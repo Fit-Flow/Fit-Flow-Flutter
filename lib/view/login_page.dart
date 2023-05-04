@@ -1,4 +1,5 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
+import 'package:fit_flow_flutter/view/forgot_password_page.dart';
 import 'package:fit_flow_flutter/view/signup_page.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +45,9 @@ class LoginPage extends StatelessWidget {
               Align(
                 alignment: Alignment.topRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(ForgotPasswordPage());
+                  },
                   child: Text(
                     'Glemt kodeord?',
                     style: TextStyle(
