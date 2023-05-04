@@ -1,9 +1,11 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
+import 'package:fit_flow_flutter/view/signup_page.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/components/custom_button.dart';
 import '../utils/components/custom_text_field.dart';
 import '../utils/components/rounded_login_logo.dart';
+import 'package:get/get.dart';
 
 /**
  * Login siden
@@ -23,19 +25,16 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image.asset(
-                'assets/img/FitFlowLogo.png',
-                width: 300,
-              ),
-              SizedBox(
-                height: 20,
+              Hero(
+                tag: 'assets/img/FitFlowLogo.png',
+                child: Image.asset(
+                  'assets/img/FitFlowLogo.png',
+                  width: 300,
+                ),
               ),
               CustomTextField(
                 label: "E-mail",
                 textInputType: TextInputType.emailAddress,
-              ),
-              SizedBox(
-                height: 20,
               ),
               CustomTextField(
                 label: 'Kodeord',
@@ -62,6 +61,7 @@ class LoginPage extends StatelessWidget {
                 text: 'Log in',
                 color: AppColors.yellowColor,
                 textColor: AppColors.darkGreyColor,
+                onTap: (){},
               ),
               SizedBox(
                 height: 20,
@@ -70,6 +70,9 @@ class LoginPage extends StatelessWidget {
                 text: 'Opret bruger',
                 color: AppColors.darkGreyColor,
                 textColor: AppColors.yellowColor,
+                onTap: () {
+                  Get.to(SignupPage());
+                },
               ),
               SizedBox(
                 height: 20,
