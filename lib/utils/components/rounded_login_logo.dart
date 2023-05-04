@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../app_colors.dart';
 
+
+/**
+ * @authors Jackie, Christoffer & Jakob
+ */
 class RoundedLoginLogo extends StatelessWidget {
   final String imagePath;
   final VoidCallback onTap;

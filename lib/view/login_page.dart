@@ -5,6 +5,11 @@ import '../utils/components/custom_button.dart';
 import '../utils/components/custom_text_field.dart';
 import '../utils/components/rounded_login_logo.dart';
 
+/**
+ * Login siden
+ *
+ * @authors Jackie, Christoffer & Jakob
+ */
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 
