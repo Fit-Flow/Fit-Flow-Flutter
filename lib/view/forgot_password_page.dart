@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 
 /**
- * @author Jackie, Christoffer & Jakob
+ * @authors Jackie, Christoffer & Jakob
  */
 class ForgotPasswordPage extends StatelessWidget {
   const ForgotPasswordPage({Key? key}) : super(key: key);
