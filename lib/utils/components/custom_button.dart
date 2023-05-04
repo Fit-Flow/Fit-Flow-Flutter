@@ -9,11 +9,13 @@ class CustomButton extends StatelessWidget {
   String text;
   Color color;
   Color textColor;
+  final VoidCallback onTap;
 
   CustomButton({
     required this.text,
     required this.color,
     required this.textColor,
+    required this.onTap,
     Key? key,
   }) : super(key: key);
 
@@ -23,9 +25,7 @@ class CustomButton extends StatelessWidget {
       width: double.infinity,
       height: 50,
       child: ElevatedButton(
-        onPressed: () {
-          // Kode til at udføre, når knappen trykkes på
-        },
+        onPressed: onTap,
         child: Text(
           text,
           style: TextStyle(
