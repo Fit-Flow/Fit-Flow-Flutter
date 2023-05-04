@@ -3,6 +3,10 @@ import 'package:fit_flow_flutter/utils/components/custom_button.dart';
 import 'package:fit_flow_flutter/utils/components/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
+/**
+ *
+ * @authors Jackie, Christoffer & Jakob
+ */
 class SignupPage extends StatelessWidget {
   const SignupPage({Key? key}) : super(key: key);
 
