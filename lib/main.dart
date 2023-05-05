@@ -1,3 +1,5 @@
+import 'package:fit_flow_flutter/view/dashboard/dashboard_page.dart';
+import 'package:fit_flow_flutter/view/forgot_password_page.dart';
 import 'package:fit_flow_flutter/view/login_page.dart';
 import 'package:fit_flow_flutter/view/signup_page.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +25,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const LoginPage(),
+      initialRoute: '/',
+      routes: <String, WidgetBuilder> {
+        "/": (context) => LoginPage(),
+        "/signup": (context) => SignupPage(),
+        "/forgot": (context) => ForgotPasswordPage(),
+        "/dashboard": (context) => DashboardPage()
+      },
     );
   }
 }

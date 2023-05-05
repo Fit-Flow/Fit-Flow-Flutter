@@ -1,6 +1,5 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/view/forgot_password_page.dart';
-import 'package:fit_flow_flutter/view/signup_page.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/components/custom_button.dart';
@@ -46,7 +45,7 @@ class LoginPage extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: TextButton(
                   onPressed: () {
-                    Get.to(ForgotPasswordPage());
+                    Get.toNamed("/forgot");
                   },
                   child: Text(
                     'Glemt kodeord?',
@@ -64,7 +63,9 @@ class LoginPage extends StatelessWidget {
                 text: 'Log in',
                 color: AppColors.yellowColor,
                 textColor: AppColors.darkGreyColor,
-                onTap: (){},
+                onTap: (){
+                  Get.toNamed("/dashboard");
+                },
               ),
               SizedBox(
                 height: 20,
@@ -74,7 +75,7 @@ class LoginPage extends StatelessWidget {
                 color: AppColors.darkGreyColor,
                 textColor: AppColors.yellowColor,
                 onTap: () {
-                  Get.to(SignupPage());
+                  Get.toNamed("/signup");
                 },
               ),
               SizedBox(
