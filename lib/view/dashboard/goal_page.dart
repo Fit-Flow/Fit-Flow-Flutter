@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+/**
+ * @authors Jackie, Christoffer & Jakob
+ */
 class GoalPage extends StatelessWidget {
   const GoalPage({Key? key}) : super(key: key);
 

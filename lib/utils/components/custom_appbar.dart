@@ -2,9 +2,11 @@ import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/utils/components/profile_tap.dart';
 import 'package:flutter/material.dart';
 
-import '../controller.dart';
 import '../responsive.dart';
 
+/**
+ * @authors Jackie, Christoffer & Jakob
+ */
 class CustomAppbar extends StatefulWidget {
   const CustomAppbar({Key? key}) : super(key: key);
 

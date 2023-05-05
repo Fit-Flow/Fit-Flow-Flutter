@@ -1,6 +1,9 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
+/**
+ * @authors Jackie, Christoffer & Jakob
+ */
 class DrawerMenu extends StatefulWidget {
   DrawerMenu({Key? key}) : super(key: key);
 

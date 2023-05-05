@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../app_colors.dart';
 
+/**
+ * @authors Jackie, Christoffer & Jakob
+ */
 class ProfileTap extends StatelessWidget {
 
   final String imagePath;

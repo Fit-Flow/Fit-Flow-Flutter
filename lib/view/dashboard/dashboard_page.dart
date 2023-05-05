@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import '../../utils/components/dashboard_content.dart';
 import '../../utils/components/drawer_menu.dart';
 
+/**
+ * @authors Jackie, Chistoffer & Jakob
+ */
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key}) : super(key: key);
 
