@@ -94,12 +94,12 @@ class MenuItem {
 }
 
 class MenuItems {
-  static const List<MenuItem> firstItems = [like, share];
-  static const List<MenuItem> secondItems = [cancel];
+  static const List<MenuItem> firstItems = [settings, faq];
+  static const List<MenuItem> secondItems = [logout];
 
-  static const like = MenuItem(text: 'Indstillinger', icon: Icons.settings);
-  static const share = MenuItem(text: 'FAQ', icon: Icons.share);
-  static const cancel = MenuItem(text: 'Logud', icon: Icons.logout);
+  static const settings = MenuItem(text: 'Indstillinger', icon: Icons.settings);
+  static const faq = MenuItem(text: 'FAQ', icon: Icons.question_mark);
+  static const logout = MenuItem(text: 'Logud', icon: Icons.logout);
 
   static Widget buildItem(MenuItem item) {
     return Row(
@@ -124,13 +124,13 @@ class MenuItems {
 
   static onChanged(BuildContext context, MenuItem item) {
     switch (item) {
-      case MenuItems.like:
+      case MenuItems.settings:
         //Do something
         break;
-      case MenuItems.share:
+      case MenuItems.faq:
         //Do something
         break;
-      case MenuItems.cancel:
+      case MenuItems.logout:
         //Do something
         break;
     }
