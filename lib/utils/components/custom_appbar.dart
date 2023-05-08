@@ -28,14 +28,19 @@ class _CustomAppbarState extends State<CustomAppbar> {
           if (!Responsive.isDesktop(context))
             IconButton(
               onPressed: () => Scaffold.of(context).openDrawer(),
-              icon: Icon(Icons.menu,color: AppColors.textColor,),
+              icon: Icon(
+                Icons.menu,
+                color: AppColors.textColor,
+              ),
             ),
           Expanded(child: Container()),
           ProfileTap(
             imagePath: 'assets/img/test-profil.png',
             profileName: 'Jakob Majid',
           ),
-          SizedBox(width: 30,),
+          SizedBox(
+            width: 30,
+          ),
         ],
       ),
     );
