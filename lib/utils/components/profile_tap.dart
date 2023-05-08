@@ -8,7 +8,6 @@ import '../app_colors.dart';
  * @authors Jackie, Christoffer & Jakob
  */
 class ProfileTap extends StatelessWidget {
-  final DrawerNavigationViewModel drawerNav = Get.find();
   final String imagePath;
   final String profileName;
 
@@ -127,13 +126,13 @@ class MenuItems {
   static onChanged(BuildContext context, MenuItem item) {
     switch (item) {
       case MenuItems.settings:
-        //Do something
+        Get.find<DrawerNavigationViewModel>().changePage(3);
         break;
       case MenuItems.faq:
-        //Do something
+        //TODO: FAQ Page
         break;
       case MenuItems.logout:
-        //Do something
+        //TODO: Log ud
         break;
     }
   }

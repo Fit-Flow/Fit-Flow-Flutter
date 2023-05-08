@@ -19,57 +19,58 @@ class DrawerMenu extends StatefulWidget {
 }
 
 class _DrawerMenuState extends State<DrawerMenu> {
-  final DrawerNavigationViewModel drawerNav = Get.find();
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       elevation: 0,
       backgroundColor: AppColors.darkGreyColor,
-      child: ListView(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(10.0),
-            child: Container(
-              height: 120,
-              child: Image.asset('assets/img/FitFlowLogo.png'),
+      child: GetBuilder<DrawerNavigationViewModel> (builder: (drawerNav) {
+        return ListView(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Container(
+                height: 120,
+                child: Image.asset('assets/img/FitFlowLogo.png'),
+              ),
             ),
-          ),
-          SizedBox(height: 35,),
-          DashboardIcon(
-              isSelected: drawerNav.selectedIndex == 0,
-              iconPath: "assets/icon/icon-home.png",
-              onTap: () {
-                setState(() {
-                  drawerNav.changePage(0);
-                });
-              }),
-          DashboardIcon(
-              isSelected: drawerNav.selectedIndex == 1,
-              iconPath: "assets/icon/icon-dumbbell.png",
-              onTap: () {
-                setState(() {
-                  drawerNav.changePage(1);
-                });
-              }),
-          DashboardIcon(
-              isSelected: drawerNav.selectedIndex == 2,
-              iconPath: "assets/icon/icon-goal.png",
-              onTap: () {
-                setState(() {
-                  drawerNav.changePage(2);
-                });
-              }),
-          DashboardIcon(
-              isSelected: drawerNav.selectedIndex == 3,
-              iconPath: "assets/icon/icon-settings.png",
-              onTap: () {
-                setState(() {
-                  drawerNav.changePage(3);
-                });
-              }),
-        ],
-      ),
+            SizedBox(height: 35,),
+            DashboardIcon(
+                isSelected: drawerNav.selectedIndex == 0,
+                iconPath: "assets/icon/icon-home.png",
+                onTap: () {
+                  setState(() {
+                    drawerNav.changePage(0);
+                  });
+                }),
+            DashboardIcon(
+                isSelected: drawerNav.selectedIndex == 1,
+                iconPath: "assets/icon/icon-dumbbell.png",
+                onTap: () {
+                  setState(() {
+                    drawerNav.changePage(1);
+                  });
+                }),
+            DashboardIcon(
+                isSelected: drawerNav.selectedIndex == 2,
+                iconPath: "assets/icon/icon-goal.png",
+                onTap: () {
+                  setState(() {
+                    drawerNav.changePage(2);
+                  });
+                }),
+            DashboardIcon(
+                isSelected: drawerNav.selectedIndex == 3,
+                iconPath: "assets/icon/icon-settings.png",
+                onTap: () {
+                  setState(() {
+                    drawerNav.changePage(3);
+                  });
+                }),
+          ],
+        );
+      }),
     );
   }
 }
