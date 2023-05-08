@@ -3,10 +3,13 @@ import 'package:fit_flow_flutter/view/forgot_password_page.dart';
 import 'package:fit_flow_flutter/view/login_page.dart';
 import 'package:fit_flow_flutter/view/signup_page.dart';
 import 'package:flutter/material.dart';
+import 'utils/dependencies.dart' as dep;
 import 'package:get/get.dart';
 
-void main() {
+void main() async{
+  await dep.init();
   runApp(const MyApp());
+
 }
 /**
  *
