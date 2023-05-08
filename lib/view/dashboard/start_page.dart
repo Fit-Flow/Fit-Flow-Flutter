@@ -118,6 +118,28 @@ class StartPage extends StatelessWidget {
                     ),
                   ),
                 ],
+                lineTouchData: LineTouchData(
+                  touchTooltipData: LineTouchTooltipData(
+                    tooltipBgColor: AppColors.darkGreyColor,
+                    getTooltipItems: (List<LineBarSpot> touchedBarSpots){
+                      return touchedBarSpots.map((barSpot){
+                        final flSpot = barSpot;
+                        if (flSpot.x == -1 || flSpot.x == 12){
+                          return null;
+                        }
+                        return LineTooltipItem(
+                          "${flSpot.y * 10}",
+                          TextStyle(color: AppColors.textColor),
+                          children: [
+                            TextSpan(
+                              text: " kg"
+                            )
+                          ]
+                        );
+                      }).toList();
+                    },
+                  )
+                )
               ),
               swapAnimationCurve: Curves.linear,
             ),
