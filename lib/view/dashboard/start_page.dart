@@ -6,14 +6,6 @@ import 'package:flutter/material.dart';
 class StartPage extends StatelessWidget {
   StartPage({Key? key}) : super(key: key);
 
-  List<Color> gradientColors = [
-    AppColors.yellowColor,
-    AppColors.blueColor,
-  ];
-
-  List<String> dropdownitems = ["Daglig", "Månedlig", "Årlig"];
-  String selectedValue = "Månedlig";
-
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -24,174 +16,224 @@ class StartPage extends StatelessWidget {
           Container(
             child: Text(
               'Oversigt',
-              style: TextStyle(color: AppColors.textColor, fontSize: 24),
+              style: TextStyle(color: AppColors.textColor, fontSize: 24, fontWeight: FontWeight.w900),
             ),
           ),
-          Container(
-            width: 400,
-            height: 250,
-            decoration: BoxDecoration(
-              color: AppColors.darkGreyColor,
-              borderRadius: BorderRadius.circular(30),
+          SizedBox(height: 10,),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: [
+              GraphOverview(
+                title: "Bænkpres",
+                goalWeight: 80,
+              ),
+              GraphOverview(
+                title: "Dødløft",
+                goalWeight: 40,
+              ),
+              GraphOverview(
+                title: "Squat",
+                goalWeight: 75,
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class GraphOverview extends StatefulWidget {
+  final String title;
+  final int goalWeight;
+  const GraphOverview({Key? key, required this.title, required this.goalWeight}) : super(key: key);
+
+  @override
+  State<GraphOverview> createState() => _GraphOverviewState();
+}
+
+class _GraphOverviewState extends State<GraphOverview> {
+  List<Color> gradientColors = [
+    AppColors.yellowColor,
+    AppColors.yellowColor,
+  ];
+
+  List<String> dropdownitems = ["Ugelig", "Månedlig", "Årlig"];
+  String selectedValue = "Månedlig";
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 400,
+      height: 250,
+      decoration: BoxDecoration(
+        color: AppColors.darkGreyColor,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 20,
             ),
-            child: Stack(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    top: 20,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Bænkpres",
-                        style:
-                            TextStyle(color: AppColors.textColor, fontSize: 12),
-                      ),
-                      DropdownButtonHideUnderline(
-                          child: DropdownButton2(
-                        items: dropdownitems
-                            .map((item) => DropdownMenuItem(
-                                  value: item,
-                                  child: Text(
-                                    item,
-                                    style: TextStyle(
-                                        color: AppColors.textColor,
-                                        fontSize: 12),
-                                  ),
-                                ))
-                            .toList(),
-                        value: selectedValue,
-                        onChanged: (value) {},
-                        dropdownStyleData: DropdownStyleData(
-                          decoration: BoxDecoration(
-                            color: AppColors.darkGreyColor,
-                          ),
-                        ),
-                        buttonStyleData: ButtonStyleData(width: 90, height: 20),
-                        menuItemStyleData: MenuItemStyleData(height: 20),
-                      ))
-                    ],
-                  ),
+                Text(
+                  widget.title,
+                  style: TextStyle(color: AppColors.textColor, fontSize: 12),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    bottom: 20,
-                    top: 40,
+                DropdownButtonHideUnderline(
+                    child: DropdownButton2(
+                  items: dropdownitems
+                      .map((item) => DropdownMenuItem(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: TextStyle(
+                                  color: AppColors.textColor, fontSize: 12),
+                            ),
+                          ))
+                      .toList(),
+                  value: selectedValue,
+                  onChanged: (value) {
+                    setState(() {
+                      selectedValue = value as String;
+                    });
+                  },
+                  dropdownStyleData: DropdownStyleData(
+                    decoration: BoxDecoration(
+                      color: AppColors.darkGreyColor,
+                    ),
                   ),
-                  child: LineChart(
-                    LineChartData(
-                        gridData: FlGridData(
-                          show: true,
-                          drawVerticalLine: true,
-                          horizontalInterval: 1,
-                          verticalInterval: 1,
-                          getDrawingVerticalLine: (value) {
-                            return FlLine(
-                              color: AppColors.lightGreyColor,
-                              strokeWidth: 1,
-                            );
-                          },
-                          getDrawingHorizontalLine: (value) {
-                            return FlLine(
-                              color: AppColors.lightGreyColor,
-                              strokeWidth: 1,
-                            );
-                          },
-                        ),
-                        titlesData: FlTitlesData(
-                          show: true,
-                          rightTitles: AxisTitles(
-                            sideTitles: SideTitles(showTitles: false),
-                          ),
-                          topTitles: AxisTitles(
-                            sideTitles: SideTitles(showTitles: false),
-                          ),
-                          bottomTitles: AxisTitles(
-                            sideTitles: SideTitles(
-                              showTitles: true,
-                              reservedSize: 30,
-                              interval: 1,
-                              getTitlesWidget: bottomTitleWidgets,
-                            ),
-                          ),
-                          leftTitles: AxisTitles(
-                            sideTitles: SideTitles(
-                              showTitles: true,
-                              interval: 1,
-                              getTitlesWidget: leftTitleWidgets,
-                              reservedSize: 42,
-                            ),
-                          ),
-                        ),
-                        borderData: FlBorderData(
-                          show: true,
-                          border: Border.all(color: const Color(0xff37434d)),
-                        ),
-                        minX: 0,
-                        maxX: 11,
-                        minY: 0,
-                        maxY: 10,
-                        lineBarsData: [
-                          LineChartBarData(
-                            spots: const [
-                              FlSpot(0, 7), // (måned, kg/10)
-                              FlSpot(1, 2),
-                              FlSpot(2, 5),
-                              FlSpot(3, 3.1),
-                              FlSpot(4, 4),
-                              FlSpot(5, 3),
-                              FlSpot(6, 4),
-                              FlSpot(7, 3),
-                              FlSpot(8, 2),
-                              FlSpot(9, 5),
-                              FlSpot(10, 3.1),
-                              FlSpot(11, 4),
-                            ],
-                            isCurved: true,
-                            gradient: LinearGradient(
-                              colors: gradientColors,
-                            ),
-                            barWidth: 5,
-                            isStrokeCapRound: true,
-                            dotData: FlDotData(
-                              show: false,
-                            ),
-                            belowBarData: BarAreaData(
-                              show: true,
-                              gradient: LinearGradient(
-                                colors: gradientColors
-                                    .map((color) => color.withOpacity(0.3))
-                                    .toList(),
-                              ),
-                            ),
-                          ),
-                        ],
-                        lineTouchData: LineTouchData(
-                            touchTooltipData: LineTouchTooltipData(
-                          tooltipBgColor: AppColors.darkGreyColor,
-                          getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
-                            return touchedBarSpots.map((barSpot) {
-                              final flSpot = barSpot;
-                              if (flSpot.x == -1 || flSpot.x == 12) {
-                                return null;
-                              }
-                              return LineTooltipItem("${flSpot.y * 10}",
-                                  TextStyle(color: AppColors.textColor),
-                                  children: [TextSpan(text: " kg")]);
-                            }).toList();
-                          },
-                        ))),
-                    swapAnimationCurve: Curves.linear,
-                  ),
-                ),
+                  buttonStyleData: ButtonStyleData(width: 90, height: 20),
+                  menuItemStyleData: MenuItemStyleData(height: 20),
+                ))
               ],
             ),
-          )
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              bottom: 20,
+              top: 40,
+            ),
+            child: LineChart(
+              LineChartData(
+                  gridData: FlGridData(
+                    show: true,
+                    drawVerticalLine: true,
+                    horizontalInterval: 1,
+                    verticalInterval: 1,
+                    getDrawingVerticalLine: (value) {
+                      return FlLine(
+                        color: AppColors.lightGreyColor,
+                        strokeWidth: 1,
+                      );
+                    },
+                    getDrawingHorizontalLine: (value) {
+                      return FlLine(
+                        color: AppColors.lightGreyColor,
+                        strokeWidth: 1,
+                      );
+                    },
+                  ),
+                  extraLinesData: ExtraLinesData(horizontalLines: [
+                    HorizontalLine(
+                      y: widget.goalWeight / 10,
+                      color: AppColors.greenColor,
+                    ),
+                  ]),
+                  titlesData: FlTitlesData(
+                    show: true,
+                    rightTitles: AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    topTitles: AxisTitles(
+                      sideTitles: SideTitles(showTitles: false),
+                    ),
+                    bottomTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        reservedSize: 30,
+                        interval: 1,
+                        getTitlesWidget: bottomTitleWidgets,
+                      ),
+                    ),
+                    leftTitles: AxisTitles(
+                      sideTitles: SideTitles(
+                        showTitles: true,
+                        interval: 1,
+                        getTitlesWidget: leftTitleWidgets,
+                        reservedSize: 42,
+                      ),
+                    ),
+                  ),
+                  borderData: FlBorderData(
+                    show: true,
+                    border: Border.all(color: const Color(0xff37434d)),
+                  ),
+                  minX: 0,
+                  maxX: 11,
+                  minY: 0,
+                  maxY: 10,
+                  lineBarsData: [
+                    LineChartBarData(
+                      spots: const [
+                        FlSpot(0, 7), // (måned, kg/10)
+                        FlSpot(1, 2),
+                        FlSpot(2, 5),
+                        FlSpot(3, 3.1),
+                        FlSpot(4, 4),
+                        FlSpot(5, 3),
+                        FlSpot(6, 4),
+                        FlSpot(7, 3),
+                        FlSpot(8, 2),
+                        FlSpot(9, 5),
+                        FlSpot(10, 3.1),
+                        FlSpot(11, 4),
+                      ],
+                      isCurved: true,
+                      gradient: LinearGradient(
+                        colors: gradientColors,
+                      ),
+                      barWidth: 5,
+                      isStrokeCapRound: true,
+                      dotData: FlDotData(
+                        show: false,
+                      ),
+                      belowBarData: BarAreaData(
+                        show: true,
+                        gradient: LinearGradient(
+                          colors: gradientColors
+                              .map((color) => color.withOpacity(0.3))
+                              .toList(),
+                        ),
+                      ),
+                    ),
+                  ],
+                  lineTouchData: LineTouchData(
+                      touchTooltipData: LineTouchTooltipData(
+                    tooltipBgColor: AppColors.darkGreyColor,
+                    getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+                      return touchedBarSpots.map((barSpot) {
+                        final flSpot = barSpot;
+                        if (flSpot.x == -1 || flSpot.x == 12) {
+                          return null;
+                        }
+                        return LineTooltipItem("${flSpot.y * 10}",
+                            TextStyle(color: AppColors.textColor),
+                            children: [TextSpan(text: " kg")]);
+                      }).toList();
+                    },
+                  ))),
+              swapAnimationCurve: Curves.linear,
+            ),
+          ),
         ],
       ),
     );
