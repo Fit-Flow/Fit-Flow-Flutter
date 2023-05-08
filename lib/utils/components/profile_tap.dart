@@ -45,7 +45,11 @@ class ProfileTap extends StatelessWidget {
               child: MenuItems.buildItem(item),
             ),
           ),
-          const DropdownMenuItem<Divider>(enabled: false, child: Divider()),
+          const DropdownMenuItem<Divider>(
+              enabled: false,
+              child: Divider(
+                color: AppColors.yellowColor,
+              )),
           ...MenuItems.secondItems.map(
             (item) => DropdownMenuItem<MenuItem>(
               value: item,
@@ -61,7 +65,7 @@ class ProfileTap extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 6),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
-            color: Colors.redAccent,
+            color: AppColors.darkGreyColor,
           ),
           elevation: 8,
           offset: const Offset(40, -4),
