@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-
+import 'package:get/get.dart';
+import '../../view_model/drawer_navigation_viewmodel.dart';
 import '../app_colors.dart';
 
 /**
  * @authors Jackie, Christoffer & Jakob
  */
 class ProfileTap extends StatelessWidget {
+  final DrawerNavigationViewModel drawerNav = Get.find();
   final String imagePath;
   final String profileName;
 
-  const ProfileTap({
+  ProfileTap({
     Key? key,
     required this.imagePath,
     required this.profileName,

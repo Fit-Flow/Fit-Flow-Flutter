@@ -15,7 +15,6 @@ class DashboardContent extends StatefulWidget {
 }
 
 class _DashboardContentState extends State<DashboardContent> {
-  DrawerNavigationViewModel drawerNav = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,9 @@ class _DashboardContentState extends State<DashboardContent> {
           SizedBox(
             height: 20,
           ),
-         drawerNav.selectedPage,
+         GetBuilder<DrawerNavigationViewModel>(builder: (drawerNav) {
+           return drawerNav.selectedPage;
+         })
         ],
       )
     );

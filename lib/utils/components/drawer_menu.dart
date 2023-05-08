@@ -1,7 +1,12 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
+import 'package:fit_flow_flutter/view/dashboard/goal_page.dart';
+import 'package:fit_flow_flutter/view/dashboard/settings_page.dart';
+import 'package:fit_flow_flutter/view/dashboard/training_page.dart';
 import 'package:fit_flow_flutter/view_model/drawer_navigation_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../view/dashboard/start_page.dart';
 
 /**
  * @authors Jackie, Christoffer & Jakob
@@ -14,15 +19,7 @@ class DrawerMenu extends StatefulWidget {
 }
 
 class _DrawerMenuState extends State<DrawerMenu> {
-  bool startSelected = true;
-
-  bool trainingSelected = false;
-
-  bool goalsSelected = false;
-
-  bool settingsSelected = false;
-
-  DrawerNavigationViewModel drawerNav = Get.find();
+  final DrawerNavigationViewModel drawerNav = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -40,51 +37,35 @@ class _DrawerMenuState extends State<DrawerMenu> {
           ),
           SizedBox(height: 35,),
           DashboardIcon(
-              isSelected: startSelected,
+              isSelected: drawerNav.selectedIndex == 0,
               iconPath: "assets/icon/icon-home.png",
               onTap: () {
                 setState(() {
                   drawerNav.changePage(0);
-                  startSelected = true;
-                  trainingSelected = false;
-                  goalsSelected = false;
-                  settingsSelected = false;
                 });
               }),
           DashboardIcon(
-              isSelected: trainingSelected,
+              isSelected: drawerNav.selectedIndex == 1,
               iconPath: "assets/icon/icon-dumbbell.png",
               onTap: () {
                 setState(() {
                   drawerNav.changePage(1);
-                  trainingSelected = true;
-                  startSelected = false;
-                  goalsSelected = false;
-                  settingsSelected = false;
                 });
               }),
           DashboardIcon(
-              isSelected: goalsSelected,
+              isSelected: drawerNav.selectedIndex == 2,
               iconPath: "assets/icon/icon-goal.png",
               onTap: () {
                 setState(() {
                   drawerNav.changePage(2);
-                  goalsSelected = true;
-                  trainingSelected = false;
-                  startSelected = false;
-                  settingsSelected = false;
                 });
               }),
           DashboardIcon(
-              isSelected: settingsSelected,
+              isSelected: drawerNav.selectedIndex == 3,
               iconPath: "assets/icon/icon-settings.png",
               onTap: () {
                 setState(() {
                   drawerNav.changePage(3);
-                  settingsSelected = true;
-                  trainingSelected = false;
-                  goalsSelected = false;
-                  startSelected = false;
                 });
               }),
         ],
