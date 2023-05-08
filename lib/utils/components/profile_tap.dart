@@ -133,6 +133,7 @@ class MenuItems {
         break;
       case MenuItems.logout:
         //TODO: Log ud
+      Get.offNamed("/login");
         break;
     }
   }

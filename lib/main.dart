@@ -28,13 +28,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
-      routes: <String, WidgetBuilder> {
-        "/": (context) => LoginPage(),
-        "/signup": (context) => SignupPage(),
-        "/forgot": (context) => ForgotPasswordPage(),
-        "/dashboard": (context) => DashboardPage()
-      },
+      home: LoginPage(),
+      getPages: [
+        GetPage(name: '/', page: () => LoginPage()),
+        GetPage(name: '/signup', page: () => SignupPage()),
+        GetPage(name: '/forgot', page: () => ForgotPasswordPage()),
+        GetPage(name: '/dashboard', page: () => DashboardPage()),
+      ],
     );
   }
 }

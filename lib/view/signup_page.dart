@@ -2,6 +2,7 @@ import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/utils/components/custom_button.dart';
 import 'package:fit_flow_flutter/utils/components/custom_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /**
  *
@@ -50,7 +51,10 @@ class SignupPage extends StatelessWidget {
                   text: 'Opret',
                   color: AppColors.yellowColor,
                   textColor: AppColors.darkGreyColor,
-                onTap: (){},
+                onTap: (){
+                    //TODO: tilføj opret funktion
+                  Get.offNamed("/dashboard");
+                },
               )
             ],
           ),
