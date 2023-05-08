@@ -30,9 +30,14 @@ class _DrawerMenuState extends State<DrawerMenu> {
           children: [
             Padding(
               padding: EdgeInsets.all(10.0),
-              child: Container(
-                height: 120,
-                child: Image.asset('assets/img/FitFlowLogo.png'),
+              child: GestureDetector(
+                onTap: () {
+                  drawerNav.changePage(0);
+                },
+                child: Container(
+                  height: 120,
+                  child: Image.asset('assets/img/FitFlowLogo.png'),
+                ),
               ),
             ),
             SizedBox(height: 35,),
