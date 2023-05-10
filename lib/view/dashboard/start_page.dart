@@ -8,37 +8,40 @@ class StartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topLeft,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            child: Text(
-              'Oversigt',
-              style: TextStyle(color: AppColors.textColor, fontSize: 24, fontWeight: FontWeight.w900),
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              child: Text(
+                'Oversigt',
+                style: TextStyle(color: AppColors.textColor, fontSize: 24, fontWeight: FontWeight.w900),
+              ),
             ),
-          ),
-          SizedBox(height: 10,),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: [
-              GraphOverview(
-                title: "Bænkpres",
-                goalWeight: 80,
-              ),
-              GraphOverview(
-                title: "Dødløft",
-                goalWeight: 40,
-              ),
-              GraphOverview(
-                title: "Squat",
-                goalWeight: 75,
-              ),
-            ],
-          )
-        ],
+            SizedBox(height: 10,),
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              children: [
+                GraphOverview(
+                  title: "Bænkpres",
+                  goalWeight: 80,
+                ),
+                GraphOverview(
+                  title: "Dødløft",
+                  goalWeight: 40,
+                ),
+                GraphOverview(
+                  title: "Squat",
+                  goalWeight: 75,
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
