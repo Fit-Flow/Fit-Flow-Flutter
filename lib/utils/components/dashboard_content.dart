@@ -19,19 +19,17 @@ class _DashboardContentState extends State<DashboardContent> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          CustomAppbar(),
-          SizedBox(
-            height: 20,
-          ),
+    return Column(
+      children: [
+        CustomAppbar(),
+        SizedBox(
+          height: 20,
+        ),
 
-         GetBuilder<DrawerNavigationViewModel>(builder: (drawerNav) {
-           return drawerNav.selectedPage;
-         })
-        ],
-      )
+       GetBuilder<DrawerNavigationViewModel>(builder: (drawerNav) {
+         return drawerNav.selectedPage;
+       })
+      ],
     );
   }
 }
