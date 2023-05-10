@@ -8,9 +8,6 @@ import '../../utils/components/latest_workout_card.dart';
 class StartPage extends StatelessWidget {
   StartPage({Key? key}) : super(key: key);
 
-  ScrollController _scrollController = ScrollController();
-  double offset = 0;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -63,139 +60,208 @@ class StartPage extends StatelessWidget {
           SizedBox(
             height: 15,
           ),
-          Row(
+          LatesWorkoutsWidget(),
+        ],
+      ),
+    );
+  }
+}
+
+class LatesWorkoutsWidget extends StatefulWidget {
+  const LatesWorkoutsWidget({
+    super.key,
+  });
+
+  @override
+  State<LatesWorkoutsWidget> createState() => _LatesWorkoutsWidgetState();
+}
+
+class _LatesWorkoutsWidgetState extends State<LatesWorkoutsWidget> {
+  ScrollController _scrollController = ScrollController();
+  double _offset = 0;
+  bool _showNextButton = true;
+  bool _showBackButton = false;
+
+  @override
+  void initState() {
+    _scrollController.addListener(_scrollListener);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    setState(() {
+      _showNextButton = _scrollController.offset <= _scrollController.position.maxScrollExtent - 1;
+      _showBackButton = _scrollController.offset >= _scrollController.position.minScrollExtent + 1;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        SingleChildScrollView(
+          controller: _scrollController,
+          scrollDirection: Axis.horizontal,
+          child: Wrap(
+            spacing: 20,
+            children: [
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown"
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                  "Dips",
+                  "Flyers",
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                  "Dips",
+                  "Flyers",
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown"
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown"
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                  "Dips",
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown"
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown"
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown"
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown"
+                ],
+              ),
+            ],
+          ),
+        ),
+        Center(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ElevatedButton(
+              _showBackButton ? ElevatedButton(
                   onPressed: () {
-                    offset = _scrollController.offset - 230;
-                    _scrollController.animateTo(offset,
+                    _offset = _scrollController.offset - 230;
+                    _scrollController.animateTo(_offset,
                         duration: const Duration(milliseconds: 500),
                         curve: Curves.easeInOut);
                   },
-                  child: const Text("-")),
-              ElevatedButton(
+                  child: const Text("-")) : Container(),
+              _showNextButton ? ElevatedButton(
                 onPressed: () {
-                  offset = _scrollController.offset + 230;
-                  _scrollController.animateTo(offset,
+                  _offset = _scrollController.offset + 230;
+                  _scrollController.animateTo(_offset,
                       duration: const Duration(milliseconds: 500),
                       curve: Curves.easeInOut);
                 },
                 child: const Text("+"),
-              ),
+              ) : Container(),
             ],
           ),
-          SingleChildScrollView(
-            controller: _scrollController,
-            scrollDirection: Axis.horizontal,
-            child: Wrap(
-              spacing: 20,
-              children: [
-                LatestWorkoutCard(
-                  title: "Træning 24-06/23",
-                  workouts: [
-                    "Bænkpres",
-                    "Incline bænkpres",
-                    "Dips",
-                    "Flyers",
-                    "Triceps pulldown"
-                  ],
-                ),
-                LatestWorkoutCard(
-                  title: "Træning 24-06/23",
-                  workouts: [
-                    "Bænkpres",
-                    "Incline bænkpres",
-                    "Dips",
-                    "Flyers",
-                    "Triceps pulldown"
-                  ],
-                ),
-                LatestWorkoutCard(
-                  title: "Træning 24-06/23",
-                  workouts: [
-                    "Bænkpres",
-                    "Incline bænkpres",
-                    "Dips",
-                    "Flyers",
-                    "Triceps pulldown"
-                  ],
-                ),
-                LatestWorkoutCard(
-                  title: "Træning 24-06/23",
-                  workouts: [
-                    "Bænkpres",
-                    "Incline bænkpres",
-                    "Dips",
-                    "Flyers",
-                    "Triceps pulldown"
-                  ],
-                ),
-                LatestWorkoutCard(
-                  title: "Træning 24-06/23",
-                  workouts: [
-                    "Bænkpres",
-                    "Incline bænkpres",
-                    "Dips",
-                    "Flyers",
-                    "Triceps pulldown"
-                  ],
-                ),
-                LatestWorkoutCard(
-                  title: "Træning 24-06/23",
-                  workouts: [
-                    "Bænkpres",
-                    "Incline bænkpres",
-                    "Dips",
-                    "Flyers",
-                    "Triceps pulldown"
-                  ],
-                ),
-                LatestWorkoutCard(
-                  title: "Træning 24-06/23",
-                  workouts: [
-                    "Bænkpres",
-                    "Incline bænkpres",
-                    "Dips",
-                    "Flyers",
-                    "Triceps pulldown"
-                  ],
-                ),
-                LatestWorkoutCard(
-                  title: "Træning 24-06/23",
-                  workouts: [
-                    "Bænkpres",
-                    "Incline bænkpres",
-                    "Dips",
-                    "Flyers",
-                    "Triceps pulldown"
-                  ],
-                ),
-                LatestWorkoutCard(
-                  title: "Træning 24-06/23",
-                  workouts: [
-                    "Bænkpres",
-                    "Incline bænkpres",
-                    "Dips",
-                    "Flyers",
-                    "Triceps pulldown"
-                  ],
-                ),
-                LatestWorkoutCard(
-                  title: "Træning 24-06/23",
-                  workouts: [
-                    "Bænkpres",
-                    "Incline bænkpres",
-                    "Dips",
-                    "Flyers",
-                    "Triceps pulldown"
-                  ],
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
