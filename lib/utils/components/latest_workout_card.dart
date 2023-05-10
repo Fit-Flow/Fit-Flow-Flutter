@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
+/**
+ * @authors Jackie, Christoffer & Jackie
+ */
 class LatestWorkoutCard extends StatelessWidget {
   final String title;
   final List<String> workouts;

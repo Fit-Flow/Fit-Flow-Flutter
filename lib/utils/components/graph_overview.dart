@@ -3,7 +3,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
-
+/**
+ * @authors Jackie, Christoffer & Jackie
+ */
 class GraphOverview extends StatefulWidget {
   final String title;
   final int goalWeight;

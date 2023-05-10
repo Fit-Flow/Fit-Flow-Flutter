@@ -3,7 +3,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
-
+/**
+ * @authors Jackie, Christoffer & Jackie
+ */
 class GraphActivity extends StatefulWidget {
   final String yTitle;
   const GraphActivity({Key? key, required this.yTitle}) : super(key: key);
