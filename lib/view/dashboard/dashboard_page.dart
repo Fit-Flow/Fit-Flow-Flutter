@@ -14,17 +14,21 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: AppColors.backgroundColor,
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (Responsive.isDesktop(context)) Expanded(child: DrawerMenu(),),
+            if (Responsive.isDesktop(context))
+              Expanded(
+                child: DrawerMenu(),
+              ),
             Expanded(
               flex: 5,
-                child: DashboardContent()
+              child: SingleChildScrollView(
+                child: DashboardContent(),
+              ),
             )
           ],
         ),
