@@ -23,7 +23,7 @@ class StartPage extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 15,
           ),
           Wrap(
             spacing: 10,
@@ -44,7 +44,7 @@ class StartPage extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 20,
+            height: 25,
           ),
           Container(
             child: Text(
@@ -55,57 +55,12 @@ class StartPage extends StatelessWidget {
                   fontWeight: FontWeight.w900),
             ),
           ),
+          SizedBox(height: 15,),
           GraphActivity(
-            title: "Aktivitet",
+            yTitle: "Dage",
           )
         ],
       ),
     );
   }
 }
-
-/*
-SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                child: Text(
-                  'Oversigt',
-                  style: TextStyle(color: AppColors.textColor,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w900),
-                ),
-              ),
-              SizedBox(height: 10,),
-              Wrap(
-                spacing: 10,
-                runSpacing: 10,
-                children: [
-                  GraphOverview(
-                    title: "Bænkpres",
-                    goalWeight: 80,
-                  ),
-                  GraphOverview(
-                    title: "Dødløft",
-                    goalWeight: 40,
-                  ),
-                  GraphOverview(
-                    title: "Squat",
-                    goalWeight: 75,
-                  ),
-                ],
-              ),
-              SizedBox(height: 20,),
-              Container(
-                child: Text(
-                  'Aktivitet',
-                  style: TextStyle(color: AppColors.textColor,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w900),
-                ),
-              ), GraphActivity(title: "Aktivitet",)
-            ],
-          ),
-        ),
- */

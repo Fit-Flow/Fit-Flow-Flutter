@@ -5,8 +5,8 @@ import '../app_colors.dart';
 
 
 class GraphActivity extends StatefulWidget {
-  final String title;
-  const GraphActivity({Key? key, required this.title}) : super(key: key);
+  final String yTitle;
+  const GraphActivity({Key? key, required this.yTitle}) : super(key: key);
 
   @override
   State<GraphActivity> createState() => _GraphActivityState();
@@ -42,7 +42,7 @@ class _GraphActivityState extends State<GraphActivity> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  widget.title,
+                  widget.yTitle,
                   style: TextStyle(color: AppColors.textColor, fontSize: 12),
                 ),
                 DropdownButtonHideUnderline(
@@ -133,22 +133,22 @@ class _GraphActivityState extends State<GraphActivity> {
                   minX: 0,
                   maxX: 11,
                   minY: 0,
-                  maxY: 10,
+                  maxY: 11,
                   lineBarsData: [
                     LineChartBarData(
                       spots: const [
-                        FlSpot(0, 7), // (måned, kg/10)
-                        FlSpot(1, 2),
-                        FlSpot(2, 5),
-                        FlSpot(3, 3.1),
-                        FlSpot(4, 4),
-                        FlSpot(5, 3),
-                        FlSpot(6, 4),
-                        FlSpot(7, 3),
-                        FlSpot(8, 2),
-                        FlSpot(9, 5),
-                        FlSpot(10, 3.1),
-                        FlSpot(11, 4),
+                        FlSpot(0, 25/3), // (måned, antal træning / 3)
+                        FlSpot(1, 17/3),
+                        FlSpot(2, 30/3),
+                        FlSpot(3, 24/3),
+                        FlSpot(4, 12/3),
+                        FlSpot(5, 16/3),
+                        FlSpot(6, 24/3),
+                        FlSpot(7, 17/3),
+                        FlSpot(8, 20/3),
+                        FlSpot(9, 21/3),
+                        FlSpot(10, 22/3),
+                        FlSpot(11, 23/3),
                       ],
                       isCurved: true,
                       gradient: LinearGradient(
@@ -178,7 +178,7 @@ class _GraphActivityState extends State<GraphActivity> {
                         if (flSpot.x == -1 || flSpot.x == 12) {
                           return null;
                         }
-                        return LineTooltipItem("${flSpot.y}",
+                        return LineTooltipItem("${flSpot.y*3}",
                             TextStyle(color: AppColors.textColor),
                             children: [TextSpan(text: " ")]);
                       }).toList();
@@ -280,19 +280,34 @@ class _GraphActivityState extends State<GraphActivity> {
     String text;
     switch (value.toInt()) {
       case 1:
-        text = '10kg';
+        text = '3';
+        break;
+      case 2:
+        text = '6';
         break;
       case 3:
-        text = '30kg';
+        text = '9';
+        break;
+      case 4:
+        text = '12';
         break;
       case 5:
-        text = '50kg';
+        text = '15';
+        break;
+      case 6:
+        text = '18';
         break;
       case 7:
-        text = '70kg';
+        text = '21';
+        break;
+      case 8:
+        text = '24';
         break;
       case 9:
-        text = '90kg';
+        text = '27';
+        break;
+      case 10:
+        text = '30';
         break;
       default:
         return Container();

@@ -145,13 +145,13 @@ class _GraphOverviewState extends State<GraphOverview> {
                     LineChartBarData(
                       spots: const [
                         FlSpot(0, 7), // (måned, kg/10)
-                        FlSpot(1, 2),
+                        FlSpot(1, 7),
                         FlSpot(2, 5),
                         FlSpot(3, 3.1),
                         FlSpot(4, 4),
                         FlSpot(5, 3),
-                        FlSpot(6, 4),
-                        FlSpot(7, 3),
+                        FlSpot(6, 7),
+                        FlSpot(7, 5),
                         FlSpot(8, 2),
                         FlSpot(9, 5),
                         FlSpot(10, 3.1),
