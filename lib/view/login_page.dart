@@ -64,7 +64,7 @@ class LoginPage extends StatelessWidget {
                 color: AppColors.yellowColor,
                 textColor: AppColors.darkGreyColor,
                 onTap: (){
-                  Get.toNamed("/dashboard");
+                  Get.offNamed("/dashboard");
                 },
               ),
               SizedBox(

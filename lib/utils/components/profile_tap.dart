@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-
+import 'package:get/get.dart';
+import '../../view_model/drawer_navigation_viewmodel.dart';
 import '../app_colors.dart';
 
 /**
@@ -10,7 +11,7 @@ class ProfileTap extends StatelessWidget {
   final String imagePath;
   final String profileName;
 
-  const ProfileTap({
+  ProfileTap({
     Key? key,
     required this.imagePath,
     required this.profileName,
@@ -125,13 +126,14 @@ class MenuItems {
   static onChanged(BuildContext context, MenuItem item) {
     switch (item) {
       case MenuItems.settings:
-        //Do something
+        Get.find<DrawerNavigationViewModel>().changePage(3);
         break;
       case MenuItems.faq:
-        //Do something
+        //TODO: FAQ Page
         break;
       case MenuItems.logout:
-        //Do something
+        //TODO: Log ud
+      Get.offNamed("/login");
         break;
     }
   }
