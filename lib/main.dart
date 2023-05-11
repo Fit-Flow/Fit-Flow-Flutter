@@ -3,10 +3,13 @@ import 'package:fit_flow_flutter/view/forgot_password_page.dart';
 import 'package:fit_flow_flutter/view/login_page.dart';
 import 'package:fit_flow_flutter/view/signup_page.dart';
 import 'package:flutter/material.dart';
+import 'utils/dependencies.dart' as dep;
 import 'package:get/get.dart';
 
-void main() {
+void main() async{
+  await dep.init();
   runApp(const MyApp());
+
 }
 /**
  *
@@ -25,13 +28,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
-      routes: <String, WidgetBuilder> {
-        "/": (context) => LoginPage(),
-        "/signup": (context) => SignupPage(),
-        "/forgot": (context) => ForgotPasswordPage(),
-        "/dashboard": (context) => DashboardPage()
-      },
+      home: LoginPage(),
+      getPages: [
+        GetPage(name: '/', page: () => LoginPage()),
+        GetPage(name: '/signup', page: () => SignupPage()),
+        GetPage(name: '/forgot', page: () => ForgotPasswordPage()),
+        GetPage(name: '/dashboard', page: () => DashboardPage()),
+      ],
     );
   }
 }
