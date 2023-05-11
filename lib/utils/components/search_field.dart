@@ -24,10 +24,13 @@ class _SearchFieldState extends State<SearchField> {
         onChanged: (value) {
           // Handle søgefunktionalitet her
         },
+        style: TextStyle(color: AppColors.textColor),
+        cursorColor: AppColors.yellowColor,
         controller: _searchController,
         focusNode: _searchFocus,
         decoration: InputDecoration(
           hintText: 'Søg...',
+          hintStyle: TextStyle(color: AppColors.lightGreyColor),
           prefixIcon: Icon(Icons.search, color: AppColors.lightGreyColor),
           suffixIcon: IconButton(
             icon: Icon(
