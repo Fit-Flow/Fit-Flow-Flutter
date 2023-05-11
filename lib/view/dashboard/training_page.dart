@@ -1,7 +1,10 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../utils/components/header_widget.dart';
+import '../../utils/components/search_field.dart';
+import '../../utils/components/workout_field.dart';
 
 class TrainingPage extends StatelessWidget {
   const TrainingPage({Key? key}) : super(key: key);
@@ -21,7 +24,12 @@ class TrainingPage extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            WorkoutField(),
+            WorkoutField(
+              workout: 'Bænkpres',
+              onTap: () {
+                buildWorkoutDialog();
+              },
+            ),
           ],
         ),
       ),
@@ -29,18 +37,18 @@ class TrainingPage extends StatelessWidget {
   }
 }
 
-class WorkoutField extends StatelessWidget {
-  const WorkoutField({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 60,
-      width: 400,
-      decoration: BoxDecoration(
-          color: AppColors.darkGreyColor,
-          border: Border.all(color: AppColors.lightGreyColor, width: 1),
-          borderRadius: BorderRadius.circular(10)),
-    );
-  }
+void buildWorkoutDialog() {
+  Get.defaultDialog(
+      title: "Find din øvelse",
+      middleText: '',
+      backgroundColor: AppColors.darkGreyColor,
+      titleStyle: TextStyle(color: AppColors.textColor),
+      radius: 30,
+      content: Container(
+        height: 600,
+        width: 750,
+        child: Column(children: [
+          SearchField(),
+        ]),
+      ));
 }
