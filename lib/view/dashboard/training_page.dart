@@ -27,37 +27,99 @@ class TrainingPage extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            Row(
-              children: [
-                WorkoutField(
-                  workout: 'Bænkpres',
-                  onTap: () {
-                    buildWorkoutDialog();
-                  },
-                ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        TrainingField(
-                          hintText: 'Indtast din vægt',
-                          prefixText: 'Vægt',
-                          sufixText: 'Kg',
-                        ),
-                        TrainingField(
-                          hintText: 'Indtast din reps',
-                          prefixText: 'Reps',
-                          sufixText: '',
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            )
+            TrainingWidget()
           ],
         ),
       ),
+    );
+  }
+}
+
+class TrainingWidget extends StatefulWidget {
+  TrainingWidget({
+    super.key,
+  });
+
+  @override
+  State<TrainingWidget> createState() => _TrainingWidgetState();
+}
+
+class _TrainingWidgetState extends State<TrainingWidget> {
+  List<Widget> sets = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      runSpacing: 20,
+      spacing: 20,
+      children: [
+        WorkoutField(
+          workout: 'Bænkpres',
+          onTap: () {
+            buildWorkoutDialog();
+          },
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              children: List.generate(
+                sets.length,
+                (index) => Padding(
+                  padding: EdgeInsets.only(
+                    bottom: 20,
+                  ),
+                  child: sets[index],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            RawMaterialButton(
+              onPressed: () {
+                setState(() {
+                  sets.add(TrainingSetWidget());
+                });
+              },
+              elevation: 2.0,
+              fillColor: AppColors.yellowIconColor,
+              child: Icon(
+                Icons.add,
+                size: 45.0,
+              ),
+              padding: EdgeInsets.all(15.0),
+              shape: CircleBorder(),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class TrainingSetWidget extends StatelessWidget {
+  const TrainingSetWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      runSpacing: 20,
+      spacing: 20,
+      children: [
+        TrainingField(
+          hintText: 'Indtast din vægt',
+          prefixText: 'Vægt',
+          sufixText: 'Kg',
+        ),
+        TrainingField(
+          hintText: 'Indtast din reps',
+          prefixText: 'Reps',
+          sufixText: '',
+        ),
+      ],
     );
   }
 }
