@@ -14,58 +14,61 @@ class StartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          HeaderWidget(
-            title: "Oversigt",
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: [
-              GraphOverview(
-                title: "Bænkpres",
-                goalWeight: 80,
-              ),
-              GraphOverview(
-                title: "Dødløft",
-                goalWeight: 40,
-              ),
-              GraphOverview(
-                title: "Squat",
-                goalWeight: 75,
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          HeaderWidget(
-            title: "Aktivitet",
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          GraphActivity(
-            yTitle: "Dage",
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          HeaderWidget(
-            title: "Seneste træninger",
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          LatesWorkoutsWidget(),
-        ],
+    return Container(
+      width: double.maxFinite,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            HeaderWidget(
+              title: "Oversigt",
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            Wrap(
+              spacing: 10,
+              runSpacing: 10,
+              children: [
+                GraphOverview(
+                  title: "Bænkpres",
+                  goalWeight: 80,
+                ),
+                GraphOverview(
+                  title: "Dødløft",
+                  goalWeight: 40,
+                ),
+                GraphOverview(
+                  title: "Squat",
+                  goalWeight: 75,
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            HeaderWidget(
+              title: "Aktivitet",
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            GraphActivity(
+              yTitle: "Dage",
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            HeaderWidget(
+              title: "Seneste træninger",
+            ),
+            SizedBox(
+              height: 15,
+            ),
+            LatesWorkoutsWidget(),
+          ],
+        ),
       ),
     );
   }
