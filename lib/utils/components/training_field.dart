@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 
 import '../app_colors.dart';
 
+/**
+ * @authors Jackie, Christoffer & Jakob
+ */
 class TrainingField extends StatelessWidget {
   final String hintText;
   final String prefixText;
@@ -16,7 +19,7 @@ class TrainingField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400,
+      width: 200,
       height: 60,
       decoration: BoxDecoration(
           color: AppColors.darkGreyColor,
