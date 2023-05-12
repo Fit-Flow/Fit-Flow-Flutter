@@ -3,6 +3,9 @@ import 'package:flutter/services.dart';
 
 import '../app_colors.dart';
 
+/**
+ * @authors Jackie, Christoffer & Jakob
+ */
 class TrainingField extends StatelessWidget {
   final String hintText;
   final String prefixText;

@@ -1,4 +1,3 @@
-import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class RoundedIconButton extends StatelessWidget {
@@ -7,7 +6,11 @@ class RoundedIconButton extends StatelessWidget {
   final Color color;
   final String tooltip;
   const RoundedIconButton({
-    super.key, required this.onTap, required this.icon, required this.color, this.tooltip = '',
+    super.key,
+    required this.onTap,
+    required this.icon,
+    required this.color,
+    this.tooltip = '',
   });
 
   @override
@@ -18,7 +21,8 @@ class RoundedIconButton extends StatelessWidget {
         onPressed: onTap,
         elevation: 2.0,
         fillColor: color,
-        constraints: BoxConstraints(minWidth: 60.0, minHeight: 60.0, maxHeight: 60.0),
+        constraints:
+            BoxConstraints(minWidth: 60.0, minHeight: 60.0, maxHeight: 60.0),
         child: Icon(
           icon,
           size: 36.0,

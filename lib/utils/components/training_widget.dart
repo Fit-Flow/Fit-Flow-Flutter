@@ -2,6 +2,7 @@ import 'package:fit_flow_flutter/utils/components/training_field.dart';
 import 'package:fit_flow_flutter/utils/components/workout_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../models/workout_model.dart';
 import '../../view_model/training_viewmodel.dart';
 import '../app_colors.dart';

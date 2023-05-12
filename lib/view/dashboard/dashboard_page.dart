@@ -33,7 +33,7 @@ class DashboardPage extends StatelessWidget {
                   },
                   icon: Icons.add,
                   color: AppColors.yellowIconColor,
-            tooltip: "Tilføj ny øvelse",
+                  tooltip: "Tilføj ny øvelse",
                 )
               : Container();
         },

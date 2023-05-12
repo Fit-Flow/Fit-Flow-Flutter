@@ -1,6 +1,3 @@
-import 'package:fit_flow_flutter/models/workout_model.dart';
-import 'package:fit_flow_flutter/utils/app_colors.dart';
-import 'package:fit_flow_flutter/utils/components/buttons/rounded_icon_button.dart';
 import 'package:fit_flow_flutter/view_model/training_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,11 +43,12 @@ class TrainingPage extends StatelessWidget {
                 ],
               );
             }),
-            SizedBox(height: 80,),
+            SizedBox(
+              height: 80,
+            ),
           ],
         ),
       ),
     );
   }
 }
-
