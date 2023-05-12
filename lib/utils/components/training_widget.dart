@@ -2,16 +2,23 @@ import 'package:fit_flow_flutter/utils/components/training_field.dart';
 import 'package:fit_flow_flutter/utils/components/workout_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../models/workout_model.dart';
 import '../../view_model/training_viewmodel.dart';
 import '../app_colors.dart';
+import 'buttons/rounded_icon_button.dart';
 import 'dialogs/workout_dialog.dart';
 
 /**
  * @authors Jackie, Christoffer & Jakob
  */
 class TrainingWidget extends StatefulWidget {
+  final Workout workout;
+  final int index;
+
   TrainingWidget({
     super.key,
+    required this.workout,
+    required this.index,
   });
 
   @override
@@ -19,7 +26,6 @@ class TrainingWidget extends StatefulWidget {
 }
 
 class _TrainingWidgetState extends State<TrainingWidget> {
-
   @override
   Widget build(BuildContext context) {
     return Wrap(
@@ -27,7 +33,7 @@ class _TrainingWidgetState extends State<TrainingWidget> {
       spacing: 20,
       children: [
         WorkoutField(
-          workout: 'Bænkpres',
+          workout: widget.workout.name,
           onTap: () {
             buildWorkoutDialog();
           },
@@ -37,31 +43,21 @@ class _TrainingWidgetState extends State<TrainingWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: List.generate(
-                  viewModel.sets[0].length,
-                      (index) => Padding(
-                    padding: EdgeInsets.only(
-                      bottom: 20,
-                    ),
-                    child: viewModel.sets[0][index],
-                  ),
+                  widget.workout.workoutSets.length,
+                  (index) => Padding(
+                      padding: EdgeInsets.only(
+                        bottom: 20,
+                      ),
+                      child: TrainingSetWidget(
+                        onAddTap: () {
+                          viewModel.addSetToTraining(widget.index);
+                        },
+                        showAddButton:
+                            index >= widget.workout.workoutSets.length - 1,
+                      )),
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              RawMaterialButton(
-                onPressed: () {
-                  viewModel.addSetToTraining(0);
-                },
-                elevation: 2.0,
-                fillColor: AppColors.yellowIconColor,
-                child: Icon(
-                  Icons.add,
-                  size: 45.0,
-                ),
-                padding: EdgeInsets.all(15.0),
-                shape: CircleBorder(),
               ),
             ],
           );
@@ -72,8 +68,13 @@ class _TrainingWidgetState extends State<TrainingWidget> {
 }
 
 class TrainingSetWidget extends StatelessWidget {
+  final VoidCallback onAddTap;
+  final bool showAddButton;
+
   const TrainingSetWidget({
     super.key,
+    required this.onAddTap,
+    required this.showAddButton,
   });
 
   @override
@@ -83,15 +84,21 @@ class TrainingSetWidget extends StatelessWidget {
       spacing: 20,
       children: [
         TrainingField(
-          hintText: 'Indtast din vægt',
+          hintText: 'Indtast',
           prefixText: 'Vægt',
           sufixText: 'Kg',
         ),
         TrainingField(
-          hintText: 'Indtast din reps',
+          hintText: 'Indtast',
           prefixText: 'Reps',
           sufixText: '',
         ),
+        if (showAddButton)
+          RoundedIconButton(
+            onTap: onAddTap,
+            icon: Icons.add,
+            color: AppColors.yellowIconColor,
+          ),
       ],
     );
   }

@@ -16,7 +16,7 @@ class TrainingField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 400,
+      width: 200,
       height: 60,
       decoration: BoxDecoration(
           color: AppColors.darkGreyColor,
