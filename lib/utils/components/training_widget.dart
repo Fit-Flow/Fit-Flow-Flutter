@@ -38,7 +38,7 @@ class _TrainingWidgetState extends State<TrainingWidget> {
           WorkoutField(
             workout: widget.workout.name,
             onTap: () {
-              buildWorkoutDialog();
+              buildWorkoutDialog(widget.index);
             },
           ),
           GetBuilder<TrainingViewModel>(builder: (viewModel) {

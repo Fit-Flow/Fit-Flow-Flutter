@@ -10,6 +10,11 @@ class TrainingViewModel extends GetxController implements GetxService {
   List<Workout> _workouts = [];
   List<Workout> get workouts => _workouts;
 
+  void updateWorkoutName(String name, int index) {
+    _workouts[index].name = name;
+    update();
+  }
+
   void addWorkout(Workout workout) {
     _workouts.add(workout);
     update();

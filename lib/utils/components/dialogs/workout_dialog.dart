@@ -1,5 +1,5 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../app_colors.dart';
 import '../search_field.dart';
@@ -8,7 +8,7 @@ import '../workout_searchlist.dart';
 /**
  * @authors Jackie, Christoffer & Jakob
  */
-void buildWorkoutDialog() {
+void buildWorkoutDialog(int index) {
   Get.defaultDialog(
       title: "Find din øvelse",
       middleText: '',
@@ -23,23 +23,27 @@ void buildWorkoutDialog() {
         width: 750,
         child: Column(children: [
           SearchField(),
-          WorkoutSearchList(workouts: [
-            'Bænkpres',
-            'Inclince Chest Press',
-            'Tricpes Extension',
-            'Bænkpres',
-            'Inclince Chest Press',
-            'Tricpes Extension',
-            'Bænkpres',
-            'Inclince Chest Press',
-            'Tricpes Extension',
-            'Bænkpres',
-            'Inclince Chest Press',
-            'Tricpes Extension',
-            'Bænkpres',
-            'Inclince Chest Press',
-            'Tricpes Extension',
-          ])
+          WorkoutSearchList(
+            workouts: [
+              //TODO: Skal ændres til søgreresultater
+              'Bænkpres',
+              'Inclince Chest Press',
+              'Tricpes Extension',
+              'Bænkpres',
+              'Inclince Chest Press',
+              'Tricpes Extension',
+              'Bænkpres',
+              'Inclince Chest Press',
+              'Tricpes Extension',
+              'Bænkpres',
+              'Inclince Chest Press',
+              'Tricpes Extension',
+              'Bænkpres',
+              'Inclince Chest Press',
+              'Tricpes Extension',
+            ],
+            index: index,
+          )
         ]),
       ));
 }
