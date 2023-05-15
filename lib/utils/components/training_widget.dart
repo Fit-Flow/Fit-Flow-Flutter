@@ -61,7 +61,13 @@ class _TrainingWidgetState extends State<TrainingWidget> {
                           showAddButton:
                               index >= widget.workout.workoutSets.length - 1,
                           onRemoveTap: () {
-                            //TODO: Remove
+                            //TODO: Lige nu ser det ud til at den sidste bliver slettet, men tror det er noget med en controller der mangler i textfield.
+                            if (index == 0) {
+                              viewModel.removeWorkout(widget.index);
+                            } else {
+                              viewModel.removeSetFromTraining(
+                                  widget.index, index);
+                            }
                           },
                         )),
                   ),

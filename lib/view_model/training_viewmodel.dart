@@ -1,5 +1,4 @@
 import 'package:fit_flow_flutter/models/workout_set_model.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../models/workout_model.dart';
@@ -8,9 +7,6 @@ import '../models/workout_model.dart';
  * @authors Jackie, Christoffer & Jakob
  */
 class TrainingViewModel extends GetxController implements GetxService {
-  List<List<Widget>> _sets = [[]]; //Liste af workouts med en Liste af sets
-  List<List<Widget>> get sets => _sets;
-
   List<Workout> _workouts = [];
   List<Workout> get workouts => _workouts;
 
@@ -21,7 +17,17 @@ class TrainingViewModel extends GetxController implements GetxService {
 
   void addSetToTraining(int index) {
     _workouts[index].workoutSets.add(WorkoutSet(kilo: 0, reps: 0));
-    //_sets[index].add(TrainingSetWidget());
+    update();
+  }
+
+  void removeWorkout(int index) {
+    _workouts.removeAt(index);
+    update();
+  }
+
+  void removeSetFromTraining(int index, int index2) {
+    print('$index = index // $index2 = index2');
+    _workouts[index].workoutSets.removeAt(index2);
     update();
   }
 }
