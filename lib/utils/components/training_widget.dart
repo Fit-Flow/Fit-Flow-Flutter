@@ -52,11 +52,15 @@ class _TrainingWidgetState extends State<TrainingWidget> {
                         bottom: 20,
                       ),
                       child: TrainingSetWidget(
+                        isFirst: index == 0,
                         onAddTap: () {
                           viewModel.addSetToTraining(widget.index);
                         },
                         showAddButton:
                             index >= widget.workout.workoutSets.length - 1,
+                        onRemoveTap: () {
+                          //TODO: Remove
+                        },
                       )),
                 ),
               ),
@@ -70,12 +74,16 @@ class _TrainingWidgetState extends State<TrainingWidget> {
 
 class TrainingSetWidget extends StatelessWidget {
   final VoidCallback onAddTap;
+  final VoidCallback onRemoveTap;
   final bool showAddButton;
+  final bool isFirst;
 
   const TrainingSetWidget({
     super.key,
     required this.onAddTap,
     required this.showAddButton,
+    this.isFirst = false,
+    required this.onRemoveTap,
   });
 
   @override
@@ -100,6 +108,10 @@ class TrainingSetWidget extends StatelessWidget {
             icon: Icons.add,
             color: AppColors.yellowIconColor,
           ),
+        RoundedIconButton(
+            onTap: onRemoveTap,
+            icon: isFirst ? Icons.delete : Icons.remove,
+            color: AppColors.redIconColor)
       ],
     );
   }
