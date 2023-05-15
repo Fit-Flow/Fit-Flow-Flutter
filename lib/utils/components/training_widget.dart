@@ -29,45 +29,48 @@ class TrainingWidget extends StatefulWidget {
 class _TrainingWidgetState extends State<TrainingWidget> {
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      runSpacing: 20,
-      spacing: 20,
-      children: [
-        WorkoutField(
-          workout: widget.workout.name,
-          onTap: () {
-            buildWorkoutDialog();
-          },
-        ),
-        GetBuilder<TrainingViewModel>(builder: (viewModel) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: List.generate(
-                  widget.workout.workoutSets.length,
-                  (index) => Padding(
-                      padding: EdgeInsets.only(
-                        bottom: 20,
-                      ),
-                      child: TrainingSetWidget(
-                        isFirst: index == 0,
-                        onAddTap: () {
-                          viewModel.addSetToTraining(widget.index);
-                        },
-                        showAddButton:
-                            index >= widget.workout.workoutSets.length - 1,
-                        onRemoveTap: () {
-                          //TODO: Remove
-                        },
-                      )),
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 20.0),
+      child: Wrap(
+        runSpacing: 20,
+        spacing: 20,
+        children: [
+          WorkoutField(
+            workout: widget.workout.name,
+            onTap: () {
+              buildWorkoutDialog();
+            },
+          ),
+          GetBuilder<TrainingViewModel>(builder: (viewModel) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: List.generate(
+                    widget.workout.workoutSets.length,
+                    (index) => Padding(
+                        padding: EdgeInsets.only(
+                          bottom: 20,
+                        ),
+                        child: TrainingSetWidget(
+                          isFirst: index == 0,
+                          onAddTap: () {
+                            viewModel.addSetToTraining(widget.index);
+                          },
+                          showAddButton:
+                              index >= widget.workout.workoutSets.length - 1,
+                          onRemoveTap: () {
+                            //TODO: Remove
+                          },
+                        )),
+                  ),
                 ),
-              ),
-            ],
-          );
-        }),
-      ],
+              ],
+            );
+          }),
+        ],
+      ),
     );
   }
 }
