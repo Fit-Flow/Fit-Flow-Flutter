@@ -8,13 +8,16 @@ import 'package:get/get.dart';
  */
 
 class AuthenticationViewModel extends GetxController implements GetxService {
-  Future<void> createUser(String emailAddress, String password) async {
+  Future<void> createUser(String emailAddress, String password,
+      String firstName, String lastName) async {
     try {
       final credential =
           await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailAddress,
         password: password,
       );
+      final user = credential.user;
+      await user?.updateDisplayName('$firstName $lastName');
       Get.offNamed("/dashboard");
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

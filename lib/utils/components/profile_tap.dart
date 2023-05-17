@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:get/get.dart';
@@ -133,7 +134,7 @@ class MenuItems {
         break;
       case MenuItems.logout:
         //TODO: Log ud
-      Get.offNamed("/login");
+        FirebaseAuth.instance.signOut();
         break;
     }
   }

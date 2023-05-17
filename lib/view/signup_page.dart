@@ -75,7 +75,10 @@ class SignupPage extends StatelessWidget {
                       if (passwordController.text ==
                           confirmPasswordController.text) {
                         Get.find<AuthenticationViewModel>().createUser(
-                            emailController.text, passwordController.text);
+                            emailController.text,
+                            passwordController.text,
+                            firstNameController.text,
+                            lastNameController.text);
                       } else {
                         print('Koden er ikke ens!');
                         buildErrorSnackBar('Fejl', 'Koden er ikke ens!');

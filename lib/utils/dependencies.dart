@@ -14,6 +14,7 @@ Future<void> init() async {
       print('User is currently signed out!');
       Get.offNamed('/');
     } else {
+      Get.offNamed('/dashboard');
       print('User is signed in!');
     }
   });
