@@ -3,7 +3,6 @@ import 'package:fit_flow_flutter/utils/components/custom_button.dart';
 import 'package:fit_flow_flutter/utils/components/custom_text_field.dart';
 import 'package:flutter/material.dart';
 
-
 /**
  * @authors Jackie, Christoffer & Jakob
  */
@@ -27,7 +26,9 @@ class ForgotPasswordPage extends StatelessWidget {
                   width: 200,
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Text(
                 'Har du glemt dit kodeord?',
                 style: TextStyle(
@@ -49,12 +50,17 @@ class ForgotPasswordPage extends StatelessWidget {
               ),
               CustomTextField(
                 label: 'E-mail',
+                controller: TextEditingController(),
                 textInputType: TextInputType.emailAddress,
               ),
               SizedBox(
                 height: 20,
               ),
-              CustomButton(text: 'Send', color: AppColors.yellowColor, textColor: AppColors.darkGreyColor, onTap: (){})
+              CustomButton(
+                  text: 'Send',
+                  color: AppColors.yellowColor,
+                  textColor: AppColors.darkGreyColor,
+                  onTap: () {})
             ],
           ),
         ),

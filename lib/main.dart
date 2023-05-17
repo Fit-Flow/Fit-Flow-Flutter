@@ -1,16 +1,23 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fit_flow_flutter/view/dashboard/dashboard_page.dart';
 import 'package:fit_flow_flutter/view/forgot_password_page.dart';
 import 'package:fit_flow_flutter/view/login_page.dart';
 import 'package:fit_flow_flutter/view/signup_page.dart';
 import 'package:flutter/material.dart';
-import 'utils/dependencies.dart' as dep;
 import 'package:get/get.dart';
 
-void main() async{
+import 'firebase_options.dart';
+import 'utils/dependencies.dart' as dep;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await dep.init();
   runApp(const MyApp());
-
 }
+
 /**
  *
  * @author Jackie
@@ -24,6 +31,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      locale: Locale('da', 'DK'),
       themeMode: ThemeMode.dark,
       theme: ThemeData(
         primarySwatch: Colors.blue,

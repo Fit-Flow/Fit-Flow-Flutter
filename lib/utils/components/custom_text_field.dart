@@ -9,10 +9,12 @@ class CustomTextField extends StatelessWidget {
   TextInputType textInputType;
   String label;
   bool isPassword;
+  TextEditingController controller;
 
   CustomTextField({
     this.textInputType = TextInputType.text,
     required this.label,
+    required this.controller,
     this.isPassword = false,
     Key? key,
   }) : super(key: key);
@@ -22,9 +24,8 @@ class CustomTextField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: 20.0),
       child: TextField(
-        style: TextStyle(
-            color: AppColors.textColor
-        ),
+        controller: controller,
+        style: TextStyle(color: AppColors.textColor),
         obscureText: isPassword,
         keyboardType: textInputType,
         decoration: InputDecoration(

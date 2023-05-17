@@ -1,5 +1,6 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/view/forgot_password_page.dart';
+import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/components/custom_button.dart';
@@ -13,7 +14,9 @@ import 'package:get/get.dart';
  * @authors Jackie, Christoffer & Jakob
  */
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +37,12 @@ class LoginPage extends StatelessWidget {
               ),
               CustomTextField(
                 label: "E-mail",
+                controller: emailController,
                 textInputType: TextInputType.emailAddress,
               ),
               CustomTextField(
                 label: 'Kodeord',
+                controller: passwordController,
                 textInputType: TextInputType.visiblePassword,
                 isPassword: true,
               ),
@@ -63,8 +68,9 @@ class LoginPage extends StatelessWidget {
                 text: 'Log in',
                 color: AppColors.yellowColor,
                 textColor: AppColors.darkGreyColor,
-                onTap: (){
-                  Get.offNamed("/dashboard");
+                onTap: () {
+                  Get.find<AuthenticationViewModel>()
+                      .login(emailController.text, passwordController.text);
                 },
               ),
               SizedBox(
@@ -86,15 +92,15 @@ class LoginPage extends StatelessWidget {
                 children: [
                   RoundedLoginLogo(
                     imagePath: 'assets/icon/icon-google.png',
-                    onTap: (){},
+                    onTap: () {},
                   ),
                   RoundedLoginLogo(
                     imagePath: 'assets/icon/icon-facebook.png',
-                    onTap: (){},
+                    onTap: () {},
                   ),
                   RoundedLoginLogo(
                     imagePath: 'assets/icon/icon-twitter.png',
-                    onTap: (){},
+                    onTap: () {},
                   ),
                 ],
               )
