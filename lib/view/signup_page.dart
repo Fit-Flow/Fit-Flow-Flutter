@@ -1,6 +1,7 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/utils/components/custom_button.dart';
 import 'package:fit_flow_flutter/utils/components/custom_text_field.dart';
+import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
 import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -65,9 +66,14 @@ class SignupPage extends StatelessWidget {
                 color: AppColors.yellowColor,
                 textColor: AppColors.darkGreyColor,
                 onTap: () {
-                  Get.find<AuthenticationViewModel>().createUser(
-                      emailController.text, passwordController.text);
-                  //Get.offNamed("/dashboard");
+                  if (passwordController.text ==
+                      confirmPasswordController.text) {
+                    Get.find<AuthenticationViewModel>().createUser(
+                        emailController.text, passwordController.text);
+                  } else {
+                    print('Koden er ikke ens!');
+                    buildErrorSnackBar('Fejl', 'Koden er ikke ens!');
+                  }
                 },
               )
             ],

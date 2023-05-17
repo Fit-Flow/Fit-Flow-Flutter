@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      locale: Locale('da', 'DK'),
       themeMode: ThemeMode.dark,
       theme: ThemeData(
         primarySwatch: Colors.blue,
