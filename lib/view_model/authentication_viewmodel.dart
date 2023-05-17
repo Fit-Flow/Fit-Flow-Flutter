@@ -2,6 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
 import 'package:get/get.dart';
 
+/**
+ *
+ * @authors Jackie, Christoffer & Jakob
+ */
+
 class AuthenticationViewModel extends GetxController implements GetxService {
   Future<void> createUser(String emailAddress, String password) async {
     try {
@@ -35,8 +40,12 @@ class AuthenticationViewModel extends GetxController implements GetxService {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
+        buildErrorSnackBar('Fejl', 'Ingen bruger med denne email');
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
+        buildErrorSnackBar('Fejl', 'Forkete kodeord til denne bruger');
+      } else {
+        buildErrorSnackBar('Fejl', '${e.message}');
       }
     }
   }

@@ -66,13 +66,25 @@ class SignupPage extends StatelessWidget {
                 color: AppColors.yellowColor,
                 textColor: AppColors.darkGreyColor,
                 onTap: () {
-                  if (passwordController.text ==
-                      confirmPasswordController.text) {
-                    Get.find<AuthenticationViewModel>().createUser(
-                        emailController.text, passwordController.text);
+                  if (firstNameController.text.isNotEmpty &&
+                      lastNameController.text.isNotEmpty &&
+                      emailController.text.isNotEmpty &&
+                      passwordController.text.isNotEmpty &&
+                      confirmPasswordController.text.isNotEmpty) {
+                    if (GetUtils.isEmail(emailController.text)) {
+                      if (passwordController.text ==
+                          confirmPasswordController.text) {
+                        Get.find<AuthenticationViewModel>().createUser(
+                            emailController.text, passwordController.text);
+                      } else {
+                        print('Koden er ikke ens!');
+                        buildErrorSnackBar('Fejl', 'Koden er ikke ens!');
+                      }
+                    } else {
+                      buildErrorSnackBar('Fejl', 'Email er ikke valid!');
+                    }
                   } else {
-                    print('Koden er ikke ens!');
-                    buildErrorSnackBar('Fejl', 'Koden er ikke ens!');
+                    buildErrorSnackBar('Fejl', 'Alle felter skal udfyldes');
                   }
                 },
               )
