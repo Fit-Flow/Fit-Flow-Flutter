@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
 import 'package:fit_flow_flutter/view_model/drawer_navigation_viewmodel.dart';
 import 'package:fit_flow_flutter/view_model/training_viewmodel.dart';
 import 'package:get/get.dart';
 
 Future<void> init() async {
   //Firebase
-  FirebaseAuth.instanceFor(app: Firebase.app(), persistence: Persistence.LOCAL);
+  FirebaseAuth.instanceFor(app: Firebase.app());
 
   FirebaseAuth.instance.authStateChanges().listen((User? user) {
     if (user == null) {
@@ -23,4 +24,5 @@ Future<void> init() async {
   //View model
   Get.lazyPut(() => DrawerNavigationViewModel());
   Get.lazyPut(() => TrainingViewModel());
+  Get.lazyPut(() => AuthenticationViewModel());
 }

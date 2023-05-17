@@ -1,6 +1,7 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/utils/components/custom_button.dart';
 import 'package:fit_flow_flutter/utils/components/custom_text_field.dart';
+import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +10,12 @@ import 'package:get/get.dart';
  * @authors Jackie, Christoffer & Jakob
  */
 class SignupPage extends StatelessWidget {
-  const SignupPage({Key? key}) : super(key: key);
+  SignupPage({Key? key}) : super(key: key);
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,19 +34,26 @@ class SignupPage extends StatelessWidget {
                   width: 200,
                 ),
               ),
-              CustomTextField(label: 'Fornavn'),
-              CustomTextField(label: 'Efternavn'),
+              CustomTextField(
+                  label: 'Fornavn', controller: firstNameController),
+              CustomTextField(
+                label: 'Efternavn',
+                controller: lastNameController,
+              ),
               CustomTextField(
                 label: 'E-mail',
+                controller: emailController,
                 textInputType: TextInputType.emailAddress,
               ),
               CustomTextField(
                 label: 'Kodeord',
+                controller: passwordController,
                 textInputType: TextInputType.visiblePassword,
                 isPassword: true,
               ),
               CustomTextField(
                 label: 'Gentag kodeord',
+                controller: confirmPasswordController,
                 textInputType: TextInputType.visiblePassword,
                 isPassword: true,
               ),
@@ -48,12 +61,13 @@ class SignupPage extends StatelessWidget {
                 height: 20,
               ),
               CustomButton(
-                  text: 'Opret',
-                  color: AppColors.yellowColor,
-                  textColor: AppColors.darkGreyColor,
-                onTap: (){
-                    //TODO: tilføj opret funktion
-                  Get.offNamed("/dashboard");
+                text: 'Opret',
+                color: AppColors.yellowColor,
+                textColor: AppColors.darkGreyColor,
+                onTap: () {
+                  Get.find<AuthenticationViewModel>().createUser(
+                      emailController.text, passwordController.text);
+                  //Get.offNamed("/dashboard");
                 },
               )
             ],
