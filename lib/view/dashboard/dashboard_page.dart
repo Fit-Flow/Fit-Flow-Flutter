@@ -1,6 +1,10 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
+import 'package:fit_flow_flutter/utils/components/buttons/rounded_icon_button.dart';
+import 'package:fit_flow_flutter/utils/components/dialogs/workout_dialog.dart';
 import 'package:fit_flow_flutter/utils/responsive.dart';
+import 'package:fit_flow_flutter/view_model/drawer_navigation_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../utils/components/dashboard_content.dart';
 import '../../utils/components/drawer_menu.dart';
@@ -16,6 +20,20 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       drawer: DrawerMenu(),
+      floatingActionButton: GetBuilder<DrawerNavigationViewModel>(
+        builder: (drawerNav) {
+          return drawerNav.selectedIndex == 1
+              ? RoundedIconButton(
+                  onTap: () {
+                    buildWorkoutDialog(-1);
+                  },
+                  icon: Icons.add,
+                  color: AppColors.yellowIconColor,
+                  tooltip: "Tilføj ny øvelse",
+                )
+              : Container();
+        },
+      ),
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
