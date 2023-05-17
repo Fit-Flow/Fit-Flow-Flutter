@@ -39,6 +39,8 @@ dependencies:
   get: ^4.6.5
   dropdown_button2: ^2.1.0
   fl_chart: ^0.62.0
+  firebase_core: ^2.13.0
+  firebase_auth: ^4.6.1
 
 
 dev_dependencies:
