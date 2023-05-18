@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/utils/components/profile_tap.dart';
+import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../responsive.dart';
 
@@ -35,10 +37,12 @@ class _CustomAppbarState extends State<CustomAppbar> {
               ),
             ),
           Expanded(child: Container()),
-          ProfileTap(
-            imagePath: 'assets/img/test-profil.png',
-            profileName: FirebaseAuth.instance.currentUser!.displayName!,
-          ),
+          GetBuilder<AuthenticationViewModel>(builder: (viewmodel) {
+            return ProfileTap(
+              imagePath: 'assets/img/test-profil.png',
+              profileName: FirebaseAuth.instance.currentUser!.displayName!,
+            );
+          }),
           SizedBox(
             width: 30,
           ),

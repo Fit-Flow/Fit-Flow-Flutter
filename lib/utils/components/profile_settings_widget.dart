@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+
+import '../app_colors.dart';
+
+class ProfileSettingsWidget extends StatelessWidget {
+  const ProfileSettingsWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Indstillinger',
+          style: TextStyle(
+              color: AppColors.textColor,
+              fontSize: 24,
+              fontWeight: FontWeight.bold),
+        ),
+        Text(
+          'Klik på dit profilbillede for at ændre det',
+          style: TextStyle(
+            color: AppColors.lightGreyColor,
+            fontSize: 16,
+          ),
+        ),
+        Divider(
+          height: 50,
+          color: AppColors.lightGreyColor,
+          thickness: 1,
+          indent: 10,
+          endIndent: 10,
+        ),
+      ],
+    );
+  }
+}
