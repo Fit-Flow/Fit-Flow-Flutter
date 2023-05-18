@@ -52,4 +52,13 @@ class AuthenticationViewModel extends GetxController implements GetxService {
       }
     }
   }
+
+  String getLastName(String input) {
+    List<String> splitString = input.split(' ');
+    if (splitString.length > 1) {
+      return input.substring(input.indexOf(' ') + 1);
+    } else {
+      return input;
+    }
+  }
 }
