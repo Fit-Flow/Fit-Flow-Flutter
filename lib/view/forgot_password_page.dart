@@ -1,13 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/utils/components/custom_button.dart';
 import 'package:fit_flow_flutter/utils/components/custom_text_field.dart';
+import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
 import 'package:flutter/material.dart';
 
 /**
  * @authors Jackie, Christoffer & Jakob
  */
 class ForgotPasswordPage extends StatelessWidget {
-  const ForgotPasswordPage({Key? key}) : super(key: key);
+  ForgotPasswordPage({Key? key}) : super(key: key);
+
+  final emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +54,7 @@ class ForgotPasswordPage extends StatelessWidget {
               ),
               CustomTextField(
                 label: 'E-mail',
-                controller: TextEditingController(),
+                controller: emailController,
                 textInputType: TextInputType.emailAddress,
               ),
               SizedBox(
@@ -60,7 +64,20 @@ class ForgotPasswordPage extends StatelessWidget {
                   text: 'Send',
                   color: AppColors.yellowColor,
                   textColor: AppColors.darkGreyColor,
-                  onTap: () {})
+                  onTap: () async {
+                    if (emailController.text.isNotEmpty) {
+                      try {
+                        await FirebaseAuth.instance.sendPasswordResetEmail(
+                            email: emailController.text);
+                        buildSuccessSnackBar(
+                            'Udført', 'Email med nyt kodeord sendt');
+                      } on FirebaseAuthException catch (e) {
+                        buildErrorSnackBar('Fejl', e.message);
+                      }
+                    } else {
+                      buildErrorSnackBar('Fejl', 'Udfyld venligst feltet');
+                    }
+                  })
             ],
           ),
         ),
