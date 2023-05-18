@@ -53,6 +53,39 @@ class AuthenticationViewModel extends GetxController implements GetxService {
     }
   }
 
+  void updateDisplayName(String firstName, String lastName) async {
+    try {
+      final user = await FirebaseAuth.instance.currentUser!;
+      await user.updateDisplayName('$firstName $lastName');
+      update();
+      buildSuccessSnackBar('Udført', 'Profil opdateret');
+    } on FirebaseAuthException catch (e) {
+      buildErrorSnackBar('Fejl', e.message);
+    }
+  }
+
+  void updateEmail(String email) async {
+    try {
+      final user = await FirebaseAuth.instance.currentUser!;
+      await user.updateEmail(email);
+      update();
+      buildSuccessSnackBar('Udført', 'Email opdateret');
+    } on FirebaseAuthException catch (e) {
+      buildErrorSnackBar('Fejl', e.message);
+    }
+  }
+
+  void updatePassword(String password, String newPassword) async {
+    try {
+      final user = await FirebaseAuth.instance.currentUser!;
+      await user.updatePassword(newPassword);
+      update();
+      buildSuccessSnackBar('Udført', 'Kodeord opdateret');
+    } on FirebaseAuthException catch (e) {
+      buildErrorSnackBar('Fejl', e.message);
+    }
+  }
+
   String getLastName(String input) {
     List<String> splitString = input.split(' ');
     if (splitString.length > 1) {

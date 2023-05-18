@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -6,6 +7,10 @@ import '../../view_model/authentication_viewmodel.dart';
 import '../app_colors.dart';
 import 'custom_button.dart';
 import 'custom_text_field.dart';
+
+/**
+ * @authors Jackie, Christoffer & Jakob
+ */
 
 class ProfileUpdateInfo extends StatelessWidget {
   ProfileUpdateInfo({super.key});
@@ -85,7 +90,43 @@ class ProfileUpdateInfo extends StatelessWidget {
               text: 'Gem',
               color: AppColors.yellowColor,
               textColor: AppColors.backgroundColor,
-              onTap: () {}),
+              onTap: () {
+                if (firstNameController.text.isNotEmpty &&
+                    lastNameController.text.isNotEmpty &&
+                    emailController.text.isNotEmpty) {
+                  if (emailController.text !=
+                      FirebaseAuth.instance.currentUser!.email!) {
+                    Get.find<AuthenticationViewModel>()
+                        .updateEmail(emailController.text);
+                  }
+
+                  if (firstNameController.text !=
+                          FirebaseAuth.instance.currentUser!.displayName!
+                              .split(' ')[0] ||
+                      lastNameController.text !=
+                          Get.find<AuthenticationViewModel>().getLastName(
+                              FirebaseAuth
+                                  .instance.currentUser!.displayName!)) {
+                    Get.find<AuthenticationViewModel>().updateDisplayName(
+                        firstNameController.text, lastNameController.text);
+                  }
+                } else {
+                  buildErrorSnackBar('Fejl', 'Alle felter skal udfyldes');
+                }
+
+                if (newPasswordController.text ==
+                    confirmPasswordController.text) {
+                  if (passwordController.text.isNotEmpty &&
+                      newPasswordController.text.isNotEmpty &&
+                      confirmPasswordController.text.isNotEmpty) {
+                    Get.find<AuthenticationViewModel>().updatePassword(
+                        passwordController.text, newPasswordController.text);
+                    passwordController.text = '';
+                    newPasswordController.text = '';
+                    confirmPasswordController.text = '';
+                  }
+                }
+              }),
         ),
       ],
     );
