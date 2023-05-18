@@ -19,6 +19,7 @@ class SettingsPage extends StatelessWidget {
             height: 25,
           ),
           ProfileSettingsWidget(),
+          ProfileUpdateInfo(),
         ],
       ),
     );
@@ -40,7 +41,40 @@ class ProfileSettingsWidget extends StatelessWidget {
               fontSize: 24,
               fontWeight: FontWeight.bold),
         ),
-        Text('Klik på dit profilbillede for at ændre det'),
+        Text(
+          'Klik på dit profilbillede for at ændre det',
+          style: TextStyle(
+            color: AppColors.lightGreyColor,
+            fontSize: 16,
+          ),
+        ),
+        Divider(
+          height: 50,
+          color: AppColors.lightGreyColor,
+          thickness: 1,
+          indent: 10,
+          endIndent: 10,
+        ),
+      ],
+    );
+  }
+}
+
+class ProfileUpdateInfo extends StatelessWidget {
+  const ProfileUpdateInfo({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Profil',
+          style: TextStyle(
+              color: AppColors.textColor,
+              fontSize: 24,
+              fontWeight: FontWeight.bold),
+        )
       ],
     );
   }
