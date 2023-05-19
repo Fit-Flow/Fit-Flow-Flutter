@@ -6,9 +6,11 @@ import '../../utils/components/header_widget.dart';
 import '../../utils/components/latestWorkoutsWidget.dart';
 import '../../utils/components/latest_workout_card.dart';
 
-/**
- * @authors Jackie, Christoffer & Jackie
- */
+/// The [StartPage] class represents the start page in the FitFlow app.
+///
+/// This page displays an overview of graphs, activity, and the latest workouts.
+///
+///authors: Jackie, Christoffer & Jakob
 class StartPage extends StatelessWidget {
   StartPage({Key? key}) : super(key: key);
 
@@ -66,7 +68,7 @@ class StartPage extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            LatesWorkoutsWidget(),
+            LatestWorkoutsWidget(),
           ],
         ),
       ),
