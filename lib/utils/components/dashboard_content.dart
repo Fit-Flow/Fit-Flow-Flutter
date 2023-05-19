@@ -3,9 +3,10 @@ import 'package:fit_flow_flutter/view_model/drawer_navigation_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
+/// Represents the content of the dashboard.
+///
+///authors: Jackie, Christoffer & Jakob
+
 class DashboardContent extends StatefulWidget {
   DashboardContent({Key? key}) : super(key: key);
 
@@ -14,7 +15,6 @@ class DashboardContent extends StatefulWidget {
 }
 
 class _DashboardContentState extends State<DashboardContent> {
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -23,9 +23,9 @@ class _DashboardContentState extends State<DashboardContent> {
         SizedBox(
           height: 20,
         ),
-       GetBuilder<DrawerNavigationViewModel>(builder: (drawerNav) {
-         return drawerNav.selectedPage;
-       })
+        GetBuilder<DrawerNavigationViewModel>(builder: (drawerNav) {
+          return drawerNav.selectedPage;
+        })
       ],
     );
   }
