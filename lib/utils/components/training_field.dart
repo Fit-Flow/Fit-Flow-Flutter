@@ -9,12 +9,12 @@ import '../app_colors.dart';
 class TrainingField extends StatelessWidget {
   final String hintText;
   final String prefixText;
-  final String sufixText;
+  final String suffixText;
   const TrainingField(
       {super.key,
       required this.hintText,
       required this.prefixText,
-      required this.sufixText});
+      required this.suffixText});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class TrainingField extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    sufixText,
+                    suffixText,
                     style: TextStyle(
                       color: AppColors.lightGreyColor,
                       fontSize: 20,

@@ -9,18 +9,16 @@ import '../app_colors.dart';
 import 'buttons/rounded_icon_button.dart';
 import 'dialogs/workout_dialog.dart';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
 class TrainingWidget extends StatefulWidget {
   final Workout workout;
   final int index;
 
-  TrainingWidget({
-    super.key,
-    required this.workout,
-    required this.index,
-  });
+  /// A widget that represents a training workout.
+  ///
+  /// The [workout] parameter represents the workout object.
+  /// The [index] parameter is the index of the workout in the list.
+  TrainingWidget({Key? key, required this.workout, required this.index})
+      : super(key: key);
 
   @override
   State<TrainingWidget> createState() => _TrainingWidgetState();
@@ -50,26 +48,24 @@ class _TrainingWidgetState extends State<TrainingWidget> {
                   children: List.generate(
                     widget.workout.workoutSets.length,
                     (index) => Padding(
-                        padding: EdgeInsets.only(
-                          bottom: 20,
-                        ),
-                        child: TrainingSetWidget(
-                          isFirst: index == 0,
-                          onAddTap: () {
-                            viewModel.addSetToTraining(widget.index);
-                          },
-                          showAddButton:
-                              index >= widget.workout.workoutSets.length - 1,
-                          onRemoveTap: () {
-                            //TODO: Lige nu ser det ud til at den sidste bliver slettet, men tror det er noget med en controller der mangler i textfield.
-                            if (index == 0) {
-                              viewModel.removeWorkout(widget.index);
-                            } else {
-                              viewModel.removeSetFromTraining(
-                                  widget.index, index);
-                            }
-                          },
-                        )),
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: TrainingSetWidget(
+                        isFirst: index == 0,
+                        onAddTap: () {
+                          viewModel.addSetToTraining(widget.index);
+                        },
+                        showAddButton:
+                            index >= widget.workout.workoutSets.length - 1,
+                        onRemoveTap: () {
+                          if (index == 0) {
+                            viewModel.removeWorkout(widget.index);
+                          } else {
+                            viewModel.removeSetFromTraining(
+                                widget.index, index);
+                          }
+                        },
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -87,13 +83,19 @@ class TrainingSetWidget extends StatelessWidget {
   final bool showAddButton;
   final bool isFirst;
 
+  /// A widget that represents a training set.
+  ///
+  /// The [onAddTap] callback is called when the add button is tapped.
+  /// The [onRemoveTap] callback is called when the remove button is tapped.
+  /// The [showAddButton] parameter determines whether the add button is visible.
+  /// The [isFirst] parameter indicates whether this is the first training set.
   const TrainingSetWidget({
-    super.key,
+    Key? key,
     required this.onAddTap,
     required this.showAddButton,
     this.isFirst = false,
     required this.onRemoveTap,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -104,12 +106,12 @@ class TrainingSetWidget extends StatelessWidget {
         TrainingField(
           hintText: 'Indtast',
           prefixText: 'Vægt',
-          sufixText: 'Kg',
+          suffixText: 'Kg',
         ),
         TrainingField(
           hintText: 'Indtast',
           prefixText: 'Reps',
-          sufixText: '',
+          suffixText: '',
         ),
         if (showAddButton)
           RoundedIconButton(
@@ -118,9 +120,10 @@ class TrainingSetWidget extends StatelessWidget {
             color: AppColors.yellowIconColor,
           ),
         RoundedIconButton(
-            onTap: onRemoveTap,
-            icon: isFirst ? Icons.delete : Icons.remove,
-            color: AppColors.redIconColor)
+          onTap: onRemoveTap,
+          icon: isFirst ? Icons.delete : Icons.remove,
+          color: AppColors.redIconColor,
+        ),
       ],
     );
   }
