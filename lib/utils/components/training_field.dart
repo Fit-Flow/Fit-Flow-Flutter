@@ -3,18 +3,24 @@ import 'package:flutter/services.dart';
 
 import '../app_colors.dart';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
 class TrainingField extends StatelessWidget {
   final String hintText;
   final String prefixText;
   final String suffixText;
-  const TrainingField(
-      {super.key,
-      required this.hintText,
-      required this.prefixText,
-      required this.suffixText});
+
+  /// A text field used in training widget.
+  ///
+  /// The [hintText] is the placeholder text displayed in the field.
+  /// The [prefixText] is the text displayed before the user input.
+  /// The [suffixText] is the text displayed after the user input.
+  ///
+  ///authors: Jackie, Christoffer & Jakob
+  const TrainingField({
+    Key? key,
+    required this.hintText,
+    required this.prefixText,
+    required this.suffixText,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +28,10 @@ class TrainingField extends StatelessWidget {
       width: 200,
       height: 60,
       decoration: BoxDecoration(
-          color: AppColors.darkGreyColor,
-          border: Border.all(color: AppColors.lightGreyColor, width: 1),
-          borderRadius: BorderRadius.circular(10)),
+        color: AppColors.darkGreyColor,
+        border: Border.all(color: AppColors.lightGreyColor, width: 1),
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Center(

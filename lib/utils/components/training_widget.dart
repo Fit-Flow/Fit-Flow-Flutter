@@ -17,6 +17,8 @@ class TrainingWidget extends StatefulWidget {
   ///
   /// The [workout] parameter represents the workout object.
   /// The [index] parameter is the index of the workout in the list.
+  ///
+  ///authors: Jackie, Christoffer & Jakob
   TrainingWidget({Key? key, required this.workout, required this.index})
       : super(key: key);
 
