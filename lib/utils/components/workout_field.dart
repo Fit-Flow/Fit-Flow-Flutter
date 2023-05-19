@@ -5,7 +5,15 @@ import '../app_colors.dart';
 class WorkoutField extends StatelessWidget {
   final String workout;
   final VoidCallback onTap;
-  const WorkoutField({super.key, required this.workout, required this.onTap});
+
+  /// Constructs a `WorkoutField` widget.
+  ///
+  /// The [workout] parameter represents the name of the workout.
+  /// The [onTap] parameter is a callback function that is triggered when the widget is tapped.
+  ///
+  ///authors: Jackie, Christoffer & Jakob
+  const WorkoutField({Key? key, required this.workout, required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,9 +23,10 @@ class WorkoutField extends StatelessWidget {
         height: 60,
         width: 400,
         decoration: BoxDecoration(
-            color: AppColors.darkGreyColor,
-            border: Border.all(color: AppColors.lightGreyColor, width: 1),
-            borderRadius: BorderRadius.circular(10)),
+          color: AppColors.darkGreyColor,
+          border: Border.all(color: AppColors.lightGreyColor, width: 1),
+          borderRadius: BorderRadius.circular(10),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Align(
