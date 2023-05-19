@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
-/**
- * @authors Jackie, Christoffer & Jackie
- */
+/// Represents a card displaying the latest workout information.
+///
+///authors: Jackie, Christoffer & Jakob
 class LatestWorkoutCard extends StatelessWidget {
   final String title;
   final List<String> workouts;
+
   const LatestWorkoutCard({
-    super.key,
+    Key? key,
     required this.title,
     required this.workouts,
   });
@@ -17,10 +18,10 @@ class LatestWorkoutCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 210,
-      padding: EdgeInsets.all(20), // Set padding around the container
+      padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: AppColors.darkGreyColor, // Set background color
-        borderRadius: BorderRadius.circular(8.0), // Set border radius
+        color: AppColors.darkGreyColor,
+        borderRadius: BorderRadius.circular(8.0),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,30 +29,30 @@ class LatestWorkoutCard extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-                color: AppColors.grayTextColor,
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
+              color: AppColors.grayTextColor,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
-          SizedBox(
-            height: 10,
-          ),
+          SizedBox(height: 10),
           Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: List.generate(
-                workouts.length,
-                (index) => Padding(
-                  padding: const EdgeInsets.only(bottom: 5),
-                  child: Text(
-                    workouts[index],
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: AppColors.grayTextColor,
-                      fontSize: 16,
-                    ),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: List.generate(
+              workouts.length,
+              (index) => Padding(
+                padding: const EdgeInsets.only(bottom: 5),
+                child: Text(
+                  workouts[index],
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: AppColors.grayTextColor,
+                    fontSize: 16,
                   ),
                 ),
-              )),
+              ),
+            ),
+          ),
         ],
       ),
     );
