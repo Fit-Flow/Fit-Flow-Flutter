@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../app_colors.dart';
 
 /// Represents a profile settings widget that displays profile settings information.
+///
+///authors: Jackie, Christoffer & Jakob
 class ProfileSettingsWidget extends StatelessWidget {
   const ProfileSettingsWidget({Key? key});
 
