@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import '../../view_model/drawer_navigation_viewmodel.dart';
 import '../app_colors.dart';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
+/// Represents a profile tap widget that displays an image and a profile name.
+///
+///authors: Jackie, Christoffer & Jakob
 class ProfileTap extends StatelessWidget {
   final String imagePath;
   final String profileName;
@@ -85,6 +85,7 @@ class ProfileTap extends StatelessWidget {
   }
 }
 
+/// Represents a menu item with text and icon.
 class MenuItem {
   final String text;
   final IconData icon;
@@ -95,6 +96,7 @@ class MenuItem {
   });
 }
 
+/// Contains the menu items and helper methods for building menu items and handling menu item selection.
 class MenuItems {
   static const List<MenuItem> firstItems = [settings, faq];
   static const List<MenuItem> secondItems = [logout];
@@ -103,6 +105,7 @@ class MenuItems {
   static const faq = MenuItem(text: 'FAQ', icon: Icons.question_mark);
   static const logout = MenuItem(text: 'Logud', icon: Icons.logout);
 
+  /// Builds a menu item widget with an icon and text.
   static Widget buildItem(MenuItem item) {
     return Row(
       children: [
@@ -124,6 +127,7 @@ class MenuItems {
     );
   }
 
+  /// Handles the selection of a menu item based on its value.
   static onChanged(BuildContext context, MenuItem item) {
     switch (item) {
       case MenuItems.settings:
