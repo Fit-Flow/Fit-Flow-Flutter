@@ -5,12 +5,11 @@ import 'package:get/get.dart';
 
 import '../app_colors.dart';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
-
+/// Represents the header section of the profile settings.
+///
+///authors: Jackie, Christoffer & Jakob
 class ProfileSettingsHeader extends StatelessWidget {
-  const ProfileSettingsHeader({super.key});
+  const ProfileSettingsHeader({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +33,18 @@ class ProfileSettingsHeader extends StatelessWidget {
               Text(
                 FirebaseAuth.instance.currentUser!.displayName!,
                 style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
+                  color: AppColors.textColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Text(
                 FirebaseAuth.instance.currentUser!.email!,
-                style: TextStyle(color: AppColors.lightGreyColor, fontSize: 16),
-              )
+                style: TextStyle(
+                  color: AppColors.lightGreyColor,
+                  fontSize: 16,
+                ),
+              ),
             ],
           ),
         ],
