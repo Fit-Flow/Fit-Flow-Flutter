@@ -2,19 +2,23 @@ import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/view/forgot_password_page.dart';
 import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../utils/components/custom_button.dart';
 import '../utils/components/custom_text_field.dart';
 import '../utils/components/rounded_login_logo.dart';
-import 'package:get/get.dart';
 
-/**
- * Login siden
- *
- * @authors Jackie, Christoffer & Jakob
- */
+/// The [LoginPage] class represents the login page in the FitFlow app.
+///
+/// This page allows users to log in by providing their email and password.
+/// It includes input fields for email and password, as well as options for password recovery and social media login.
+/// Users can tap on the "Log in" button to authenticate their credentials and access the app.
+/// If they don't have an account, they can tap on the "Opret bruger" button to navigate to the signup page.
+///
+///authors: Jackie, Christoffer & Jakob
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -69,8 +73,10 @@ class LoginPage extends StatelessWidget {
                 color: AppColors.yellowColor,
                 textColor: AppColors.darkGreyColor,
                 onTap: () {
-                  Get.find<AuthenticationViewModel>()
-                      .login(emailController.text, passwordController.text);
+                  Get.find<AuthenticationViewModel>().login(
+                    emailController.text,
+                    passwordController.text,
+                  );
                 },
               ),
               SizedBox(
