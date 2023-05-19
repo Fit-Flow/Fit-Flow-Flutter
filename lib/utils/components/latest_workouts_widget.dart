@@ -6,16 +6,16 @@ import 'latest_workout_card.dart';
 /**
  * @authors Jackie, Christoffer & Jackie
  */
-class LatesWorkoutsWidget extends StatefulWidget {
-  const LatesWorkoutsWidget({
+class LatestWorkoutsWidget extends StatefulWidget {
+  const LatestWorkoutsWidget({
     super.key,
   });
 
   @override
-  State<LatesWorkoutsWidget> createState() => _LatesWorkoutsWidgetState();
+  State<LatestWorkoutsWidget> createState() => _LatestWorkoutsWidgetState();
 }
 
-class _LatesWorkoutsWidgetState extends State<LatesWorkoutsWidget> {
+class _LatestWorkoutsWidgetState extends State<LatestWorkoutsWidget> {
   ScrollController _scrollController = ScrollController();
   double _offset = 0;
   bool _showNextButton = true;

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
+/// A widget for handling responsive design based on screen size.
 class Responsive extends StatelessWidget {
   final Widget mobile;
   final Widget? tablet;
   final Widget desktop;
 
+  /// Constructs a `Responsive` widget.
+  ///
+  /// The [mobile] widget is required and will be displayed on small screens.
+  /// The [tablet] widget is optional and will be displayed on medium-sized screens.
+  /// The [desktop] widget is required and will be displayed on large screens.
   const Responsive({
     Key? key,
     required this.mobile,
@@ -15,13 +18,16 @@ class Responsive extends StatelessWidget {
     required this.desktop,
   }) : super(key: key);
 
+  /// Returns `true` if the screen size is considered as a mobile device.
   static bool isMobile(BuildContext context) =>
       MediaQuery.of(context).size.width < 850;
 
+  /// Returns `true` if the screen size is considered as a tablet device.
   static bool isTablet(BuildContext context) =>
       MediaQuery.of(context).size.width < 1100 &&
       MediaQuery.of(context).size.width >= 850;
 
+  /// Returns `true` if the screen size is considered as a desktop device.
   static bool isDesktop(BuildContext context) =>
       MediaQuery.of(context).size.width >= 1100;
 
