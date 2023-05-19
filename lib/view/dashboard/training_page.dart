@@ -5,9 +5,11 @@ import 'package:get/get.dart';
 import '../../utils/components/header_widget.dart';
 import '../../utils/components/training_widget.dart';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
+/// The [TrainingPage] class represents the training page in the FitFlow app.
+///
+/// This page displays the list of workouts for the user to view and interact with.
+///
+///authors: Jackie, Christoffer & Jakob
 class TrainingPage extends StatelessWidget {
   const TrainingPage({Key? key}) : super(key: key);
 
