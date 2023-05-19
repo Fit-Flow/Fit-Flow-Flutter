@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 /// A widget for handling responsive design based on screen size.
+///
+///authors: Jackie, Christoffer & Jakob
 class Responsive extends StatelessWidget {
   final Widget mobile;
   final Widget? tablet;
