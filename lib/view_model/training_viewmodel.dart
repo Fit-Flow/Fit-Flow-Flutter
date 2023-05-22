@@ -1,5 +1,7 @@
+import 'package:fit_flow_flutter/models/training_model.dart';
 import 'package:fit_flow_flutter/models/workout_set_model.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../models/workout_model.dart';
 
@@ -8,8 +10,11 @@ import '../models/workout_model.dart';
 /// This class extends [GetxController] and implements the [GetxService] interface.
 /// It provides methods for updating workout names, adding workouts and sets, removing workouts and sets.
 class TrainingViewModel extends GetxController implements GetxService {
-  List<Workout> _workouts = [];
-  List<Workout> get workouts => _workouts;
+  Training _currentTraining = Training(
+      name: 'Træning ${DateFormat('dd/MM/yyyy').format(DateTime.now())}',
+      workouts: []);
+
+  Training get currentTraining => _currentTraining;
 
   /// Updates the name of the workout at the specified index.
   ///
@@ -17,7 +22,7 @@ class TrainingViewModel extends GetxController implements GetxService {
   ///
   ///authors: Jackie, Christoffer & Jakob
   void updateWorkoutName(String name, int index) {
-    _workouts[index].name = name;
+    _currentTraining.workouts[index].name = name;
     update();
   }
 
@@ -27,7 +32,7 @@ class TrainingViewModel extends GetxController implements GetxService {
   ///
   ///authors: Jackie, Christoffer & Jakob
   void addWorkout(Workout workout) {
-    _workouts.add(workout);
+    _currentTraining.workouts.add(workout);
     update();
   }
 
@@ -38,7 +43,8 @@ class TrainingViewModel extends GetxController implements GetxService {
   ///
   ///authors: Jackie, Christoffer & Jakob
   void addSetToTraining(int index) {
-    _workouts[index].workoutSets.add(WorkoutSet(kilo: 0, reps: 0));
+    _currentTraining.workouts[index].workoutSets
+        .add(WorkoutSet(kilo: 0, reps: 0));
     update();
   }
 
@@ -48,7 +54,7 @@ class TrainingViewModel extends GetxController implements GetxService {
   ///
   ///authors: Jackie, Christoffer & Jakob
   void removeWorkout(int index) {
-    _workouts.removeAt(index);
+    _currentTraining.workouts.removeAt(index);
     update();
   }
 
@@ -58,7 +64,7 @@ class TrainingViewModel extends GetxController implements GetxService {
   ///
   ///authors: Jackie, Christoffer & Jakob
   void removeSetFromTraining(int workoutIndex, int setIndex) {
-    _workouts[workoutIndex].workoutSets.removeAt(setIndex);
+    _currentTraining.workouts[workoutIndex].workoutSets.removeAt(setIndex);
     update();
   }
 }

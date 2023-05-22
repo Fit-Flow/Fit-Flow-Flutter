@@ -18,39 +18,40 @@ class TrainingPage extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            HeaderWidget(
-              title: "Træning",
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            GetBuilder<TrainingViewModel>(builder: (viewModel) {
+          padding: const EdgeInsets.all(20),
+          child: GetBuilder<TrainingViewModel>(
+            builder: (viewModel) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  HeaderWidget(
+                    title: viewModel.currentTraining.name,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(
-                      viewModel.workouts.length,
-                      (index) => TrainingWidget(
-                        workout: viewModel.workouts[index],
-                        index: index,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: List.generate(
+                          viewModel.currentTraining.workouts.length,
+                          (index) => TrainingWidget(
+                            workout: viewModel.currentTraining.workouts[index],
+                            index: index,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 80,
                   ),
                 ],
               );
-            }),
-            SizedBox(
-              height: 80,
-            ),
-          ],
-        ),
-      ),
+            },
+          )),
     );
   }
 }

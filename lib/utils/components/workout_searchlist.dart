@@ -45,7 +45,11 @@ class _WorkoutSearchListState extends State<WorkoutSearchList> {
                         ),
                       );
                       Get.find<TrainingViewModel>().addSetToTraining(
-                          Get.find<TrainingViewModel>().workouts.length - 1);
+                          Get.find<TrainingViewModel>()
+                                  .currentTraining
+                                  .workouts
+                                  .length -
+                              1);
                     } else {
                       Get.find<TrainingViewModel>().updateWorkoutName(
                           widget.workouts[index], widget.index);
