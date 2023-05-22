@@ -8,9 +8,10 @@ import 'package:get/get.dart';
 
 import '../../view/dashboard/start_page.dart';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
+/// Represents the drawer menu widget.
+///
+///authors: Jackie, Christoffer & Jakob
+
 class DrawerMenu extends StatefulWidget {
   DrawerMenu({Key? key}) : super(key: key);
 
@@ -19,13 +20,12 @@ class DrawerMenu extends StatefulWidget {
 }
 
 class _DrawerMenuState extends State<DrawerMenu> {
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
       elevation: 0,
       backgroundColor: AppColors.darkGreyColor,
-      child: GetBuilder<DrawerNavigationViewModel> (builder: (drawerNav) {
+      child: GetBuilder<DrawerNavigationViewModel>(builder: (drawerNav) {
         return ListView(
           children: [
             Padding(
@@ -40,7 +40,9 @@ class _DrawerMenuState extends State<DrawerMenu> {
                 ),
               ),
             ),
-            SizedBox(height: 35,),
+            SizedBox(
+              height: 35,
+            ),
             DashboardIcon(
                 isSelected: drawerNav.selectedIndex == 0,
                 iconPath: "assets/icon/icon-home.png",
@@ -79,6 +81,10 @@ class _DrawerMenuState extends State<DrawerMenu> {
     );
   }
 }
+
+/// Represents an icon in the dashboard menu.
+///
+///authors: Jackie, Christoffer & Jakob
 
 class DashboardIcon extends StatelessWidget {
   final bool isSelected;

@@ -1,21 +1,67 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import '../../view_model/authentication_viewmodel.dart';
 import '../app_colors.dart';
 import 'latest_workout_card.dart';
 
-/**
- * @authors Jackie, Christoffer & Jackie
- */
-class LatesWorkoutsWidget extends StatefulWidget {
-  const LatesWorkoutsWidget({
-    super.key,
-  });
+/// Represents the widget displaying the profile settings header.
+///
+///authors: Jackie, Christoffer & Jakob
+class ProfileSettingsHeader extends StatelessWidget {
+  const ProfileSettingsHeader({Key? key});
 
   @override
-  State<LatesWorkoutsWidget> createState() => _LatesWorkoutsWidgetState();
+  Widget build(BuildContext context) {
+    return GetBuilder<AuthenticationViewModel>(builder: (viewmodel) {
+      return Row(
+        children: [
+          Container(
+            width: 200,
+            height: 200,
+            child: ClipRRect(
+              child: Image.asset('assets/img/test-profil.png'),
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          SizedBox(
+            width: 40,
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                FirebaseAuth.instance.currentUser!.displayName!,
+                style: TextStyle(
+                  color: AppColors.textColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                FirebaseAuth.instance.currentUser!.email!,
+                style: TextStyle(
+                  color: AppColors.lightGreyColor,
+                  fontSize: 16,
+                ),
+              ),
+            ],
+          ),
+        ],
+      );
+    });
+  }
 }
 
-class _LatesWorkoutsWidgetState extends State<LatesWorkoutsWidget> {
+/// Represents the widget displaying the latest workouts.
+class LatestWorkoutsWidget extends StatefulWidget {
+  const LatestWorkoutsWidget({Key? key});
+
+  @override
+  State<LatestWorkoutsWidget> createState() => _LatestWorkoutsWidgetState();
+}
+
+class _LatestWorkoutsWidgetState extends State<LatestWorkoutsWidget> {
   ScrollController _scrollController = ScrollController();
   double _offset = 0;
   bool _showNextButton = true;
@@ -62,7 +108,7 @@ class _LatesWorkoutsWidgetState extends State<LatesWorkoutsWidget> {
                   "Triceps pulldown",
                   "Dips",
                   "Flyers",
-                  "Triceps pulldown"
+                  "Triceps pulldown",
                 ],
               ),
               LatestWorkoutCard(
@@ -99,64 +145,7 @@ class _LatesWorkoutsWidgetState extends State<LatesWorkoutsWidget> {
                   "Incline bænkpres",
                   "Dips",
                   "Flyers",
-                  "Triceps pulldown"
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
                   "Triceps pulldown",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown"
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                  "Dips",
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown"
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown"
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown"
                 ],
               ),
               LatestWorkoutCard(
@@ -170,9 +159,66 @@ class _LatesWorkoutsWidgetState extends State<LatesWorkoutsWidget> {
                   "Dips",
                   "Flyers",
                   "Triceps pulldown",
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
                   "Dips",
                   "Flyers",
-                  "Triceps pulldown"
+                  "Triceps pulldown",
+                  "Dips",
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                ],
+              ),
+              LatestWorkoutCard(
+                title: "Træning 24-06/23",
+                workouts: [
+                  "Bænkpres",
+                  "Incline bænkpres",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
+                  "Dips",
+                  "Flyers",
+                  "Triceps pulldown",
                 ],
               ),
             ],
@@ -190,9 +236,11 @@ class _LatesWorkoutsWidgetState extends State<LatesWorkoutsWidget> {
                         isBack: true,
                         onTap: () {
                           _offset = _scrollController.offset - 230;
-                          _scrollController.animateTo(_offset,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.easeInOut);
+                          _scrollController.animateTo(
+                            _offset,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeInOut,
+                          );
                         },
                       )
                     : Container(),
@@ -201,9 +249,11 @@ class _LatesWorkoutsWidgetState extends State<LatesWorkoutsWidget> {
                         isBack: false,
                         onTap: () {
                           _offset = _scrollController.offset + 230;
-                          _scrollController.animateTo(_offset,
-                              duration: const Duration(milliseconds: 500),
-                              curve: Curves.easeInOut);
+                          _scrollController.animateTo(
+                            _offset,
+                            duration: const Duration(milliseconds: 500),
+                            curve: Curves.easeInOut,
+                          );
                         },
                       )
                     : Container(),
@@ -216,15 +266,13 @@ class _LatesWorkoutsWidgetState extends State<LatesWorkoutsWidget> {
   }
 }
 
-/**
- * @authors Jackie, Christoffer & Jackie
- */
+/// Represents a button with a direction arrow.
 class DirectionButton extends StatelessWidget {
   final bool isBack;
   final VoidCallback onTap;
 
   const DirectionButton({
-    super.key,
+    Key? key,
     required this.isBack,
     required this.onTap,
   });
@@ -238,15 +286,16 @@ class DirectionButton extends StatelessWidget {
         height: double.maxFinite,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: isBack
-                  ? [
-                      AppColors.backgroundColor,
-                      AppColors.darkGreyColor.withOpacity(0.3)
-                    ]
-                  : [
-                      AppColors.darkGreyColor.withOpacity(0.3),
-                      AppColors.backgroundColor
-                    ]),
+            colors: isBack
+                ? [
+                    AppColors.backgroundColor,
+                    AppColors.darkGreyColor.withOpacity(0.3),
+                  ]
+                : [
+                    AppColors.darkGreyColor.withOpacity(0.3),
+                    AppColors.backgroundColor,
+                  ],
+          ),
         ),
         child: Icon(
           isBack ? Icons.arrow_back_ios : Icons.arrow_forward_ios,

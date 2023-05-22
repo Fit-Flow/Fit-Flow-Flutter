@@ -8,12 +8,11 @@ import '../app_colors.dart';
 import 'custom_button.dart';
 import 'custom_text_field.dart';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
-
+/// A widget for updating user profile information.
+///
+///authors: Jackie, Christoffer & Jakob
 class ProfileUpdateInfo extends StatelessWidget {
-  ProfileUpdateInfo({super.key});
+  ProfileUpdateInfo({Key? key});
 
   final firstNameController = TextEditingController(
       text: FirebaseAuth.instance.currentUser!.displayName!.split(' ')[0]);

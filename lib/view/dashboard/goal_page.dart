@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
+/// The [GoalPage] class represents the goal page in the FitFlow app.
+///
+/// This page displays the user's goals and objectives.
+///
+///authors: Jackie, Christoffer & Jakob
 class GoalPage extends StatelessWidget {
   const GoalPage({Key? key}) : super(key: key);
 

@@ -5,9 +5,12 @@ import 'package:fit_flow_flutter/utils/components/custom_text_field.dart';
 import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
 import 'package:flutter/material.dart';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
+/// The [ForgotPasswordPage] class represents the forgot password page in the FitFlow app.
+///
+/// This page allows users to reset their password by entering their email address.
+/// Users will receive an email with a password reset link to change their password.
+///
+///authors: Jackie, Christoffer & Jakob
 class ForgotPasswordPage extends StatelessWidget {
   ForgotPasswordPage({Key? key}) : super(key: key);
 
@@ -61,23 +64,27 @@ class ForgotPasswordPage extends StatelessWidget {
                 height: 20,
               ),
               CustomButton(
-                  text: 'Send',
-                  color: AppColors.yellowColor,
-                  textColor: AppColors.darkGreyColor,
-                  onTap: () async {
-                    if (emailController.text.isNotEmpty) {
-                      try {
-                        await FirebaseAuth.instance.sendPasswordResetEmail(
-                            email: emailController.text);
-                        buildSuccessSnackBar(
-                            'Udført', 'Email med nyt kodeord sendt');
-                      } on FirebaseAuthException catch (e) {
-                        buildErrorSnackBar('Fejl', e.message);
-                      }
-                    } else {
-                      buildErrorSnackBar('Fejl', 'Udfyld venligst feltet');
+                text: 'Send',
+                color: AppColors.yellowColor,
+                textColor: AppColors.darkGreyColor,
+                onTap: () async {
+                  if (emailController.text.isNotEmpty) {
+                    try {
+                      await FirebaseAuth.instance.sendPasswordResetEmail(
+                        email: emailController.text,
+                      );
+                      buildSuccessSnackBar(
+                        'Udført',
+                        'Email med nyt kodeord sendt',
+                      );
+                    } on FirebaseAuthException catch (e) {
+                      buildErrorSnackBar('Fejl', e.message);
                     }
-                  })
+                  } else {
+                    buildErrorSnackBar('Fejl', 'Udfyld venligst feltet');
+                  }
+                },
+              ),
             ],
           ),
         ),

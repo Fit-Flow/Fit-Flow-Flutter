@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 
 import '../app_colors.dart';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
+/// Represents a custom text field widget with customizable properties such as the input type,
+/// label, password visibility, controller, and maximum width.
+///
+///authors: Jackie, Christoffer & Jakob
+
 class CustomTextField extends StatelessWidget {
-  TextInputType textInputType;
-  String label;
-  bool isPassword;
-  TextEditingController controller;
-  double maxWidth;
+  final TextInputType textInputType;
+  final String label;
+  final bool isPassword;
+  final TextEditingController controller;
+  final double maxWidth;
 
   CustomTextField({
     this.textInputType = TextInputType.text,
