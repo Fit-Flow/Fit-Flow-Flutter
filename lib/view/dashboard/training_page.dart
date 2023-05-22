@@ -1,3 +1,5 @@
+import 'package:fit_flow_flutter/utils/app_colors.dart';
+import 'package:fit_flow_flutter/utils/components/custom_button.dart';
 import 'package:fit_flow_flutter/view_model/training_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,6 +48,17 @@ class TrainingPage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
+                    child: viewModel.currentTraining.workouts.length > 0
+                        ? SizedBox(
+                            width: 120,
+                            height: 60,
+                            child: CustomButton(
+                                text: 'Gem',
+                                color: AppColors.yellowColor,
+                                textColor: AppColors.backgroundColor,
+                                onTap: () {}),
+                          )
+                        : Container(),
                     height: 80,
                   ),
                 ],
