@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
 import 'package:get/get.dart';
@@ -7,6 +8,8 @@ import 'package:get/get.dart';
 /// This class extends [GetxController] and implements the [GetxService] interface.
 /// It provides methods for creating a new user, logging in, updating user information (display name, email, and password).
 class AuthenticationViewModel extends GetxController implements GetxService {
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
   /// Creates a new user with the provided email, password, first name, and last name.
   ///
   /// If the creation is successful, the user's display name is updated, and the user is redirected to the "/dashboard" route.
@@ -23,7 +26,22 @@ class AuthenticationViewModel extends GetxController implements GetxService {
       );
       final user = credential.user;
       await user?.updateDisplayName('$firstName $lastName');
-      Get.offNamed("/dashboard");
+      // Create a new user with a first and last name
+      final userdb = <String, dynamic>{
+        "first_name": firstName,
+        "last_name": lastName,
+        "email": emailAddress
+      };
+
+// Add a new document with a generated ID
+      await db
+          .collection("users")
+          .doc(credential.user!.uid)
+          .set(userdb)
+          .then((value) {
+        print("xxx" + FirebaseAuth.instance.currentUser!.displayName!);
+        Get.offNamed("/dashboard");
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
