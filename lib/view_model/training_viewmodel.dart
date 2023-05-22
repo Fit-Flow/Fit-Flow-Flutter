@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_flow_flutter/models/training_model.dart';
 import 'package:fit_flow_flutter/models/workout_set_model.dart';
+import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -83,6 +84,23 @@ class TrainingViewModel extends GetxController implements GetxService {
         .doc(_currentTraining.name)
         .set(training)
         .onError((e, _) => print("Error writing document: $e"))
-        .then((value) {});
+        .then((value) {
+      _currentTraining.workouts.forEach((workout) {
+        List<String> workoutSets = [];
+        workout.workoutSets.forEach((element) {
+          String temp = element.kilo.toString() + ";" + element.reps.toString();
+        });
+
+        final workoutMap = <String, dynamic>{
+          "name": workout.name,
+          "workouts": workoutSets,
+        };
+
+        _dbRef.doc(workout.name).set(workoutMap).then((value) {
+          buildSuccessSnackBar("Gemt", "Træning er gemt");
+          //TODO: Slet alt og lav en ny træning
+        });
+      });
+    });
   }
 }
