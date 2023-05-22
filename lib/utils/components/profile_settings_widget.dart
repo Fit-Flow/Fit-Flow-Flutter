@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../app_colors.dart';
 
+/// Represents a profile settings widget that displays profile settings information.
+///
+///authors: Jackie, Christoffer & Jakob
 class ProfileSettingsWidget extends StatelessWidget {
-  const ProfileSettingsWidget({super.key});
+  const ProfileSettingsWidget({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +16,10 @@ class ProfileSettingsWidget extends StatelessWidget {
         Text(
           'Indstillinger',
           style: TextStyle(
-              color: AppColors.textColor,
-              fontSize: 24,
-              fontWeight: FontWeight.bold),
+            color: AppColors.textColor,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         Text(
           'Klik på dit profilbillede for at ændre det',

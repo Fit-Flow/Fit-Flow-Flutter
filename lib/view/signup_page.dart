@@ -6,12 +6,16 @@ import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-/**
- *
- * @authors Jackie, Christoffer & Jakob
- */
+/// The [SignupPage] class represents the signup page in the FitFlow app.
+///
+/// This page allows users to sign up by providing their first name, last name, email, and password.
+/// It includes input fields for each of these details and a signup button.
+/// When the signup button is tapped, the entered details are validated and passed to the [AuthenticationViewModel] to create a new user.
+///
+///authors: Jackie, Christoffer & Jakob
 class SignupPage extends StatelessWidget {
   SignupPage({Key? key}) : super(key: key);
+
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final emailController = TextEditingController();
@@ -36,7 +40,9 @@ class SignupPage extends StatelessWidget {
                 ),
               ),
               CustomTextField(
-                  label: 'Fornavn', controller: firstNameController),
+                label: 'Fornavn',
+                controller: firstNameController,
+              ),
               CustomTextField(
                 label: 'Efternavn',
                 controller: lastNameController,
@@ -75,10 +81,11 @@ class SignupPage extends StatelessWidget {
                       if (passwordController.text ==
                           confirmPasswordController.text) {
                         Get.find<AuthenticationViewModel>().createUser(
-                            emailController.text,
-                            passwordController.text,
-                            firstNameController.text,
-                            lastNameController.text);
+                          emailController.text,
+                          passwordController.text,
+                          firstNameController.text,
+                          lastNameController.text,
+                        );
                       } else {
                         print('Koden er ikke ens!');
                         buildErrorSnackBar('Fejl', 'Koden er ikke ens!');

@@ -5,24 +5,25 @@ import 'package:fit_flow_flutter/view_model/drawer_navigation_viewmodel.dart';
 import 'package:fit_flow_flutter/view_model/training_viewmodel.dart';
 import 'package:get/get.dart';
 
+/// Initializes Firebase and sets up authentication and view models.
+///
+///authors: Jackie, Christoffer & Jakob
 Future<void> init() async {
-  //Firebase
-  FirebaseAuth.instanceFor(app: Firebase.app());
+  // Firebase initialization
+  await Firebase.initializeApp();
 
+  // Configure Firebase authentication
   FirebaseAuth.instance.authStateChanges().listen((User? user) {
     if (user == null) {
       print('User is currently signed out!');
       Get.offNamed('/');
     } else {
-      Get.offNamed('/dashboard');
       print('User is signed in!');
+      Get.offNamed('/dashboard');
     }
   });
 
-  //Repo
-  //Get.lazyPut(() => SettingsRepo(sharedPreferences: sharedPreferences, apiClient: Get.find()));
-
-  //View model
+  // Initialize view models
   Get.lazyPut(() => DrawerNavigationViewModel());
   Get.lazyPut(() => TrainingViewModel());
   Get.lazyPut(() => AuthenticationViewModel());
