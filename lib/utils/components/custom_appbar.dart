@@ -41,9 +41,12 @@ class _CustomAppbarState extends State<CustomAppbar> {
             ),
           Expanded(child: Container()),
           GetBuilder<AuthenticationViewModel>(builder: (viewmodel) {
+            var currentUser = FirebaseAuth.instance.currentUser;
+            String profileName =
+                currentUser != null ? currentUser.displayName! : "";
             return ProfileTap(
               imagePath: 'assets/img/test-profil.png',
-              profileName: FirebaseAuth.instance.currentUser!.displayName!,
+              profileName: profileName,
             );
           }),
           SizedBox(

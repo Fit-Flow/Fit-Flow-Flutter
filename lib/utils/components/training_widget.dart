@@ -66,6 +66,8 @@ class _TrainingWidgetState extends State<TrainingWidget> {
                                 widget.index, index);
                           }
                         },
+                        workoutIndex: widget.index,
+                        setIndex: index,
                       ),
                     ),
                   ),
@@ -84,6 +86,8 @@ class TrainingSetWidget extends StatelessWidget {
   final VoidCallback onRemoveTap;
   final bool showAddButton;
   final bool isFirst;
+  final int workoutIndex;
+  final int setIndex;
 
   /// A widget that represents a training set.
   ///
@@ -91,13 +95,18 @@ class TrainingSetWidget extends StatelessWidget {
   /// The [onRemoveTap] callback is called when the remove button is tapped.
   /// The [showAddButton] parameter determines whether the add button is visible.
   /// The [isFirst] parameter indicates whether this is the first training set.
-  const TrainingSetWidget({
+  TrainingSetWidget({
     Key? key,
     required this.onAddTap,
     required this.showAddButton,
     this.isFirst = false,
     required this.onRemoveTap,
+    required this.workoutIndex,
+    required this.setIndex,
   }) : super(key: key);
+
+  final TextEditingController weightController = TextEditingController();
+  final TextEditingController repsController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -109,11 +118,21 @@ class TrainingSetWidget extends StatelessWidget {
           hintText: 'Indtast',
           prefixText: 'Vægt',
           suffixText: 'Kg',
+          controller: weightController,
+          onChange: (value) {
+            Get.find<TrainingViewModel>().addWeight(
+                workoutIndex, setIndex, int.parse(weightController.text));
+          },
         ),
         TrainingField(
           hintText: 'Indtast',
           prefixText: 'Reps',
           suffixText: '',
+          controller: repsController,
+          onChange: (value) {
+            Get.find<TrainingViewModel>().addReps(
+                workoutIndex, setIndex, int.parse(repsController.text));
+          },
         ),
         if (showAddButton)
           RoundedIconButton(

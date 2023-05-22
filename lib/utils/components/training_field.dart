@@ -7,6 +7,8 @@ class TrainingField extends StatelessWidget {
   final String hintText;
   final String prefixText;
   final String suffixText;
+  final TextEditingController controller;
+  final Function(String value) onChange;
 
   /// A text field used in training widget.
   ///
@@ -20,6 +22,8 @@ class TrainingField extends StatelessWidget {
     required this.hintText,
     required this.prefixText,
     required this.suffixText,
+    required this.controller,
+    required this.onChange,
   }) : super(key: key);
 
   @override
@@ -36,6 +40,8 @@ class TrainingField extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Center(
           child: TextField(
+            controller: controller,
+            onChanged: onChange,
             keyboardType: TextInputType.number,
             inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             style: TextStyle(

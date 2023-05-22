@@ -56,7 +56,9 @@ class TrainingPage extends StatelessWidget {
                                 text: 'Gem',
                                 color: AppColors.yellowColor,
                                 textColor: AppColors.backgroundColor,
-                                onTap: () {}),
+                                onTap: () {
+                                  viewModel.saveTraining();
+                                }),
                           )
                         : Container(),
                     height: 80,

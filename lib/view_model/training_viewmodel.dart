@@ -18,7 +18,7 @@ class TrainingViewModel extends GetxController implements GetxService {
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection('trainings');
   Training _currentTraining = Training(
-      name: 'Træning ${DateFormat('dd/MM/yyyy').format(DateTime.now())}',
+      name: 'Træning ${DateFormat('dd-MM-yyyy').format(DateTime.now())}',
       workouts: []);
 
   Training get currentTraining => _currentTraining;
@@ -75,6 +75,14 @@ class TrainingViewModel extends GetxController implements GetxService {
     update();
   }
 
+  void addReps(int workoutIndex, int setIndex, int reps) {
+    _currentTraining.workouts[workoutIndex].workoutSets[setIndex].reps = reps;
+  }
+
+  void addWeight(int workoutIndex, int setIndex, int weight) {
+    _currentTraining.workouts[workoutIndex].workoutSets[setIndex].reps = weight;
+  }
+
   void saveTraining() {
     final training = <String, String>{
       "name": _currentTraining.name,
@@ -89,6 +97,7 @@ class TrainingViewModel extends GetxController implements GetxService {
         List<String> workoutSets = [];
         workout.workoutSets.forEach((element) {
           String temp = element.kilo.toString() + ";" + element.reps.toString();
+          workoutSets.add(temp);
         });
 
         final workoutMap = <String, dynamic>{
@@ -96,7 +105,12 @@ class TrainingViewModel extends GetxController implements GetxService {
           "workouts": workoutSets,
         };
 
-        _dbRef.doc(workout.name).set(workoutMap).then((value) {
+        _dbRef
+            .doc(_currentTraining.name)
+            .collection('sets')
+            .doc(workout.name)
+            .set(workoutMap)
+            .then((value) {
           buildSuccessSnackBar("Gemt", "Træning er gemt");
           //TODO: Slet alt og lav en ny træning
         });
