@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_flow_flutter/models/training_model.dart';
 import 'package:fit_flow_flutter/models/workout_set_model.dart';
 import 'package:get/get.dart';
@@ -10,6 +12,10 @@ import '../models/workout_model.dart';
 /// This class extends [GetxController] and implements the [GetxService] interface.
 /// It provides methods for updating workout names, adding workouts and sets, removing workouts and sets.
 class TrainingViewModel extends GetxController implements GetxService {
+  var _dbRef = FirebaseFirestore.instance
+      .collection('users')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .collection('trainings');
   Training _currentTraining = Training(
       name: 'Træning ${DateFormat('dd/MM/yyyy').format(DateTime.now())}',
       workouts: []);
@@ -66,5 +72,17 @@ class TrainingViewModel extends GetxController implements GetxService {
   void removeSetFromTraining(int workoutIndex, int setIndex) {
     _currentTraining.workouts[workoutIndex].workoutSets.removeAt(setIndex);
     update();
+  }
+
+  void saveTraining() {
+    final training = <String, String>{
+      "name": _currentTraining.name,
+    };
+// TODO: HVIS MAN OPRETTER 2 PÅ SAMME DAG, SÅ SKAL NAVNET ÆNDRES!
+    _dbRef
+        .doc(_currentTraining.name)
+        .set(training)
+        .onError((e, _) => print("Error writing document: $e"))
+        .then((value) {});
   }
 }
