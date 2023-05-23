@@ -19,7 +19,8 @@ class TrainingViewModel extends GetxController implements GetxService {
       .collection('trainings');
   Training _currentTraining = Training(
       name: 'Træning ${DateFormat('dd-MM-yyyy').format(DateTime.now())}',
-      workouts: []);
+      workouts: [],
+      timestamp: Timestamp.fromDate(DateTime.now()));
 
   Training get currentTraining => _currentTraining;
 
@@ -84,8 +85,9 @@ class TrainingViewModel extends GetxController implements GetxService {
   }
 
   void saveTraining() {
-    final training = <String, String>{
+    final training = <String, dynamic>{
       "name": _currentTraining.name,
+      "timestamp": _currentTraining.timestamp
     };
 // TODO: HVIS MAN OPRETTER 2 PÅ SAMME DAG, SÅ SKAL NAVNET ÆNDRES!
     _dbRef
