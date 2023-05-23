@@ -19,7 +19,7 @@ Future<void> init() async {
       Get.offNamed('/');
     } else {
       print('User is signed in!');
-      Get.offNamed('/dashboard');
+      //Get.offNamed('/dashboard');
     }
   });
 
