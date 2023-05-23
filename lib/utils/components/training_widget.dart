@@ -81,7 +81,7 @@ class _TrainingWidgetState extends State<TrainingWidget> {
   }
 }
 
-class TrainingSetWidget extends StatelessWidget {
+class TrainingSetWidget extends StatefulWidget {
   final VoidCallback onAddTap;
   final VoidCallback onRemoveTap;
   final bool showAddButton;
@@ -105,8 +105,45 @@ class TrainingSetWidget extends StatelessWidget {
     required this.setIndex,
   }) : super(key: key);
 
+  @override
+  State<TrainingSetWidget> createState() => _TrainingSetWidgetState();
+}
+
+class _TrainingSetWidgetState extends State<TrainingSetWidget> {
   final TextEditingController weightController = TextEditingController();
+
   final TextEditingController repsController = TextEditingController();
+
+  @override
+  void initState() {
+    if (Get.find<TrainingViewModel>()
+            .currentTraining
+            .workouts[widget.workoutIndex]
+            .workoutSets[widget.setIndex]
+            .kilo !=
+        0) {
+      weightController.text = Get.find<TrainingViewModel>()
+          .currentTraining
+          .workouts[widget.workoutIndex]
+          .workoutSets[widget.setIndex]
+          .kilo
+          .toString();
+    }
+    if (Get.find<TrainingViewModel>()
+            .currentTraining
+            .workouts[widget.workoutIndex]
+            .workoutSets[widget.setIndex]
+            .reps !=
+        0) {
+      weightController.text = Get.find<TrainingViewModel>()
+          .currentTraining
+          .workouts[widget.workoutIndex]
+          .workoutSets[widget.setIndex]
+          .reps
+          .toString();
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,8 +157,8 @@ class TrainingSetWidget extends StatelessWidget {
           suffixText: 'Kg',
           controller: weightController,
           onChange: (value) {
-            Get.find<TrainingViewModel>().addWeight(
-                workoutIndex, setIndex, int.parse(weightController.text));
+            Get.find<TrainingViewModel>().addWeight(widget.workoutIndex,
+                widget.setIndex, int.parse(weightController.text));
           },
         ),
         TrainingField(
@@ -130,19 +167,19 @@ class TrainingSetWidget extends StatelessWidget {
           suffixText: '',
           controller: repsController,
           onChange: (value) {
-            Get.find<TrainingViewModel>().addReps(
-                workoutIndex, setIndex, int.parse(repsController.text));
+            Get.find<TrainingViewModel>().addReps(widget.workoutIndex,
+                widget.setIndex, int.parse(repsController.text));
           },
         ),
-        if (showAddButton)
+        if (widget.showAddButton)
           RoundedIconButton(
-            onTap: onAddTap,
+            onTap: widget.onAddTap,
             icon: Icons.add,
             color: AppColors.yellowIconColor,
           ),
         RoundedIconButton(
-          onTap: onRemoveTap,
-          icon: isFirst ? Icons.delete : Icons.remove,
+          onTap: widget.onRemoveTap,
+          icon: widget.isFirst ? Icons.delete : Icons.remove,
           color: AppColors.redIconColor,
         ),
       ],

@@ -80,7 +80,7 @@ class TrainingViewModel extends GetxController implements GetxService {
   }
 
   void addWeight(int workoutIndex, int setIndex, int weight) {
-    _currentTraining.workouts[workoutIndex].workoutSets[setIndex].reps = weight;
+    _currentTraining.workouts[workoutIndex].workoutSets[setIndex].kilo = weight;
   }
 
   void saveTraining() {
@@ -109,12 +109,11 @@ class TrainingViewModel extends GetxController implements GetxService {
             .doc(_currentTraining.name)
             .collection('sets')
             .doc(workout.name)
-            .set(workoutMap)
-            .then((value) {
-          buildSuccessSnackBar("Gemt", "Træning er gemt");
-          //TODO: Slet alt og lav en ny træning
-        });
+            .set(workoutMap);
       });
+    }).then((value) {
+      buildSuccessSnackBar("Gemt", "Træning er gemt");
+      //TODO: Slet alt og lav en ny træning
     });
   }
 }
