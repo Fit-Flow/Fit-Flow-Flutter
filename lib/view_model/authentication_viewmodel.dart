@@ -68,6 +68,8 @@ class AuthenticationViewModel extends GetxController implements GetxService {
   ///
   ///authors: Jackie, Christoffer & Jakob
   Future<void> login(String emailAddress, String password) async {
+    isLoading = true;
+    update();
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
@@ -86,6 +88,8 @@ class AuthenticationViewModel extends GetxController implements GetxService {
         buildErrorSnackBar('Fejl', '${e.message}');
       }
     }
+    isLoading = false;
+    update();
   }
 
   /// Updates the user's display name with the provided first name and last name.

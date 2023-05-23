@@ -6,6 +6,8 @@ import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../utils/components/full_screen_load_widget.dart';
+
 /// The [SignupPage] class represents the signup page in the FitFlow app.
 ///
 /// This page allows users to sign up by providing their first name, last name, email, and password.
@@ -84,8 +86,7 @@ class SignupPage extends StatelessWidget {
                               if (GetUtils.isEmail(emailController.text)) {
                                 if (passwordController.text ==
                                     confirmPasswordController.text) {
-                                  Get.find<AuthenticationViewModel>()
-                                      .createUser(
+                                  viewModel.createUser(
                                     emailController.text,
                                     passwordController.text,
                                     firstNameController.text,
@@ -110,22 +111,7 @@ class SignupPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (viewModel.isLoading)
-                  Stack(
-                    children: [
-                      Container(
-                        width: double.maxFinite,
-                        height: double.maxFinite,
-                        color: Colors.transparent,
-                      ),
-                      Center(
-                        child: CircularProgressIndicator(
-                          color: AppColors.yellowColor,
-                          strokeWidth: 10,
-                        ),
-                      ),
-                    ],
-                  ),
+                if (viewModel.isLoading) FullScreenLoadWidget(),
               ],
             );
           },
