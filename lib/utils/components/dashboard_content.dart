@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 /// Represents the content of the dashboard.
 ///
 ///authors: Jackie, Christoffer & Jakob
-
 class DashboardContent extends StatefulWidget {
   DashboardContent({Key? key}) : super(key: key);
 

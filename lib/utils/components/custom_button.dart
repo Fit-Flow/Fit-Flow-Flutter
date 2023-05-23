@@ -6,7 +6,6 @@ import '../app_colors.dart';
 ///Represents a custom button widget with customizable text, color, and onTap callback.
 ///
 ///authors: Jackie, Christoffer & Jakob
-
 class CustomButton extends StatelessWidget {
   final String text;
   final Color color;

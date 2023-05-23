@@ -76,14 +76,34 @@ class TrainingViewModel extends GetxController implements GetxService {
     update();
   }
 
+  /// Adds the number of reps to a specific workout set in the current training.
+  ///
+  /// The [workoutIndex] specifies the index of the workout in the current training.
+  /// The [setIndex] specifies the index of the workout set in the specified workout.
+  /// The [reps] is the number of reps to be added.
+  ///
+  /// authors: Jackie & Christoffer
   void addReps(int workoutIndex, int setIndex, int reps) {
     _currentTraining.workouts[workoutIndex].workoutSets[setIndex].reps = reps;
   }
 
+  /// Adds the weight to a specific workout set in the current training.
+  ///
+  /// The [workoutIndex] specifies the index of the workout in the current training.
+  /// The [setIndex] specifies the index of the workout set in the specified workout.
+  /// The [weight] is the weight to be added.
+  ///
+  /// authors: Jackie & Christoffer
   void addWeight(int workoutIndex, int setIndex, int weight) {
     _currentTraining.workouts[workoutIndex].workoutSets[setIndex].kilo = weight;
   }
 
+  /// Saves the current training to the database.
+  ///
+  /// It creates a new document in the database with the name and timestamp of the current training.
+  /// Then, it iterates through each workout in the current training and saves their respective sets to the database.
+  ///
+  /// authors: Jackie & Christoffer
   void saveTraining() {
     final training = <String, dynamic>{
       "name": _currentTraining.name,

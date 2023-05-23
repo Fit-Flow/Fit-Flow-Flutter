@@ -18,10 +18,9 @@ void main() async {
   runApp(const MyApp());
 }
 
-/**
- *
- * @author Jackie
- */
+/// Main start
+///
+/// authors: Jackie, Christoffer & Jakob
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 

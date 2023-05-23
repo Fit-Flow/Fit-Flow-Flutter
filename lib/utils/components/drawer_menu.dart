@@ -1,17 +1,11 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
-import 'package:fit_flow_flutter/view/dashboard/goal_page.dart';
-import 'package:fit_flow_flutter/view/dashboard/settings_page.dart';
-import 'package:fit_flow_flutter/view/dashboard/training_page.dart';
 import 'package:fit_flow_flutter/view_model/drawer_navigation_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../view/dashboard/start_page.dart';
-
 /// Represents the drawer menu widget.
 ///
 ///authors: Jackie, Christoffer & Jakob
-
 class DrawerMenu extends StatefulWidget {
   DrawerMenu({Key? key}) : super(key: key);
 

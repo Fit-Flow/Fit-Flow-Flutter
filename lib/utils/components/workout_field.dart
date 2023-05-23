@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 import '../app_colors.dart';
 
+/// Constructs a `WorkoutField` widget.
+///
+/// The [workout] parameter represents the name of the workout.
+/// The [onTap] parameter is a callback function that is triggered when the widget is tapped.
+///
+///authors: Jackie, Christoffer & Jakob
 class WorkoutField extends StatelessWidget {
   final String workout;
   final VoidCallback onTap;
 
-  /// Constructs a `WorkoutField` widget.
-  ///
-  /// The [workout] parameter represents the name of the workout.
-  /// The [onTap] parameter is a callback function that is triggered when the widget is tapped.
-  ///
-  ///authors: Jackie, Christoffer & Jakob
   const WorkoutField({Key? key, required this.workout, required this.onTap})
       : super(key: key);
 

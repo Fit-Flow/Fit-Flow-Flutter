@@ -5,16 +5,16 @@ import 'package:get/get.dart';
 import '../../models/workout_model.dart';
 import '../app_colors.dart';
 
+/// Constructs a `WorkoutSearchList` widget.
+///
+/// The [workouts] parameter is a list of workout names.
+/// The [index] parameter represents the index of the workout being edited (-1 if a new workout is being added).
+///
+///authors: Jackie, Christoffer & Jakob
 class WorkoutSearchList extends StatefulWidget {
   final List<String> workouts;
   final int index;
 
-  /// Constructs a `WorkoutSearchList` widget.
-  ///
-  /// The [workouts] parameter is a list of workout names.
-  /// The [index] parameter represents the index of the workout being edited (-1 if a new workout is being added).
-  ///
-  ///authors: Jackie, Christoffer & Jakob
   const WorkoutSearchList(
       {Key? key, required this.workouts, required this.index})
       : super(key: key);

@@ -1,13 +1,16 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+
 import '../app_colors.dart';
 
-/**
- * @authors Jackie, Christoffer & Jackie
- */
+/// A widget that displays a graph activity with a dropdown button for selecting time intervals.
+/// Creates a [GraphActivity] widget with the given y-axis title.
+///
+/// authors: Jackie, Christoffer & Jakob
 class GraphActivity extends StatefulWidget {
   final String yTitle;
+
   const GraphActivity({Key? key, required this.yTitle}) : super(key: key);
 
   @override
@@ -194,6 +197,9 @@ class _GraphActivityState extends State<GraphActivity> {
     );
   }
 
+  /// Builds the widget for bottom titles on the graph.
+  ///
+  /// authors: Jackie, Christoffer & Jakob
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       color: AppColors.lightGreyColor,
@@ -273,6 +279,9 @@ class _GraphActivityState extends State<GraphActivity> {
     );
   }
 
+  /// Builds the widget for left titles on the graph.
+  ///
+  /// authors: Jackie, Christoffer & Jakob
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       color: AppColors.lightGreyColor,

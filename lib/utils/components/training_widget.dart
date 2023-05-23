@@ -9,16 +9,16 @@ import '../app_colors.dart';
 import 'buttons/rounded_icon_button.dart';
 import 'dialogs/workout_dialog.dart';
 
+/// A widget that represents a training workout.
+///
+/// The [workout] parameter represents the workout object.
+/// The [index] parameter is the index of the workout in the list.
+///
+///authors: Jackie, Christoffer & Jakob
 class TrainingWidget extends StatefulWidget {
   final Workout workout;
   final int index;
 
-  /// A widget that represents a training workout.
-  ///
-  /// The [workout] parameter represents the workout object.
-  /// The [index] parameter is the index of the workout in the list.
-  ///
-  ///authors: Jackie, Christoffer & Jakob
   TrainingWidget({Key? key, required this.workout, required this.index})
       : super(key: key);
 
@@ -95,6 +95,10 @@ class TrainingSetWidget extends StatefulWidget {
   /// The [onRemoveTap] callback is called when the remove button is tapped.
   /// The [showAddButton] parameter determines whether the add button is visible.
   /// The [isFirst] parameter indicates whether this is the first training set.
+  /// The [workoutIndex] is the index of the parent workout.
+  /// The [setIndex] is the index of this training set.
+  ///
+  /// Authors: Jackie, Christoffer & Jakob
   TrainingSetWidget({
     Key? key,
     required this.onAddTap,
