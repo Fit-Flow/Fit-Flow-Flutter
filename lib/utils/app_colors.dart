@@ -1,8 +1,8 @@
 import 'dart:ui';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
+/// Constructs all colors in as a static parameter.
+///
+///authors: Jackie, Christoffer & Jakob
 class AppColors {
   static const Color titleColor = Color(0xFFFFFFFF);
   static const Color textColor = Color(0xFFFFFFFF); //TODO: Den skal vælges??

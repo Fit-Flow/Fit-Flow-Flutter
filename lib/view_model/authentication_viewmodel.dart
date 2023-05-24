@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 /// It provides methods for creating a new user, logging in, updating user information (display name, email, and password).
 class AuthenticationViewModel extends GetxController implements GetxService {
   FirebaseFirestore db = FirebaseFirestore.instance;
+  bool isLoading = false;
 
   /// Creates a new user with the provided email, password, first name, and last name.
   ///
@@ -18,29 +19,29 @@ class AuthenticationViewModel extends GetxController implements GetxService {
   ///authors: Jackie, Christoffer & Jakob
   Future<void> createUser(String emailAddress, String password,
       String firstName, String lastName) async {
+    isLoading = true;
+    update();
     try {
-      final credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      final credential = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
         email: emailAddress,
         password: password,
-      );
-      final user = credential.user;
-      await user?.updateDisplayName('$firstName $lastName');
-      // Create a new user with a first and last name
-      final userdb = <String, dynamic>{
-        "first_name": firstName,
-        "last_name": lastName,
-        "email": emailAddress
-      };
+      )
+          .then((value) async {
+        final user = FirebaseAuth.instance.currentUser;
+        await user?.updateDisplayName('$firstName $lastName');
+        // Create a new user with a first and last name
+        final userdb = <String, dynamic>{
+          "first_name": firstName,
+          "last_name": lastName,
+          "email": emailAddress
+        };
 
 // Add a new document with a generated ID
-      await db
-          .collection("users")
-          .doc(credential.user!.uid)
-          .set(userdb)
-          .then((value) {
-        print("xxx" + FirebaseAuth.instance.currentUser!.displayName!);
-        Get.offNamed("/dashboard");
+        await db.collection("users").doc(user!.uid).set(userdb).then((value) {
+          buildSuccessSnackBar('Buger oprettet', 'Din bruger er oprettet');
+          Get.offNamed('/login');
+        });
       });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -56,6 +57,8 @@ class AuthenticationViewModel extends GetxController implements GetxService {
       print(e);
       buildErrorSnackBar('Fejl', '${e}');
     }
+    isLoading = false;
+    update();
   }
 
   /// Login with the provided email and password.
@@ -65,12 +68,15 @@ class AuthenticationViewModel extends GetxController implements GetxService {
   ///
   ///authors: Jackie, Christoffer & Jakob
   Future<void> login(String emailAddress, String password) async {
+    isLoading = true;
+    update();
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailAddress,
-        password: password,
-      );
-      Get.offNamed('/dashboard');
+      final credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+            email: emailAddress,
+            password: password,
+          )
+          .then((value) => Get.offNamed('/dashboard'));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -82,6 +88,8 @@ class AuthenticationViewModel extends GetxController implements GetxService {
         buildErrorSnackBar('Fejl', '${e.message}');
       }
     }
+    isLoading = false;
+    update();
   }
 
   /// Updates the user's display name with the provided first name and last name.

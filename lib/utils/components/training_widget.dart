@@ -9,16 +9,16 @@ import '../app_colors.dart';
 import 'buttons/rounded_icon_button.dart';
 import 'dialogs/workout_dialog.dart';
 
+/// A widget that represents a training workout.
+///
+/// The [workout] parameter represents the workout object.
+/// The [index] parameter is the index of the workout in the list.
+///
+///authors: Jackie, Christoffer & Jakob
 class TrainingWidget extends StatefulWidget {
   final Workout workout;
   final int index;
 
-  /// A widget that represents a training workout.
-  ///
-  /// The [workout] parameter represents the workout object.
-  /// The [index] parameter is the index of the workout in the list.
-  ///
-  ///authors: Jackie, Christoffer & Jakob
   TrainingWidget({Key? key, required this.workout, required this.index})
       : super(key: key);
 
@@ -66,6 +66,8 @@ class _TrainingWidgetState extends State<TrainingWidget> {
                                 widget.index, index);
                           }
                         },
+                        workoutIndex: widget.index,
+                        setIndex: index,
                       ),
                     ),
                   ),
@@ -79,11 +81,13 @@ class _TrainingWidgetState extends State<TrainingWidget> {
   }
 }
 
-class TrainingSetWidget extends StatelessWidget {
+class TrainingSetWidget extends StatefulWidget {
   final VoidCallback onAddTap;
   final VoidCallback onRemoveTap;
   final bool showAddButton;
   final bool isFirst;
+  final int workoutIndex;
+  final int setIndex;
 
   /// A widget that represents a training set.
   ///
@@ -91,13 +95,59 @@ class TrainingSetWidget extends StatelessWidget {
   /// The [onRemoveTap] callback is called when the remove button is tapped.
   /// The [showAddButton] parameter determines whether the add button is visible.
   /// The [isFirst] parameter indicates whether this is the first training set.
-  const TrainingSetWidget({
+  /// The [workoutIndex] is the index of the parent workout.
+  /// The [setIndex] is the index of this training set.
+  ///
+  /// Authors: Jackie, Christoffer & Jakob
+  TrainingSetWidget({
     Key? key,
     required this.onAddTap,
     required this.showAddButton,
     this.isFirst = false,
     required this.onRemoveTap,
+    required this.workoutIndex,
+    required this.setIndex,
   }) : super(key: key);
+
+  @override
+  State<TrainingSetWidget> createState() => _TrainingSetWidgetState();
+}
+
+class _TrainingSetWidgetState extends State<TrainingSetWidget> {
+  final TextEditingController weightController = TextEditingController();
+
+  final TextEditingController repsController = TextEditingController();
+
+  @override
+  void initState() {
+    if (Get.find<TrainingViewModel>()
+            .currentTraining
+            .workouts[widget.workoutIndex]
+            .workoutSets[widget.setIndex]
+            .kilo !=
+        0) {
+      weightController.text = Get.find<TrainingViewModel>()
+          .currentTraining
+          .workouts[widget.workoutIndex]
+          .workoutSets[widget.setIndex]
+          .kilo
+          .toString();
+    }
+    if (Get.find<TrainingViewModel>()
+            .currentTraining
+            .workouts[widget.workoutIndex]
+            .workoutSets[widget.setIndex]
+            .reps !=
+        0) {
+      weightController.text = Get.find<TrainingViewModel>()
+          .currentTraining
+          .workouts[widget.workoutIndex]
+          .workoutSets[widget.setIndex]
+          .reps
+          .toString();
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,21 +159,31 @@ class TrainingSetWidget extends StatelessWidget {
           hintText: 'Indtast',
           prefixText: 'Vægt',
           suffixText: 'Kg',
+          controller: weightController,
+          onChange: (value) {
+            Get.find<TrainingViewModel>().addWeight(widget.workoutIndex,
+                widget.setIndex, int.parse(weightController.text));
+          },
         ),
         TrainingField(
           hintText: 'Indtast',
           prefixText: 'Reps',
           suffixText: '',
+          controller: repsController,
+          onChange: (value) {
+            Get.find<TrainingViewModel>().addReps(widget.workoutIndex,
+                widget.setIndex, int.parse(repsController.text));
+          },
         ),
-        if (showAddButton)
+        if (widget.showAddButton)
           RoundedIconButton(
-            onTap: onAddTap,
+            onTap: widget.onAddTap,
             icon: Icons.add,
             color: AppColors.yellowIconColor,
           ),
         RoundedIconButton(
-          onTap: onRemoveTap,
-          icon: isFirst ? Icons.delete : Icons.remove,
+          onTap: widget.onRemoveTap,
+          icon: widget.isFirst ? Icons.delete : Icons.remove,
           color: AppColors.redIconColor,
         ),
       ],

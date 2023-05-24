@@ -1,3 +1,5 @@
+import 'package:fit_flow_flutter/utils/app_colors.dart';
+import 'package:fit_flow_flutter/utils/components/custom_button.dart';
 import 'package:fit_flow_flutter/view_model/training_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,39 +20,53 @@ class TrainingPage extends StatelessWidget {
     return Container(
       width: double.maxFinite,
       child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            HeaderWidget(
-              title: "Træning",
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            GetBuilder<TrainingViewModel>(builder: (viewModel) {
+          padding: const EdgeInsets.all(20),
+          child: GetBuilder<TrainingViewModel>(
+            builder: (viewModel) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  HeaderWidget(
+                    title: viewModel.currentTraining.name,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(
-                      viewModel.workouts.length,
-                      (index) => TrainingWidget(
-                        workout: viewModel.workouts[index],
-                        index: index,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: List.generate(
+                          viewModel.currentTraining.workouts.length,
+                          (index) => TrainingWidget(
+                            workout: viewModel.currentTraining.workouts[index],
+                            index: index,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
+                  ),
+                  SizedBox(
+                    child: viewModel.currentTraining.workouts.length > 0
+                        ? SizedBox(
+                            width: 120,
+                            height: 60,
+                            child: CustomButton(
+                                text: 'Gem',
+                                color: AppColors.yellowColor,
+                                textColor: AppColors.backgroundColor,
+                                onTap: () {
+                                  viewModel.saveTraining();
+                                }),
+                          )
+                        : Container(),
+                    height: 80,
                   ),
                 ],
               );
-            }),
-            SizedBox(
-              height: 80,
-            ),
-          ],
-        ),
-      ),
+            },
+          )),
     );
   }
 }

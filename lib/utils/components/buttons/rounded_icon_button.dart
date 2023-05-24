@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 
+/// A rounded button widget that displays an icon.
+///
+/// The [onTap] callback is called when the button is tapped.
+/// The [icon] property represents the icon to be displayed.
+/// The [color] property defines the background color of the button.
+/// The [tooltip] property specifies an optional tooltip message to be shown on long press.
+///
+/// authors: Jackie, Christoffer & Jakob
 class RoundedIconButton extends StatelessWidget {
   final VoidCallback onTap;
   final IconData icon;
   final Color color;
   final String tooltip;
+
   const RoundedIconButton({
     super.key,
     required this.onTap,

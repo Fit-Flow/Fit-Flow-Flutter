@@ -3,11 +3,12 @@ import 'package:get/get.dart';
 
 import '../../app_colors.dart';
 
-/**
- *
- * @authors Jackie, Christoffer & Jakob
- */
-
+/// Displays an error snackbar with the specified [title] and [message].
+///
+/// The [title] is the title text displayed on the snackbar.
+/// The [message] is the content text displayed on the snackbar.
+///
+/// authors: Jackie, Christoffer & Jakob
 void buildErrorSnackBar(title, message) {
   Get.snackbar(title, message,
       maxWidth: 200,
@@ -23,6 +24,12 @@ void buildErrorSnackBar(title, message) {
       ));
 }
 
+/// Displays a success snackbar with the specified [title] and [message].
+///
+/// The [title] is the title text displayed on the snackbar.
+/// The [message] is the content text displayed on the snackbar.
+///
+/// authors: Jackie, Christoffer & Jakob
 void buildSuccessSnackBar(title, message) {
   Get.snackbar(title, message,
       maxWidth: 200,

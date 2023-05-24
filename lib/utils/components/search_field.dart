@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../app_colors.dart';
 
+/// A widget that represents a search field.
+/// The `SearchField` widget is typically used to allow users to input search queries.
+///
+///authors: Jackie, Christoffer & Jakob
 class SearchField extends StatefulWidget {
   const SearchField({super.key});
 

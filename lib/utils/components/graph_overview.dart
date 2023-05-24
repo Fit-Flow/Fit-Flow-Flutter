@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
-import '../app_colors.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+
+import '../app_colors.dart';
 
 /// Represents a graph overview widget that displays a line chart with dropdown selection.
 ///
@@ -211,6 +212,9 @@ class _GraphOverviewState extends State<GraphOverview> {
     );
   }
 
+  /// Builds the widget for bottom titles on the graph.
+  ///
+  /// authors: Jackie, Christoffer & Jakob
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       color: AppColors.lightGreyColor,
@@ -302,6 +306,9 @@ class _GraphOverviewState extends State<GraphOverview> {
     );
   }
 
+  /// Builds the widget for left titles on the graph.
+  ///
+  /// authors: Jackie, Christoffer & Jakob
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       color: AppColors.lightGreyColor,

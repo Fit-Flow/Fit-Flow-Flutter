@@ -9,10 +9,9 @@ import '../responsive.dart';
 
 /// Represents a custom app bar widget for the application.
 /// Displays a responsive app bar with menu icon, profile image, and profile name.
-//Supports user authentication and responsiveness using GetX and responsive.dart.
+///Supports user authentication and responsiveness using GetX and responsive.dart.
 ///
 ///authors: Jackie, Christoffer & Jakob
-
 class CustomAppbar extends StatefulWidget {
   const CustomAppbar({Key? key}) : super(key: key);
 

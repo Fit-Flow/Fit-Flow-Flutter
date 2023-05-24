@@ -5,9 +5,11 @@ import '../../app_colors.dart';
 import '../search_field.dart';
 import '../workout_searchlist.dart';
 
-/**
- * @authors Jackie, Christoffer & Jakob
- */
+/// Displays a dialog for finding a workout.
+///
+/// The [index] parameter is used for indicating the workout index.
+///
+/// Authors: Jackie, Christoffer & Jakob
 void buildWorkoutDialog(int index) {
   Get.defaultDialog(
       title: "Find din øvelse",

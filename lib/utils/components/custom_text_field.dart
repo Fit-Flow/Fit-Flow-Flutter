@@ -6,7 +6,6 @@ import '../app_colors.dart';
 /// label, password visibility, controller, and maximum width.
 ///
 ///authors: Jackie, Christoffer & Jakob
-
 class CustomTextField extends StatelessWidget {
   final TextInputType textInputType;
   final String label;

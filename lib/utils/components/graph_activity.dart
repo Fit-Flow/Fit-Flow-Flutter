@@ -1,13 +1,16 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+
 import '../app_colors.dart';
 
-/**
- * @authors Jackie, Christoffer & Jackie
- */
+/// A widget that displays a graph activity with a dropdown button for selecting time intervals.
+/// Creates a [GraphActivity] widget with the given y-axis title.
+///
+/// authors: Jackie, Christoffer & Jakob
 class GraphActivity extends StatefulWidget {
   final String yTitle;
+
   const GraphActivity({Key? key, required this.yTitle}) : super(key: key);
 
   @override
@@ -139,18 +142,18 @@ class _GraphActivityState extends State<GraphActivity> {
                   lineBarsData: [
                     LineChartBarData(
                       spots: const [
-                        FlSpot(0, 25/3), // (måned, antal træning / 3)
-                        FlSpot(1, 17/3),
-                        FlSpot(2, 30/3),
-                        FlSpot(3, 24/3),
-                        FlSpot(4, 12/3),
-                        FlSpot(5, 16/3),
-                        FlSpot(6, 24/3),
-                        FlSpot(7, 17/3),
-                        FlSpot(8, 20/3),
-                        FlSpot(9, 21/3),
-                        FlSpot(10, 22/3),
-                        FlSpot(11, 23/3),
+                        FlSpot(0, 25 / 3), // (måned, antal træning / 3)
+                        FlSpot(1, 17 / 3),
+                        FlSpot(2, 30 / 3),
+                        FlSpot(3, 24 / 3),
+                        FlSpot(4, 12 / 3),
+                        FlSpot(5, 16 / 3),
+                        FlSpot(6, 24 / 3),
+                        FlSpot(7, 17 / 3),
+                        FlSpot(8, 20 / 3),
+                        FlSpot(9, 21 / 3),
+                        FlSpot(10, 22 / 3),
+                        FlSpot(11, 23 / 3),
                       ],
                       isCurved: true,
                       gradient: LinearGradient(
@@ -180,7 +183,7 @@ class _GraphActivityState extends State<GraphActivity> {
                         if (flSpot.x == -1 || flSpot.x == 12) {
                           return null;
                         }
-                        return LineTooltipItem("${flSpot.y*3}",
+                        return LineTooltipItem("${flSpot.y * 3}",
                             TextStyle(color: AppColors.textColor),
                             children: [TextSpan(text: " ")]);
                       }).toList();
@@ -194,6 +197,9 @@ class _GraphActivityState extends State<GraphActivity> {
     );
   }
 
+  /// Builds the widget for bottom titles on the graph.
+  ///
+  /// authors: Jackie, Christoffer & Jakob
   Widget bottomTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       color: AppColors.lightGreyColor,
@@ -273,6 +279,9 @@ class _GraphActivityState extends State<GraphActivity> {
     );
   }
 
+  /// Builds the widget for left titles on the graph.
+  ///
+  /// authors: Jackie, Christoffer & Jakob
   Widget leftTitleWidgets(double value, TitleMeta meta) {
     const style = TextStyle(
       color: AppColors.lightGreyColor,

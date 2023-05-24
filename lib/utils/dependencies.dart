@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 /// Initializes Firebase and sets up authentication and view models.
 ///
-///authors: Jackie, Christoffer & Jakob
+///authors: Jackie
 Future<void> init() async {
   // Firebase initialization
   await Firebase.initializeApp();
@@ -19,7 +19,7 @@ Future<void> init() async {
       Get.offNamed('/');
     } else {
       print('User is signed in!');
-      Get.offNamed('/dashboard');
+      //Get.offNamed('/dashboard');
     }
   });
 

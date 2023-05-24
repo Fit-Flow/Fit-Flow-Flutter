@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 /// A widget for handling responsive design based on screen size.
+/// Constructs a `Responsive` widget.
 ///
-///authors: Jackie, Christoffer & Jakob
+/// The [mobile] widget is required and will be displayed on small screens.
+/// The [tablet] widget is optional and will be displayed on medium-sized screens.
+/// The [desktop] widget is required and will be displayed on large screens.
+///
+///authors: Jackie
 class Responsive extends StatelessWidget {
   final Widget mobile;
   final Widget? tablet;
   final Widget desktop;
 
-  /// Constructs a `Responsive` widget.
-  ///
-  /// The [mobile] widget is required and will be displayed on small screens.
-  /// The [tablet] widget is optional and will be displayed on medium-sized screens.
-  /// The [desktop] widget is required and will be displayed on large screens.
   const Responsive({
     Key? key,
     required this.mobile,
