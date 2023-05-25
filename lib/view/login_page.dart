@@ -1,5 +1,6 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
+import 'package:fit_flow_flutter/view_model/facebook_sign_in_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
@@ -105,7 +106,6 @@ class LoginPage extends StatelessWidget {
                             RoundedLoginLogo(
                               imagePath: 'assets/icon/icon-google.png',
                               onTap: () {
-                                print("Google trykket!");
                                 final provider =
                                     Provider.of<GoogleSignInProvider>(context,
                                         listen: false);
@@ -114,7 +114,12 @@ class LoginPage extends StatelessWidget {
                             ),
                             RoundedLoginLogo(
                               imagePath: 'assets/icon/icon-facebook.png',
-                              onTap: () {},
+                              onTap: () {
+                                final provider =
+                                    Provider.of<FacebookSignInProvider>(context,
+                                        listen: false);
+                                provider.signInWithFacebook();
+                              },
                             ),
                             RoundedLoginLogo(
                               imagePath: 'assets/icon/icon-twitter.png',
