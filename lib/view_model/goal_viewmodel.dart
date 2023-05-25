@@ -10,5 +10,19 @@ class GoalViewModel extends GetxController implements GetxService {
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection('goals');
   bool isLoading = false;
-  List<Goal> goals = [];
+  List<Goal> _goals = [];
+  List<Goal> get goals => _goals;
+
+  void addGoalWorkout(String workout) {
+    _goals.add(Goal(workout: workout, prWeight: '', goalWeight: ''));
+    update();
+  }
+
+  void updateGoalWeight(String goalWeight, int index) {
+    _goals[index].goalWeight = goalWeight;
+  }
+
+  void updatePrWeight() {
+    //TODO: Skal bruge træningerne
+  }
 }

@@ -1,6 +1,8 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/utils/components/buttons/rounded_icon_button.dart';
 import 'package:fit_flow_flutter/utils/components/custom_button.dart';
+import 'package:fit_flow_flutter/utils/components/dialogs/goal_dialog.dart';
+import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
 import 'package:fit_flow_flutter/utils/components/goal_field.dart';
 import 'package:fit_flow_flutter/utils/components/training_field.dart';
 import 'package:fit_flow_flutter/utils/components/workout_field.dart';
@@ -28,6 +30,14 @@ class _GoalPageState extends State<GoalPage> {
   bool isChange = false;
 
   @override
+  void initState() {
+    Get.find<GoalViewModel>().goals.forEach((element) {
+      controllers.add(TextEditingController(text: element.goalWeight));
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
         padding: EdgeInsets.all(20.0),
@@ -42,12 +52,13 @@ class _GoalPageState extends State<GoalPage> {
                 if (viewModel.goals.isNotEmpty)
                   Column(
                     children: List.generate(viewModel.goals.length, (index) {
-                      controllers.add(TextEditingController());
                       return Padding(
                         padding: EdgeInsets.all(10.0),
                         child: Row(
                           children: [
-                            WorkoutField(workout: "Push up", onTap: () {}),
+                            WorkoutField(
+                                workout: viewModel.goals[index].workout,
+                                onTap: () {}),
                             SizedBox(
                               width: 20,
                             ),
@@ -64,7 +75,7 @@ class _GoalPageState extends State<GoalPage> {
                             GoalField(
                                 prefixText: 'PR',
                                 suffixText: 'Kg',
-                                value: '35'),
+                                value: viewModel.goals[index].prWeight),
                             SizedBox(
                               width: 20,
                             ),
@@ -103,7 +114,15 @@ class _GoalPageState extends State<GoalPage> {
                         ),
                         RoundedIconButton(
                             onTap: () {
-                              //buildWorkoutDialog(-1);
+                              buildGoalDialog(-1);
+                              controllers.add(TextEditingController());
+                              if (controllers.length > viewModel.goals.length) {
+                                for (int i = 0; i < controllers.length; i++) {
+                                  if (i > viewModel.goals.length) {
+                                    controllers.removeLast();
+                                  }
+                                }
+                              }
                             },
                             icon: Icons.add,
                             color: AppColors.yellowIconColor),
@@ -118,7 +137,17 @@ class _GoalPageState extends State<GoalPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       RoundedIconButton(
-                          onTap: () {},
+                          onTap: () {
+                            buildGoalDialog(-1);
+                            controllers.add(TextEditingController());
+                            if (controllers.length > viewModel.goals.length) {
+                              for (int i = 0; i < controllers.length; i++) {
+                                if (i > viewModel.goals.length) {
+                                  controllers.removeLast();
+                                }
+                              }
+                            }
+                          },
                           icon: Icons.add,
                           color: AppColors.yellowIconColor),
                       if (isChange)
@@ -129,7 +158,18 @@ class _GoalPageState extends State<GoalPage> {
                               text: 'Gem',
                               color: AppColors.yellowColor,
                               textColor: AppColors.backgroundColor,
-                              onTap: () {}),
+                              onTap: () {
+                                for (int i = 0; i < controllers.length; i++) {
+                                  viewModel.updateGoalWeight(
+                                      controllers[i].text, i);
+                                }
+                                setState(() {
+                                  isChange = false;
+                                  print('Click');
+                                });
+                                buildSuccessSnackBar(
+                                    'Gemt', 'Dine mål er gemt');
+                              }),
                         )
                     ],
                   ),

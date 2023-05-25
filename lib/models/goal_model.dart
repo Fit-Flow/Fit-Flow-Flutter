@@ -7,8 +7,8 @@
 /// Authors: Jackie, Christoffer & Jakob
 class Goal {
   final String workout;
-  final String prWeight;
-  final String goalWeight;
+  String prWeight;
+  String goalWeight;
 
   Goal(
       {required this.workout,
