@@ -1,12 +1,15 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
+import 'package:fit_flow_flutter/view_model/facebook_sign_in_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 import '../utils/components/custom_button.dart';
 import '../utils/components/custom_text_field.dart';
 import '../utils/components/full_screen_load_widget.dart';
 import '../utils/components/rounded_login_logo.dart';
+import '../view_model/google_sign_in_provider.dart';
 
 /// The [LoginPage] class represents the login page in the FitFlow app.
 ///
@@ -102,11 +105,21 @@ class LoginPage extends StatelessWidget {
                           children: [
                             RoundedLoginLogo(
                               imagePath: 'assets/icon/icon-google.png',
-                              onTap: () {},
+                              onTap: () {
+                                final provider =
+                                    Provider.of<GoogleSignInProvider>(context,
+                                        listen: false);
+                                provider.googleLogin();
+                              },
                             ),
                             RoundedLoginLogo(
                               imagePath: 'assets/icon/icon-facebook.png',
-                              onTap: () {},
+                              onTap: () {
+                                final provider =
+                                    Provider.of<FacebookSignInProvider>(context,
+                                        listen: false);
+                                provider.signInWithFacebook();
+                              },
                             ),
                             RoundedLoginLogo(
                               imagePath: 'assets/icon/icon-twitter.png',
