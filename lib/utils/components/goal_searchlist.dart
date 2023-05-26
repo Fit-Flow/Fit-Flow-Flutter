@@ -35,12 +35,10 @@ class _GoalSearchListState extends State<GoalSearchList> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (widget.index == -1) {
-                      Get.find<GoalViewModel>()
-                          .addGoalWorkout(widget.workouts[index]);
-                    } else {
-                      //Do you want to delete popup
-                    }
+                    Get.find<GoalViewModel>()
+                        .addGoalWorkout(widget.workouts[index]);
+                    Get.find<GoalViewModel>()
+                        .updatePrWeight(widget.workouts[index], widget.index);
                     Get.back();
                   });
                 },

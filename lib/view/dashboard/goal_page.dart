@@ -114,7 +114,7 @@ class _GoalPageState extends State<GoalPage> {
                         ),
                         RoundedIconButton(
                             onTap: () {
-                              buildGoalDialog(-1);
+                              buildGoalDialog(0);
                               controllers.add(TextEditingController());
                               if (controllers.length > viewModel.goals.length) {
                                 for (int i = 0; i < controllers.length; i++) {
@@ -138,7 +138,7 @@ class _GoalPageState extends State<GoalPage> {
                     children: [
                       RoundedIconButton(
                           onTap: () {
-                            buildGoalDialog(-1);
+                            buildGoalDialog(viewModel.goals.length);
                             controllers.add(TextEditingController());
                             if (controllers.length > viewModel.goals.length) {
                               for (int i = 0; i < controllers.length; i++) {
