@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
+import '../../utils/components/full_screen_load_widget.dart';
 import '../../utils/components/header_widget.dart';
 
 /// The [GoalPage] class represents the goal page in the FitFlow app.
@@ -31,8 +32,10 @@ class _GoalPageState extends State<GoalPage> {
 
   @override
   void initState() {
-    Get.find<GoalViewModel>().goals.forEach((element) {
-      controllers.add(TextEditingController(text: element.goalWeight));
+    Get.find<GoalViewModel>().getGoals().then((value) {
+      Get.find<GoalViewModel>().goals.forEach((element) {
+        controllers.add(TextEditingController(text: element.goalWeight));
+      });
     });
     super.initState();
   }
@@ -43,138 +46,150 @@ class _GoalPageState extends State<GoalPage> {
         padding: EdgeInsets.all(20.0),
         child: GetBuilder<GoalViewModel>(
           builder: (viewModel) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                HeaderWidget(
-                  title: "Målsætning",
-                ),
-                if (viewModel.goals.isNotEmpty)
-                  Column(
-                    children: List.generate(viewModel.goals.length, (index) {
-                      return Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Row(
-                          children: [
-                            WorkoutField(
-                                workout: viewModel.goals[index].workout,
-                                onTap: () {}),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            GoalField(
-                              prefixText: '',
-                              suffixText: '',
-                              value: DateFormat('dd-MM-yyyy').format(
-                                DateTime(2023, 3, 20),
+            return viewModel.isLoading
+                ? FullScreenLoadWidget()
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      HeaderWidget(
+                        title: "Målsætning",
+                      ),
+                      if (viewModel.goals.isNotEmpty)
+                        Column(
+                          children:
+                              List.generate(viewModel.goals.length, (index) {
+                            return Padding(
+                              padding: EdgeInsets.all(10.0),
+                              child: Row(
+                                children: [
+                                  WorkoutField(
+                                      workout: viewModel.goals[index].workout,
+                                      onTap: () {}),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  GoalField(
+                                    prefixText: '',
+                                    suffixText: '',
+                                    value: DateFormat('dd-MM-yyyy').format(
+                                      DateTime(2023, 3, 20),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  GoalField(
+                                      prefixText: 'PR',
+                                      suffixText: 'Kg',
+                                      value: viewModel.goals[index].prWeight),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  TrainingField(
+                                      hintText: 'Set mål',
+                                      prefixText: 'Mål',
+                                      suffixText: 'Kg',
+                                      controller: controllers[index],
+                                      onChange: (value) {
+                                        setState(() {
+                                          isChange = true;
+                                        });
+                                      })
+                                ],
                               ),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            GoalField(
-                                prefixText: 'PR',
-                                suffixText: 'Kg',
-                                value: viewModel.goals[index].prWeight),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            TrainingField(
-                                hintText: 'Set mål',
-                                prefixText: 'Mål',
-                                suffixText: 'Kg',
-                                controller: controllers[index],
-                                onChange: (value) {
-                                  setState(() {
-                                    isChange = true;
-                                  });
-                                })
-                          ],
+                            );
+                          }),
                         ),
-                      );
-                    }),
-                  ),
-                if (viewModel.goals.isEmpty)
-                  Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: 100,
-                        ),
-                        Text(
-                          'Du har ikke tilføjet nogle mål endnu, tryk på knappen og kom igang',
-                          style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 18,
+                      if (viewModel.goals.isEmpty)
+                        Center(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                height: 100,
+                              ),
+                              Text(
+                                'Du har ikke tilføjet nogle mål endnu, tryk på knappen og kom igang',
+                                style: TextStyle(
+                                  color: AppColors.textColor,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 40,
+                              ),
+                              RoundedIconButton(
+                                  onTap: () {
+                                    buildGoalDialog(0);
+                                    controllers.add(TextEditingController());
+                                    if (controllers.length >
+                                        viewModel.goals.length) {
+                                      for (int i = 0;
+                                          i < controllers.length;
+                                          i++) {
+                                        if (i > viewModel.goals.length) {
+                                          controllers.removeLast();
+                                        }
+                                      }
+                                    }
+                                  },
+                                  icon: Icons.add,
+                                  color: AppColors.yellowIconColor),
+                            ],
                           ),
                         ),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        RoundedIconButton(
-                            onTap: () {
-                              buildGoalDialog(0);
-                              controllers.add(TextEditingController());
-                              if (controllers.length > viewModel.goals.length) {
-                                for (int i = 0; i < controllers.length; i++) {
-                                  if (i > viewModel.goals.length) {
-                                    controllers.removeLast();
+                      SizedBox(
+                        height: 20,
+                      ),
+                      if (viewModel.goals.isNotEmpty)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            RoundedIconButton(
+                                onTap: () {
+                                  buildGoalDialog(viewModel.goals.length);
+                                  controllers.add(TextEditingController());
+                                  if (controllers.length >
+                                      viewModel.goals.length) {
+                                    for (int i = 0;
+                                        i < controllers.length;
+                                        i++) {
+                                      if (i > viewModel.goals.length) {
+                                        controllers.removeLast();
+                                      }
+                                    }
                                   }
-                                }
-                              }
-                            },
-                            icon: Icons.add,
-                            color: AppColors.yellowIconColor),
-                      ],
-                    ),
-                  ),
-                SizedBox(
-                  height: 20,
-                ),
-                if (viewModel.goals.isNotEmpty)
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      RoundedIconButton(
-                          onTap: () {
-                            buildGoalDialog(viewModel.goals.length);
-                            controllers.add(TextEditingController());
-                            if (controllers.length > viewModel.goals.length) {
-                              for (int i = 0; i < controllers.length; i++) {
-                                if (i > viewModel.goals.length) {
-                                  controllers.removeLast();
-                                }
-                              }
-                            }
-                          },
-                          icon: Icons.add,
-                          color: AppColors.yellowIconColor),
-                      if (isChange)
-                        SizedBox(
-                          width: 120,
-                          height: 60,
-                          child: CustomButton(
-                              text: 'Gem',
-                              color: AppColors.yellowColor,
-                              textColor: AppColors.backgroundColor,
-                              onTap: () {
-                                for (int i = 0; i < controllers.length; i++) {
-                                  viewModel.updateGoalWeight(
-                                      controllers[i].text, i);
-                                }
-                                setState(() {
-                                  isChange = false;
-                                  print('Click');
-                                });
-                                buildSuccessSnackBar(
-                                    'Gemt', 'Dine mål er gemt');
-                              }),
-                        )
+                                },
+                                icon: Icons.add,
+                                color: AppColors.yellowIconColor),
+                            if (isChange)
+                              SizedBox(
+                                width: 120,
+                                height: 60,
+                                child: CustomButton(
+                                    text: 'Gem',
+                                    color: AppColors.yellowColor,
+                                    textColor: AppColors.backgroundColor,
+                                    onTap: () {
+                                      for (int i = 0;
+                                          i < controllers.length;
+                                          i++) {
+                                        viewModel.updateGoalWeight(
+                                            controllers[i].text, i);
+                                      }
+                                      setState(() {
+                                        isChange = false;
+                                        print('Click');
+                                      });
+                                      viewModel.saveGoals();
+                                      buildSuccessSnackBar(
+                                          'Gemt', 'Dine mål er gemt');
+                                    }),
+                              )
+                          ],
+                        ),
                     ],
-                  ),
-              ],
-            );
+                  );
           },
         ));
   }

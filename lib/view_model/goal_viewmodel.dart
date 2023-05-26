@@ -22,7 +22,7 @@ class GoalViewModel extends GetxController implements GetxService {
     _goals[index].goalWeight = goalWeight;
   }
 
-  void updatePrWeight(String workout, int index) async {
+  Future<void> updatePrWeight(String workout, int index) async {
     final dbRefTrain = FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -33,18 +33,12 @@ class GoalViewModel extends GetxController implements GetxService {
     await dbRefTrain.get().then((QuerySnapshot querySnapshot) async {
       await Future.wait(
           querySnapshot.docs.map((DocumentSnapshot document) async {
-        // Hent dokumentets reference
         DocumentReference docRef = document.reference;
-
-        // Hent dokumentet
         DocumentSnapshot docSnapshot =
             await docRef.collection('sets').doc(workout).get();
 
         if (docSnapshot.exists) {
-          // Hent listen 'workouts'
           dynamic value = docSnapshot.data();
-
-          // Udfør handling baseret på værdien
           if (value != null) {
             print(value['workouts']);
             List<dynamic> temp = value['workouts'] as List<dynamic>;
@@ -59,7 +53,62 @@ class GoalViewModel extends GetxController implements GetxService {
     print('DONE');
     print(workoutsList);
     print(_findHighestValue(workoutsList));
-    _goals[index].prWeight = _findHighestValue(workoutsList).toString();
+    if (index != -1) {
+      _goals[index].prWeight = _findHighestValue(workoutsList).toString();
+    }
+    update();
+  }
+
+  void saveGoals() {
+    final DocumentReference documentRef =
+        _dbRef.doc(FirebaseAuth.instance.currentUser?.uid);
+
+    List<Map<String, dynamic>> goalsData = goals.map((goal) {
+      return {
+        'workout': goal.workout,
+        'prWeight': goal.prWeight,
+        'goalWeight': goal.goalWeight,
+      };
+    }).toList();
+
+    Map<String, dynamic> data = {
+      'goals': goalsData,
+    };
+
+    documentRef.set(data).then((value) {
+      print('Mål er gemt.');
+    }).catchError((error) {
+      print('Fejl under gemning af mål: $error');
+    });
+  }
+
+  Future<void> getGoals() async {
+    isLoading = true;
+    _goals = [];
+    update();
+    print('Henter goals');
+    final DocumentReference documentRef =
+        _dbRef.doc(FirebaseAuth.instance.currentUser?.uid);
+
+    DocumentSnapshot docSnapshot = await documentRef.get();
+
+    if (docSnapshot.exists && docSnapshot.data() != null) {
+      dynamic goalsData = docSnapshot.data();
+
+      goalsData['goals'].forEach((data) async {
+        String workout = data['workout'];
+        String prWeight = data['prWeight'];
+        String goalWeight = data['goalWeight'];
+
+        Goal goal =
+            Goal(workout: workout, prWeight: prWeight, goalWeight: goalWeight);
+        _goals.add(goal);
+        await updatePrWeight(goal.workout, _goals.length - 1);
+      });
+
+      print(goalsData);
+    }
+    isLoading = false;
     update();
   }
 

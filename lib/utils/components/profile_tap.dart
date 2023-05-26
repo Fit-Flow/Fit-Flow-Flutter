@@ -144,8 +144,8 @@ class MenuItems {
         //TODO: FAQ Page
         break;
       case MenuItems.logout:
-        //TODO: Log ud
         FirebaseAuth.instance.signOut();
+        //TODO: Reset alle viewmodels
         break;
     }
   }
