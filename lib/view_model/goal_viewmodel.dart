@@ -122,6 +122,12 @@ class GoalViewModel extends GetxController implements GetxService {
     update();
   }
 
+  void updateGoalDate(DateTime date, int index) {
+    String formattedDate = DateFormat('dd-MM-yyyy').format(date);
+    _goals[index].goalDate = formattedDate;
+    update();
+  }
+
   int _findHighestValue(List<dynamic> values) {
     int highestValue = 0;
 

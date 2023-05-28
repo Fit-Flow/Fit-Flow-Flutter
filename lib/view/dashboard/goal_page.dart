@@ -9,6 +9,7 @@ import 'package:fit_flow_flutter/utils/components/workout_field.dart';
 import 'package:fit_flow_flutter/view_model/goal_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../utils/components/full_screen_load_widget.dart';
 import '../../utils/components/header_widget.dart';
@@ -39,6 +40,23 @@ class _GoalPageState extends State<GoalPage> {
     super.initState();
   }
 
+  void _showDatePicker(
+      BuildContext context, int index, DateTime initialDate) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+    );
+
+    if (picked != null) {
+      setState(() {
+        Get.find<GoalViewModel>().updateGoalDate(picked, index);
+        isChange = true;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -67,10 +85,28 @@ class _GoalPageState extends State<GoalPage> {
                                   SizedBox(
                                     width: 20,
                                   ),
-                                  GoalField(
-                                    prefixText: '',
-                                    suffixText: '',
-                                    value: viewModel.goals[index].goalDate,
+                                  GestureDetector(
+                                    onTap: () {
+                                      DateTime dateTime =
+                                          DateFormat('dd-MM-yyyy').parse(
+                                              viewModel.goals[index].goalDate);
+                                      _showDatePicker(context, index, dateTime);
+                                    },
+                                    child: Stack(
+                                      children: [
+                                        GoalField(
+                                          prefixText: '',
+                                          suffixText: '',
+                                          value:
+                                              viewModel.goals[index].goalDate,
+                                        ),
+                                        Positioned.fill(
+                                          child: Container(
+                                            color: Colors.transparent,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                   SizedBox(
                                     width: 20,
