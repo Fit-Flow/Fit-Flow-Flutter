@@ -47,6 +47,28 @@ class _GoalPageState extends State<GoalPage> {
       initialDate: initialDate,
       firstDate: DateTime(1900),
       lastDate: DateTime(2100),
+      cancelText: 'Annuller',
+      confirmText: 'Vælg',
+      helpText: 'Dato for dit mål',
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            dialogBackgroundColor: AppColors.backgroundColor,
+            colorScheme: ColorScheme.light(
+              primary: AppColors.yellowColor,
+              onPrimary: AppColors.backgroundColor,
+              onSurface: AppColors.textColor,
+              inverseSurface: AppColors.backgroundColor,
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                primary: AppColors.textColor,
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
     );
 
     if (picked != null) {
