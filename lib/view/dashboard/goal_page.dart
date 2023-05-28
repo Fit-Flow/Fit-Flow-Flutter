@@ -9,7 +9,6 @@ import 'package:fit_flow_flutter/utils/components/workout_field.dart';
 import 'package:fit_flow_flutter/view_model/goal_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
 import '../../utils/components/full_screen_load_widget.dart';
 import '../../utils/components/header_widget.dart';
@@ -71,9 +70,7 @@ class _GoalPageState extends State<GoalPage> {
                                   GoalField(
                                     prefixText: '',
                                     suffixText: '',
-                                    value: DateFormat('dd-MM-yyyy').format(
-                                      DateTime(2023, 3, 20),
-                                    ),
+                                    value: viewModel.goals[index].goalDate,
                                   ),
                                   SizedBox(
                                     width: 20,
@@ -132,6 +129,9 @@ class _GoalPageState extends State<GoalPage> {
                                         }
                                       }
                                     }
+                                    setState(() {
+                                      isChange = true;
+                                    });
                                   },
                                   icon: Icons.add,
                                   color: AppColors.yellowIconColor),
@@ -159,6 +159,9 @@ class _GoalPageState extends State<GoalPage> {
                                       }
                                     }
                                   }
+                                  setState(() {
+                                    isChange = true;
+                                  });
                                 },
                                 icon: Icons.add,
                                 color: AppColors.yellowIconColor),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../models/goal_model.dart';
 
@@ -14,7 +15,11 @@ class GoalViewModel extends GetxController implements GetxService {
   List<Goal> get goals => _goals;
 
   void addGoalWorkout(String workout) {
-    _goals.add(Goal(workout: workout, prWeight: '', goalWeight: ''));
+    _goals.add(Goal(
+        workout: workout,
+        prWeight: '',
+        goalWeight: '',
+        goalDate: _addSixMonths()));
     update();
   }
 
@@ -66,6 +71,7 @@ class GoalViewModel extends GetxController implements GetxService {
     List<Map<String, dynamic>> goalsData = goals.map((goal) {
       return {
         'workout': goal.workout,
+        'goalDate': goal.goalDate,
         'prWeight': goal.prWeight,
         'goalWeight': goal.goalWeight,
       };
@@ -97,11 +103,15 @@ class GoalViewModel extends GetxController implements GetxService {
 
       goalsData['goals'].forEach((data) async {
         String workout = data['workout'];
+        String goalDate = data['goalDate'];
         String prWeight = data['prWeight'];
         String goalWeight = data['goalWeight'];
 
-        Goal goal =
-            Goal(workout: workout, prWeight: prWeight, goalWeight: goalWeight);
+        Goal goal = Goal(
+            workout: workout,
+            prWeight: prWeight,
+            goalWeight: goalWeight,
+            goalDate: goalDate);
         _goals.add(goal);
         await updatePrWeight(goal.workout, _goals.length - 1);
       });
@@ -128,5 +138,13 @@ class GoalViewModel extends GetxController implements GetxService {
     }
 
     return highestValue;
+  }
+
+  String _addSixMonths() {
+    DateTime now = DateTime.now();
+    DateTime futureDate = DateTime(now.year, now.month + 6, now.day);
+    String date = DateFormat('dd-MM-yyyy').format(futureDate);
+
+    return date;
   }
 }
