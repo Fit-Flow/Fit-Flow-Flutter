@@ -8,6 +8,7 @@ import 'package:fit_flow_flutter/view_model/google_sign_in_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
 import 'firebase_options.dart';
 import 'utils/dependencies.dart' as dep;
 

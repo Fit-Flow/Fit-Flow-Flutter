@@ -13,7 +13,7 @@ import '../models/workout_model.dart';
 /// This class extends [GetxController] and implements the [GetxService] interface.
 /// It provides methods for updating workout names, adding workouts and sets, removing workouts and sets.
 class TrainingViewModel extends GetxController implements GetxService {
-  var _dbRef = FirebaseFirestore.instance
+  final _dbRef = FirebaseFirestore.instance
       .collection('users')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection('trainings');
