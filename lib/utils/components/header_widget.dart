@@ -21,6 +21,7 @@ class HeaderWidget extends StatelessWidget {
           color: AppColors.textColor,
           fontSize: 24,
           fontWeight: FontWeight.w900,
+          fontFamily: 'Fusion',
         ),
       ),
     );
