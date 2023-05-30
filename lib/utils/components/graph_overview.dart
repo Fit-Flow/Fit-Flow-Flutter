@@ -257,11 +257,13 @@ class _GraphOverviewState extends State<GraphOverview> {
       fontSize: 12,
     );
     String text;
+    int lowestWeight = (widget.goalWeight * 0.1)
+        .toInt(); //TODO: Skal gøres så den viser det laveste vægt der er taget
 
-    final double spacing = (widget.goalWeight - 10) / 4;
+    final double spacing = (widget.goalWeight - lowestWeight) / 4;
     final List<int> values = [
-      10,
-      for (int i = 1; i <= 3; i++) (10 + (spacing * i)).round(),
+      lowestWeight,
+      for (int i = 1; i <= 3; i++) (lowestWeight + (spacing * i)).round(),
       widget.goalWeight
     ];
 

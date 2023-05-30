@@ -1,21 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fit_flow_flutter/models/training_model.dart';
 import 'package:get/get.dart';
 
 import '../models/goal_model.dart';
 
 class GraphViewModel extends GetxController implements GetxService {
-  final _dbRef = FirebaseFirestore.instance
+  final _dbRefGoals = FirebaseFirestore.instance
       .collection('users')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection('goals');
-  Goal? goalOne = null;
-  Goal? goalTwo = null;
-  Goal? goalThree = null;
+  final _dbRefTrainings = FirebaseFirestore.instance
+      .collection('users')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .collection('trainings');
+  Goal? goalOne;
+  List<Training> trainingsOne = [];
+  Goal? goalTwo;
+  List<Training> trainingsTwo = [];
+  Goal? goalThree;
+  List<Training> trainingsThree = [];
 
   void getGoalFromName(String name, int goalNumber) async {
     final DocumentReference documentRef =
-        _dbRef.doc(FirebaseAuth.instance.currentUser?.uid);
+        _dbRefGoals.doc(FirebaseAuth.instance.currentUser?.uid);
 
     DocumentSnapshot docSnapshot = await documentRef.get();
 
