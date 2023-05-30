@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../app_colors.dart';
 
@@ -106,7 +107,7 @@ class _GraphOverviewState extends State<GraphOverview> {
                   },
                   getDrawingHorizontalLine: (value) {
                     return FlLine(
-                      color: AppColors.lightGreyColor,
+                      color: Colors.transparent,
                       strokeWidth: 1,
                     );
                   },
@@ -149,7 +150,8 @@ class _GraphOverviewState extends State<GraphOverview> {
                 minX: 0,
                 maxX: 11,
                 minY: 0,
-                maxY: 10,
+                maxY: double.parse(
+                    (widget.goalWeight + (widget.goalWeight * 0.1)).toString()),
                 lineBarsData: [
                   LineChartBarData(
                     spots: const [
@@ -222,83 +224,22 @@ class _GraphOverviewState extends State<GraphOverview> {
       fontSize: 12,
     );
     Widget text;
-    switch (value.toInt()) {
-      case 0:
-        text = RotationTransition(
-          turns: AlwaysStoppedAnimation(310 / 360),
-          child: const Text('JAN', style: style),
-        );
-        break;
-      case 1:
-        text = RotationTransition(
-          turns: AlwaysStoppedAnimation(310 / 360),
-          child: const Text('FEB', style: style),
-        );
-        break;
-      case 2:
-        text = RotationTransition(
-          turns: AlwaysStoppedAnimation(310 / 360),
-          child: const Text('MAR', style: style),
-        );
-        break;
-      case 3:
-        text = RotationTransition(
-          turns: AlwaysStoppedAnimation(310 / 360),
-          child: const Text('APR', style: style),
-        );
-        break;
-      case 4:
-        text = RotationTransition(
-          turns: AlwaysStoppedAnimation(310 / 360),
-          child: const Text('MAY', style: style),
-        );
-        break;
-      case 5:
-        text = RotationTransition(
-          turns: AlwaysStoppedAnimation(310 / 360),
-          child: const Text('JUN', style: style),
-        );
-        break;
-      case 6:
-        text = RotationTransition(
-          turns: AlwaysStoppedAnimation(310 / 360),
-          child: const Text('JUL', style: style),
-        );
-        break;
-      case 7:
-        text = RotationTransition(
-          turns: AlwaysStoppedAnimation(310 / 360),
-          child: const Text('AUG', style: style),
-        );
-        break;
-      case 8:
-        text = RotationTransition(
-          turns: AlwaysStoppedAnimation(310 / 360),
-          child: const Text('SEP', style: style),
-        );
-        break;
-      case 9:
-        text = RotationTransition(
-          turns: AlwaysStoppedAnimation(310 / 360),
-          child: const Text('OCT', style: style),
-        );
-        break;
-      case 10:
-        text = RotationTransition(
-          turns: AlwaysStoppedAnimation(310 / 360),
-          child: const Text('NOV', style: style),
-        );
-        break;
-      case 11:
-        text = RotationTransition(
-          turns: AlwaysStoppedAnimation(310 / 360),
-          child: const Text('DEC', style: style),
-        );
-        break;
-      default:
-        text = const Text('', style: style);
-        break;
+
+    DateTime now = DateTime.now();
+    int currentMonth = now.month - 1;
+    int monthIndex = (currentMonth - value.toInt()) % 12;
+    if (monthIndex < 0) {
+      monthIndex += 12;
     }
+
+    String monthName = DateFormat.MMM().format(
+      DateTime(now.year, monthIndex + 1, 1),
+    );
+
+    text = RotationTransition(
+      turns: AlwaysStoppedAnimation(310 / 360),
+      child: Text(monthName, style: style),
+    );
 
     return SideTitleWidget(
       axisSide: meta.axisSide,
@@ -316,26 +257,38 @@ class _GraphOverviewState extends State<GraphOverview> {
       fontSize: 12,
     );
     String text;
-    switch (value.toInt()) {
-      case 1:
-        text = '10kg';
-        break;
-      case 3:
-        text = '30kg';
-        break;
-      case 5:
-        text = '50kg';
-        break;
-      case 7:
-        text = '70kg';
-        break;
-      case 9:
-        text = '90kg';
-        break;
-      default:
-        return Container();
+
+    final double spacing = (widget.goalWeight - 10) / 4;
+    final List<int> values = [
+      10,
+      for (int i = 1; i <= 3; i++) (10 + (spacing * i)).round(),
+      widget.goalWeight
+    ];
+
+    if (values.contains(value.toInt())) {
+      text = '${value.toInt()}kg';
+    } else {
+      return Container();
     }
 
     return Text(text, style: style, textAlign: TextAlign.left);
   }
 }
+
+/*
+case 1:
+        text = '10kg';
+        break;
+      case 2:
+        text = '${(widget.goalWeight ~/ 3) + 10}kg';
+        break;
+      case 3:
+        text = '${(widget.goalWeight ~/ 2) + 10}kg';
+        break;
+      case 4:
+        text = '${(widget.goalWeight ~/ 3 * 2) + 10}kg';
+        break;
+      case 5:
+        text = '${(widget.goalWeight) + 10}kg';
+        break;
+ */

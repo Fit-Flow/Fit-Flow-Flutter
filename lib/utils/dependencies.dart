@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
 import 'package:fit_flow_flutter/view_model/drawer_navigation_viewmodel.dart';
 import 'package:fit_flow_flutter/view_model/goal_viewmodel.dart';
+import 'package:fit_flow_flutter/view_model/graph_viewmodel.dart';
 import 'package:fit_flow_flutter/view_model/training_viewmodel.dart';
 import 'package:get/get.dart';
 
@@ -29,4 +30,5 @@ Future<void> init() async {
   Get.lazyPut(() => TrainingViewModel());
   Get.lazyPut(() => AuthenticationViewModel());
   Get.lazyPut(() => GoalViewModel());
+  Get.lazyPut(() => GraphViewModel());
 }

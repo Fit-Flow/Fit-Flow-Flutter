@@ -1,5 +1,7 @@
 import 'package:fit_flow_flutter/utils/components/graph_activity.dart';
+import 'package:fit_flow_flutter/view_model/graph_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../utils/components/graph_overview.dart';
 import '../../utils/components/header_widget.dart';
@@ -28,24 +30,30 @@ class StartPage extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            Wrap(
-              spacing: 10,
-              runSpacing: 10,
-              children: [
-                GraphOverview(
-                  title: "Bænkpres",
-                  goalWeight: 80,
-                ),
-                GraphOverview(
-                  title: "Dødløft",
-                  goalWeight: 40,
-                ),
-                GraphOverview(
-                  title: "Squat",
-                  goalWeight: 75,
-                ),
-              ],
-            ),
+            GetBuilder<GraphViewModel>(builder: (graphViewModel) {
+              graphViewModel.getGoalFromName('Bænkpres', 1);
+              return Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: [
+                  graphViewModel.goalOne == null
+                      ? Container()
+                      : GraphOverview(
+                          title: "Bænkpres",
+                          goalWeight:
+                              int.parse(graphViewModel.goalOne!.goalWeight),
+                        ),
+                  GraphOverview(
+                    title: "Dødløft",
+                    goalWeight: 40,
+                  ),
+                  GraphOverview(
+                    title: "Squat",
+                    goalWeight: 75,
+                  ),
+                ],
+              );
+            }),
             SizedBox(
               height: 25,
             ),
