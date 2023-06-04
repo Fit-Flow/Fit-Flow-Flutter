@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fit_flow_flutter/models/training_model.dart';
+import 'package:fit_flow_flutter/models/graph_data_model.dart';
 import 'package:get/get.dart';
 
 import '../models/goal_model.dart';
@@ -14,12 +14,54 @@ class GraphViewModel extends GetxController implements GetxService {
       .collection('users')
       .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection('trainings');
-  Goal? goalOne;
-  List<Training> trainingsOne = [];
-  Goal? goalTwo;
-  List<Training> trainingsTwo = [];
-  Goal? goalThree;
-  List<Training> trainingsThree = [];
+
+  Goal? _goalOne;
+  Goal? get goalOne => _goalOne;
+  List<GraphData> _trainingsOne = [];
+  List<GraphData> get trainingsOne => _trainingsOne;
+  Goal? _goalTwo;
+  Goal? get goalTwo => _goalTwo;
+  List<GraphData> _trainingsTwo = [];
+  List<GraphData> get trainingsTwo => _trainingsTwo;
+  Goal? _goalThree;
+  Goal? get goalThree => _goalThree;
+  List<GraphData> _trainingsThree = [];
+  List<GraphData> get trainingsThree => _trainingsThree;
+
+  @override
+  void onInit() async {
+    createGraphList();
+    super.onInit();
+  }
+
+  void createGraphList() {
+    for (int i = 1; i <= 12; i++) {
+      GraphData graphData = GraphData(
+        month: i,
+        maxWeight: 0,
+        minWeight: 0,
+        trainingCount: 0,
+      );
+
+      _trainingsOne.add(graphData);
+
+      GraphData graphDataCopy = GraphData(
+        month: graphData.month,
+        maxWeight: graphData.maxWeight,
+        minWeight: graphData.minWeight,
+        trainingCount: graphData.trainingCount,
+      );
+      _trainingsTwo.add(graphDataCopy);
+
+      GraphData graphDataCopy2 = GraphData(
+        month: graphData.month,
+        maxWeight: graphData.maxWeight,
+        minWeight: graphData.minWeight,
+        trainingCount: graphData.trainingCount,
+      );
+      _trainingsThree.add(graphDataCopy2);
+    }
+  }
 
   void getGoalFromName(String name, int goalNumber) async {
     final DocumentReference documentRef =
@@ -44,18 +86,113 @@ class GraphViewModel extends GetxController implements GetxService {
               goalDate: goalDate);
           switch (goalNumber) {
             case 1:
-              goalOne = goal;
+              _goalOne = goal;
               break;
             case 2:
-              goalTwo = goal;
+              _goalTwo = goal;
               break;
             case 3:
-              goalThree = goal;
+              _goalThree = goal;
               break;
           }
-          update();
         }
       });
     }
+    print('Done');
+  }
+
+  Future<void> getTrainingData(String workoutName, int graphNumber) async {
+    QuerySnapshot snapshot = await _dbRefTrainings.get();
+
+    snapshot.docs.forEach((DocumentSnapshot doc) async {
+      var set = await doc.reference.collection('sets').doc(workoutName).get();
+
+      if (set.exists && set.data() != null) {
+        var data = set.data();
+        var name = data?['name'];
+        var workouts = data?['workouts'];
+
+        Map<String, dynamic>? training = doc.data()
+            as Map<String, dynamic>?; // Cast til Map<String, dynamic>
+
+        if (training != null) {
+          var timestamp = training['timestamp'];
+          DateTime dateTime = timestamp.toDate();
+          int month = dateTime.month;
+
+          if (month >= 1 && month <= 12) {
+            int highestValue = _findHighestValue(workouts);
+            int lowestValue = _findLowestValue(workouts);
+            setList(graphNumber, month, highestValue, lowestValue);
+          }
+        }
+      }
+    });
+    print('Done');
+  }
+
+  void setList(int graphNumber, int month, int highestValue, int lowestValue) {
+    switch (graphNumber) {
+      case 1:
+        if (highestValue > _trainingsOne[month - 1].maxWeight) {
+          _trainingsOne[month - 1].maxWeight = highestValue.toDouble();
+        }
+        if (lowestValue < _trainingsOne[month - 1].minWeight) {
+          _trainingsOne[month - 1].minWeight = lowestValue;
+        }
+        break;
+      case 2:
+        if (highestValue > _trainingsTwo[month - 1].maxWeight) {
+          _trainingsTwo[month - 1].maxWeight = highestValue.toDouble();
+        }
+        if (lowestValue < _trainingsTwo[month - 1].minWeight) {
+          _trainingsTwo[month - 1].minWeight = lowestValue;
+        }
+        break;
+      case 3:
+        if (highestValue > _trainingsThree[month - 1].maxWeight) {
+          _trainingsThree[month - 1].maxWeight = highestValue.toDouble();
+        }
+        if (lowestValue < _trainingsThree[month - 1].minWeight) {
+          _trainingsThree[month - 1].minWeight = lowestValue;
+        }
+        break;
+    }
+  }
+
+  int _findHighestValue(List<dynamic> values) {
+    int highestValue = 0;
+
+    for (dynamic value in values) {
+      if (value is String) {
+        List<String> parts = value.split(";");
+        if (parts.length == 2) {
+          int currentValue = int.tryParse(parts[0]) ?? 0;
+          if (currentValue > highestValue) {
+            highestValue = currentValue;
+          }
+        }
+      }
+    }
+
+    return highestValue;
+  }
+
+  int _findLowestValue(List<dynamic> values) {
+    int lowestValue = int.parse(values[0].split(";")[0]);
+
+    for (dynamic value in values) {
+      if (value is String) {
+        List<String> parts = value.split(";");
+        if (parts.length == 2) {
+          int currentValue = int.parse(parts[0]);
+          if (currentValue < lowestValue) {
+            lowestValue = currentValue;
+          }
+        }
+      }
+    }
+
+    return lowestValue;
   }
 }

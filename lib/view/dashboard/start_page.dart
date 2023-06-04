@@ -30,30 +30,7 @@ class StartPage extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            GetBuilder<GraphViewModel>(builder: (graphViewModel) {
-              graphViewModel.getGoalFromName('Bænkpres', 1);
-              return Wrap(
-                spacing: 10,
-                runSpacing: 10,
-                children: [
-                  graphViewModel.goalOne == null
-                      ? Container()
-                      : GraphOverview(
-                          title: "Bænkpres",
-                          goalWeight:
-                              int.parse(graphViewModel.goalOne!.goalWeight),
-                        ),
-                  GraphOverview(
-                    title: "Dødløft",
-                    goalWeight: 40,
-                  ),
-                  GraphOverview(
-                    title: "Squat",
-                    goalWeight: 75,
-                  ),
-                ],
-              );
-            }),
+            OverviewGraphs(),
             SizedBox(
               height: 25,
             ),
@@ -80,5 +57,56 @@ class StartPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class OverviewGraphs extends StatefulWidget {
+  const OverviewGraphs({
+    super.key,
+  });
+
+  @override
+  State<OverviewGraphs> createState() => _OverviewGraphsState();
+}
+
+class _OverviewGraphsState extends State<OverviewGraphs> {
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<GraphViewModel>(builder: (graphViewModel) {
+      graphViewModel.getGoalFromName('Bænkpres', 1);
+      graphViewModel.getTrainingData('Bænkpres', 1);
+      graphViewModel.getGoalFromName('Squat', 2);
+      graphViewModel.getTrainingData('Squat', 2);
+      graphViewModel.getGoalFromName('Triceps Extension', 3);
+      graphViewModel.getTrainingData('Triceps Extension', 3);
+
+      return Wrap(
+        spacing: 10,
+        runSpacing: 10,
+        children: [
+          graphViewModel.goalOne == null
+              ? Container()
+              : GraphOverview(
+                  title: "Bænkpres",
+                  goalWeight: int.parse(graphViewModel.goalOne!.goalWeight),
+                  graphData: graphViewModel.trainingsOne,
+                ),
+          graphViewModel.goalTwo == null
+              ? Container()
+              : GraphOverview(
+                  title: "Dødløft",
+                  goalWeight: int.parse(graphViewModel.goalTwo!.goalWeight),
+                  graphData: graphViewModel.trainingsTwo,
+                ),
+          graphViewModel.goalThree == null
+              ? Container()
+              : GraphOverview(
+                  title: "Squat",
+                  goalWeight: int.parse(graphViewModel.goalThree!.goalWeight),
+                  graphData: graphViewModel.trainingsThree,
+                ),
+        ],
+      );
+    });
   }
 }

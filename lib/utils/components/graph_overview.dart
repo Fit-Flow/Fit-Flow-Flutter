@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:fit_flow_flutter/models/graph_data_model.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -11,11 +12,13 @@ import '../app_colors.dart';
 class GraphOverview extends StatefulWidget {
   final String title;
   final int goalWeight;
+  final List<GraphData> graphData;
 
   const GraphOverview({
     Key? key,
     required this.title,
     required this.goalWeight,
+    required this.graphData,
   }) : super(key: key);
 
   @override
@@ -114,7 +117,7 @@ class _GraphOverviewState extends State<GraphOverview> {
                 ),
                 extraLinesData: ExtraLinesData(horizontalLines: [
                   HorizontalLine(
-                    y: widget.goalWeight / 10,
+                    y: widget.goalWeight.toDouble(),
                     color: AppColors.greenColor,
                   ),
                 ]),
@@ -154,20 +157,15 @@ class _GraphOverviewState extends State<GraphOverview> {
                     (widget.goalWeight + (widget.goalWeight * 0.1)).toString()),
                 lineBarsData: [
                   LineChartBarData(
-                    spots: const [
-                      FlSpot(0, 7), // (måned, kg/10)
-                      FlSpot(1, 7),
-                      FlSpot(2, 5),
-                      FlSpot(3, 3.1),
-                      FlSpot(4, 4),
-                      FlSpot(5, 3),
-                      FlSpot(6, 7),
-                      FlSpot(7, 5),
-                      FlSpot(8, 2),
-                      FlSpot(9, 5),
-                      FlSpot(10, 3.1),
-                      FlSpot(11, 4),
-                    ],
+                    spots: List.generate(12, (index) {
+                      int todayMonth = DateTime.now().month;
+                      int adjustedMonth = todayMonth - index - 1;
+                      int adjustedIndex = adjustedMonth >= 0
+                          ? adjustedMonth
+                          : 12 + adjustedMonth;
+                      return FlSpot(index.toDouble(),
+                          widget.graphData[adjustedIndex].maxWeight);
+                    }),
                     isCurved: true,
                     gradient: LinearGradient(
                       colors: gradientColors,
@@ -197,7 +195,7 @@ class _GraphOverviewState extends State<GraphOverview> {
                           return null;
                         }
                         return LineTooltipItem(
-                          "${flSpot.y * 10}",
+                          "${flSpot.y}",
                           TextStyle(color: AppColors.textColor),
                           children: [TextSpan(text: " kg")],
                         );
@@ -257,14 +255,15 @@ class _GraphOverviewState extends State<GraphOverview> {
       fontSize: 12,
     );
     String text;
-    int lowestWeight = (widget.goalWeight * 0.1)
-        .toInt(); //TODO: Skal gøres så den viser det laveste vægt der er taget
+    int maxWeight = widget
+        .goalWeight; //TODO: Måske der skal laves noget dynamisk hvis max vægt er mere end målet
+    int lowestWeight = (maxWeight * 0.1).toInt();
 
-    final double spacing = (widget.goalWeight - lowestWeight) / 4;
+    final double spacing = (maxWeight - lowestWeight) / 4;
     final List<int> values = [
       lowestWeight,
       for (int i = 1; i <= 3; i++) (lowestWeight + (spacing * i)).round(),
-      widget.goalWeight
+      maxWeight
     ];
 
     if (values.contains(value.toInt())) {
@@ -276,21 +275,3 @@ class _GraphOverviewState extends State<GraphOverview> {
     return Text(text, style: style, textAlign: TextAlign.left);
   }
 }
-
-/*
-case 1:
-        text = '10kg';
-        break;
-      case 2:
-        text = '${(widget.goalWeight ~/ 3) + 10}kg';
-        break;
-      case 3:
-        text = '${(widget.goalWeight ~/ 2) + 10}kg';
-        break;
-      case 4:
-        text = '${(widget.goalWeight ~/ 3 * 2) + 10}kg';
-        break;
-      case 5:
-        text = '${(widget.goalWeight) + 10}kg';
-        break;
- */

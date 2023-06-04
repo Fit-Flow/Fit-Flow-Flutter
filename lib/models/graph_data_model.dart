@@ -1,6 +1,6 @@
 class GraphData {
   int month;
-  int maxWeight;
+  double maxWeight;
   int minWeight;
   int trainingCount;
 
