@@ -14,6 +14,13 @@ class GoalViewModel extends GetxController implements GetxService {
   List<Goal> _goals = [];
   List<Goal> get goals => _goals;
 
+  @override
+  void onInit() {
+    getGoals();
+    print('INIT Goal viewmodel');
+    super.onInit();
+  }
+
   void addGoalWorkout(String workout) {
     _goals.add(Goal(
         workout: workout,
@@ -61,6 +68,12 @@ class GoalViewModel extends GetxController implements GetxService {
     if (index != -1) {
       _goals[index].prWeight = _findHighestValue(workoutsList).toString();
     }
+    update();
+  }
+
+  void updateGoalDate(DateTime date, int index) {
+    String formattedDate = DateFormat('dd-MM-yyyy').format(date);
+    _goals[index].goalDate = formattedDate;
     update();
   }
 
@@ -119,12 +132,6 @@ class GoalViewModel extends GetxController implements GetxService {
       print(goalsData);
     }
     isLoading = false;
-    update();
-  }
-
-  void updateGoalDate(DateTime date, int index) {
-    String formattedDate = DateFormat('dd-MM-yyyy').format(date);
-    _goals[index].goalDate = formattedDate;
     update();
   }
 
