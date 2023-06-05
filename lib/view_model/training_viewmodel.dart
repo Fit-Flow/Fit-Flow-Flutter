@@ -12,6 +12,8 @@ import '../widgets/dialogs/snackbar_dialog.dart';
 ///
 /// This class extends [GetxController] and implements the [GetxService] interface.
 /// It provides methods for updating workout names, adding workouts and sets, removing workouts and sets.
+///
+/// authors: Jackie, Christoffer & Jakob
 class TrainingViewModel extends GetxController implements GetxService {
   final _dbRef = FirebaseFirestore.instance
       .collection('users')
@@ -28,7 +30,7 @@ class TrainingViewModel extends GetxController implements GetxService {
   ///
   /// The workout's name is updated with the provided [name], and the UI is updated.
   ///
-  ///authors: Jackie, Christoffer & Jakob
+  /// authors: Jackie, Christoffer & Jakob
   void updateWorkoutName(String name, int index) {
     _currentTraining.workouts[index].name = name;
     update();
@@ -38,7 +40,7 @@ class TrainingViewModel extends GetxController implements GetxService {
   ///
   /// The provided [workout] is added to the list of workouts, and the UI is updated.
   ///
-  ///authors: Jackie, Christoffer & Jakob
+  /// authors: Jackie, Christoffer & Jakob
   void addWorkout(Workout workout) {
     _currentTraining.workouts.add(workout);
     update();
@@ -49,7 +51,7 @@ class TrainingViewModel extends GetxController implements GetxService {
   /// A new [WorkoutSet] object with initial kilo and reps values is added to the workout's list of sets,
   /// and the UI is updated.
   ///
-  ///authors: Jackie, Christoffer & Jakob
+  /// authors: Jackie, Christoffer & Jakob
   void addSetToTraining(int index) {
     _currentTraining.workouts[index].workoutSets
         .add(WorkoutSet(kilo: 0, reps: 0));
@@ -60,7 +62,7 @@ class TrainingViewModel extends GetxController implements GetxService {
   ///
   /// The workout is removed from the list of workouts, and the UI is updated.
   ///
-  ///authors: Jackie, Christoffer & Jakob
+  /// authors: Jackie, Christoffer & Jakob
   void removeWorkout(int index) {
     _currentTraining.workouts.removeAt(index);
     update();
@@ -70,7 +72,7 @@ class TrainingViewModel extends GetxController implements GetxService {
   ///
   /// The set is removed from the workout's list of sets, and the UI is updated.
   ///
-  ///authors: Jackie, Christoffer & Jakob
+  /// authors: Jackie, Christoffer & Jakob
   void removeSetFromTraining(int workoutIndex, int setIndex) {
     _currentTraining.workouts[workoutIndex].workoutSets.removeAt(setIndex);
     update();

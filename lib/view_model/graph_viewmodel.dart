@@ -5,6 +5,19 @@ import 'package:get/get.dart';
 
 import '../models/goal_model.dart';
 
+/// Represents a view model for graph data.
+///
+/// This view model is responsible for managing the graph data used in the application.
+/// It retrieves goals and training data from Firestore based on the user's ID and updates
+/// the respective lists of [Goal] and [GraphData] objects. The [createGraphList] method
+/// initializes the graph data lists with default values for each month. The [getGoalFromName]
+/// method retrieves a specific goal based on its name and goal number. The [getTrainingData]
+/// method retrieves training data for a specific workout and updates the corresponding
+/// graph data list. The [setList] method sets the highest and lowest values in the graph
+/// data list for a specific month and graph number. The [_findHighestValue] and [_findLowestValue]
+/// methods are helper methods to find the highest and lowest values from a list of dynamic values.
+///
+/// Author: Jackie
 class GraphViewModel extends GetxController implements GetxService {
   final _dbRefGoals = FirebaseFirestore.instance
       .collection('users')
@@ -34,6 +47,13 @@ class GraphViewModel extends GetxController implements GetxService {
     super.onInit();
   }
 
+  /// Creates the initial graph data list.
+  ///
+  /// This method initializes the graph data lists [_trainingsOne], [_trainingsTwo],
+  /// and [_trainingsThree] with default values for each month. It creates a [GraphData]
+  /// object for each month from 1 to 12 and adds them to the respective lists.
+  ///
+  /// Author: Jackie
   void createGraphList() {
     for (int i = 1; i <= 12; i++) {
       GraphData graphData = GraphData(
@@ -63,6 +83,14 @@ class GraphViewModel extends GetxController implements GetxService {
     }
   }
 
+  /// Retrieves a specific goal based on its name and goal number.
+  ///
+  /// This method retrieves goals from Firestore using the [_dbRefGoals] collection
+  /// reference and the user's ID. It compares the workout name with the provided [name]
+  /// and if a match is found, creates a [Goal] object and assigns it to [_goalOne],
+  /// [_goalTwo], or [_goalThree] based on the [goalNumber].
+  ///
+  /// Author: Jackie
   void getGoalFromName(String name, int goalNumber) async {
     final DocumentReference documentRef =
         _dbRefGoals.doc(FirebaseAuth.instance.currentUser?.uid);
@@ -101,6 +129,15 @@ class GraphViewModel extends GetxController implements GetxService {
     print('Done');
   }
 
+  /// Retrieves training data for a specific workout and updates the corresponding graph data list.
+  ///
+  /// This method retrieves training data from Firestore using the [_dbRefTrainings] collection
+  /// reference. It loops through each document in the retrieved snapshot, retrieves the set data
+  /// for the provided [workoutName], and updates the corresponding graph data list based on the
+  /// month of the training data. The highest and lowest values for each month are calculated using
+  /// the [_findHighestValue] and [_findLowestValue] methods.
+  ///
+  /// Author: Jackie
   Future<void> getTrainingData(String workoutName, int graphNumber) async {
     QuerySnapshot snapshot = await _dbRefTrainings.get();
 
@@ -131,6 +168,14 @@ class GraphViewModel extends GetxController implements GetxService {
     print('Done');
   }
 
+  /// Updates the graph data list with the highest and lowest values for a specific month and graph number.
+  ///
+  /// This method updates the graph data lists [_trainingsOne], [_trainingsTwo], or [_trainingsThree]
+  /// based on the provided [graphNumber]. It compares the provided [highestValue] and [lowestValue]
+  /// with the existing values in the graph data list for the corresponding month and updates them
+  /// if necessary.
+  ///
+  /// Author: Jackie
   void setList(int graphNumber, int month, int highestValue, int lowestValue) {
     switch (graphNumber) {
       case 1:
@@ -160,6 +205,13 @@ class GraphViewModel extends GetxController implements GetxService {
     }
   }
 
+  /// Finds the highest value from a list of dynamic values.
+  ///
+  /// This method loops through the provided [values] and finds the highest integer value
+  /// from the values. It ignores values that cannot be parsed as integers and returns 0 if
+  /// no valid value is found.
+  ///
+  /// Author: Jackie
   int _findHighestValue(List<dynamic> values) {
     int highestValue = 0;
 
@@ -178,6 +230,13 @@ class GraphViewModel extends GetxController implements GetxService {
     return highestValue;
   }
 
+  /// Finds the lowest value from a list of dynamic values.
+  ///
+  /// This method loops through the provided [values] and finds the lowest integer value
+  /// from the values. It ignores values that cannot be parsed as integers and returns 0 if
+  /// no valid value is found.
+  ///
+  /// Author: Jackie
   int _findLowestValue(List<dynamic> values) {
     int lowestValue = int.parse(values[0].split(";")[0]);
 
