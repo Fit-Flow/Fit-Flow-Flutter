@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../app_colors.dart';
+import '../utils/app_colors.dart';
 
 /// Represents a custom text field widget with customizable properties such as the input type,
 /// label, password visibility, controller, and maximum width.

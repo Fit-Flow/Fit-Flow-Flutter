@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
 import 'package:get/get.dart';
+
+import '../widgets/dialogs/snackbar_dialog.dart';
 
 /// The [AuthenticationViewModel] class handles user authentication and account interactions using Firebase Authentication in a Flutter app.
 ///

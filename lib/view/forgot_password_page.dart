@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_flow_flutter/utils/app_colors.dart';
-import 'package:fit_flow_flutter/utils/components/custom_button.dart';
-import 'package:fit_flow_flutter/utils/components/custom_text_field.dart';
-import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/custom_button.dart';
+import '../widgets/custom_text_field.dart';
+import '../widgets/dialogs/snackbar_dialog.dart';
 
 /// The [ForgotPasswordPage] class represents the forgot password page in the FitFlow app.
 ///

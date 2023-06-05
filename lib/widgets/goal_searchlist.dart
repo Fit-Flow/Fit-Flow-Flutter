@@ -1,29 +1,27 @@
-import 'package:fit_flow_flutter/view_model/training_viewmodel.dart';
+import 'package:fit_flow_flutter/view_model/goal_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../models/workout_model.dart';
-import '../app_colors.dart';
+import '../utils/app_colors.dart';
 
-/// Constructs a `WorkoutSearchList` widget.
+/// Constructs a `GoalSearchList` widget.
 ///
 /// The [workouts] parameter is a list of workout names.
 /// The [index] parameter represents the index of the workout being edited (-1 if a new workout is being added).
 ///
-///authors: Jackie, Christoffer & Jakob
-class WorkoutSearchList extends StatefulWidget {
+///authors: Jackie
+class GoalSearchList extends StatefulWidget {
   final List<String> workouts;
   final int index;
 
-  const WorkoutSearchList(
-      {Key? key, required this.workouts, required this.index})
+  const GoalSearchList({Key? key, required this.workouts, required this.index})
       : super(key: key);
 
   @override
-  State<WorkoutSearchList> createState() => _WorkoutSearchListState();
+  State<GoalSearchList> createState() => _GoalSearchListState();
 }
 
-class _WorkoutSearchListState extends State<WorkoutSearchList> {
+class _GoalSearchListState extends State<GoalSearchList> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,23 +35,10 @@ class _WorkoutSearchListState extends State<WorkoutSearchList> {
               child: GestureDetector(
                 onTap: () {
                   setState(() {
-                    if (widget.index == -1) {
-                      Get.find<TrainingViewModel>().addWorkout(
-                        Workout(
-                          name: widget.workouts[index],
-                          workoutSets: [],
-                        ),
-                      );
-                      Get.find<TrainingViewModel>().addSetToTraining(
-                          Get.find<TrainingViewModel>()
-                                  .currentTraining
-                                  .workouts
-                                  .length -
-                              1);
-                    } else {
-                      Get.find<TrainingViewModel>().updateWorkoutName(
-                          widget.workouts[index], widget.index);
-                    }
+                    Get.find<GoalViewModel>()
+                        .addGoalWorkout(widget.workouts[index]);
+                    Get.find<GoalViewModel>()
+                        .updatePrWeight(widget.workouts[index], widget.index);
                     Get.back();
                   });
                 },

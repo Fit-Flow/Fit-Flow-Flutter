@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fit_flow_flutter/models/training_model.dart';
 import 'package:fit_flow_flutter/models/workout_set_model.dart';
-import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../models/workout_model.dart';
+import '../widgets/dialogs/snackbar_dialog.dart';
 
 /// The [TrainingViewModel] class handles the management of workouts and workout sets in a training session.
 ///

@@ -1,5 +1,5 @@
-import 'package:fit_flow_flutter/utils/components/custom_appbar.dart';
 import 'package:fit_flow_flutter/view_model/drawer_navigation_viewmodel.dart';
+import 'package:fit_flow_flutter/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../utils/components/custom_button.dart';
-import '../utils/components/custom_text_field.dart';
-import '../utils/components/full_screen_load_widget.dart';
-import '../utils/components/rounded_login_logo.dart';
 import '../view_model/google_sign_in_provider.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/custom_text_field.dart';
+import '../widgets/full_screen_load_widget.dart';
+import '../widgets/rounded_login_logo.dart';
 
 /// The [LoginPage] class represents the login page in the FitFlow app.
 ///

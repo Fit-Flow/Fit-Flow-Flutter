@@ -3,7 +3,7 @@ import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../app_colors.dart';
+import '../utils/app_colors.dart';
 
 /// Represents the header section of the profile settings.
 ///

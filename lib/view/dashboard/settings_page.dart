@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/components/profile_settings_header.dart';
-import '../../utils/components/profile_settings_widget.dart';
-import '../../utils/components/profile_update_info.dart';
+import '../../widgets/latest_workouts_widget.dart';
+import '../../widgets/profile_settings_widget.dart';
+import '../../widgets/profile_update_info.dart';
 
 /// The [SettingsPage] class represents the settings page in the FitFlow app.
 ///

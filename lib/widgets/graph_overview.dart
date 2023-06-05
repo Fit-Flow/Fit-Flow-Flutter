@@ -4,7 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../app_colors.dart';
+import '../utils/app_colors.dart';
 
 /// Represents a graph overview widget that displays a line chart with dropdown selection.
 ///

@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../view_model/authentication_viewmodel.dart';
-import '../app_colors.dart';
+
+import '../utils/app_colors.dart';
+import '../view_model/authentication_viewmodel.dart';
 import 'latest_workout_card.dart';
 
 /// Represents the widget displaying the profile settings header.

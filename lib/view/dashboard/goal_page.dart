@@ -1,18 +1,18 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
-import 'package:fit_flow_flutter/utils/components/buttons/rounded_icon_button.dart';
-import 'package:fit_flow_flutter/utils/components/custom_button.dart';
-import 'package:fit_flow_flutter/utils/components/dialogs/goal_dialog.dart';
-import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
-import 'package:fit_flow_flutter/utils/components/goal_field.dart';
-import 'package:fit_flow_flutter/utils/components/training_field.dart';
-import 'package:fit_flow_flutter/utils/components/workout_field.dart';
 import 'package:fit_flow_flutter/view_model/goal_viewmodel.dart';
+import 'package:fit_flow_flutter/widgets/goal_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../utils/components/full_screen_load_widget.dart';
-import '../../utils/components/header_widget.dart';
+import '../../widgets/buttons/rounded_icon_button.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/dialogs/goal_dialog.dart';
+import '../../widgets/dialogs/snackbar_dialog.dart';
+import '../../widgets/full_screen_load_widget.dart';
+import '../../widgets/header_widget.dart';
+import '../../widgets/training_field.dart';
+import '../../widgets/workout_field.dart';
 
 /// The [GoalPage] class represents the goal page in the FitFlow app.
 /// This page displays the user's goals and objectives.

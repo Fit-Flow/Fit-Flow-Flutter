@@ -2,7 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
-import '../app_colors.dart';
+import '../utils/app_colors.dart';
 
 /// A widget that displays a graph activity with a dropdown button for selecting time intervals.
 /// Creates a [GraphActivity] widget with the given y-axis title.

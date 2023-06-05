@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../view_model/drawer_navigation_viewmodel.dart';
-import '../app_colors.dart';
+import '../utils/app_colors.dart';
+import '../view_model/drawer_navigation_viewmodel.dart';
 
 /// Represents a profile tap widget that displays an image and a profile name.
 ///

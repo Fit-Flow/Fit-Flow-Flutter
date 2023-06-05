@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../app_colors.dart';
+import '../../utils/app_colors.dart';
+import '../goal_searchlist.dart';
 import '../search_field.dart';
-import '../workout_searchlist.dart';
 
-/// Displays a dialog for finding a workout.
+/// Displays a dialog for finding a workout for the goal.
 ///
 /// The [index] parameter is used for indicating the workout index.
 ///
 /// Authors: Jackie, Christoffer & Jakob
-void buildWorkoutDialog(int index) {
+void buildGoalDialog(int index) {
   Get.defaultDialog(
       title: "Find din øvelse",
       middleText: '',
@@ -25,7 +25,7 @@ void buildWorkoutDialog(int index) {
         width: 750,
         child: Column(children: [
           SearchField(),
-          WorkoutSearchList(
+          GoalSearchList(
             workouts: [
               //TODO: Skal ændres til søgreresultater
               'Bænkpres',

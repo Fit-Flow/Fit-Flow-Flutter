@@ -1,11 +1,11 @@
-import 'package:fit_flow_flutter/utils/components/graph_activity.dart';
 import 'package:fit_flow_flutter/view_model/graph_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/components/graph_overview.dart';
-import '../../utils/components/header_widget.dart';
-import '../../utils/components/latest_workouts_widget.dart';
+import '../../widgets/graph_activity.dart';
+import '../../widgets/graph_overview.dart';
+import '../../widgets/header_widget.dart';
+import '../../widgets/latest_workouts_widget.dart';
 
 /// The [StartPage] class represents the start page in the FitFlow app.
 ///

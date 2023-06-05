@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../app_colors.dart';
+
+import '../utils/app_colors.dart';
 
 /// Represents a card displaying the latest workout information.
 ///

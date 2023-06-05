@@ -1,11 +1,11 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
-import 'package:fit_flow_flutter/utils/components/custom_button.dart';
 import 'package:fit_flow_flutter/view_model/training_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/components/header_widget.dart';
-import '../../utils/components/training_widget.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/header_widget.dart';
+import '../../widgets/training_widget.dart';
 
 /// The [TrainingPage] class represents the training page in the FitFlow app.
 ///

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../app_colors.dart';
+import '../utils/app_colors.dart';
 
-///
 ///Represents a custom button widget with customizable text, color, and onTap callback.
 ///
 ///authors: Jackie, Christoffer & Jakob

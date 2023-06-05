@@ -1,12 +1,12 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
-import 'package:fit_flow_flutter/utils/components/custom_button.dart';
-import 'package:fit_flow_flutter/utils/components/custom_text_field.dart';
-import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
 import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
+import 'package:fit_flow_flutter/widgets/custom_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../utils/components/full_screen_load_widget.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/dialogs/snackbar_dialog.dart';
+import '../widgets/full_screen_load_widget.dart';
 
 /// The [SignupPage] class represents the signup page in the FitFlow app.
 ///

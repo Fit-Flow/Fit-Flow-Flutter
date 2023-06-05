@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../app_colors.dart';
+import '../utils/app_colors.dart';
 
 /// A widget that represents a search field.
 /// The `SearchField` widget is typically used to allow users to input search queries.

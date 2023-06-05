@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fit_flow_flutter/utils/components/dialogs/snackbar_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../view_model/authentication_viewmodel.dart';
-import '../app_colors.dart';
+import '../../widgets/custom_text_field.dart';
+import '../utils/app_colors.dart';
 import 'custom_button.dart';
-import 'custom_text_field.dart';
+import 'dialogs/snackbar_dialog.dart';
 
 /// A widget for updating user profile information.
 ///
