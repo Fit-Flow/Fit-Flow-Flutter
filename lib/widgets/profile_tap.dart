@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../utils/app_colors.dart';
-import '../view_model/drawer_navigation_viewmodel.dart';
+import '../view_models/drawer_navigation_viewmodel.dart';
 
 /// Represents a profile tap widget that displays an image and a profile name.
 ///

@@ -1,11 +1,11 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
-import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
-import 'package:fit_flow_flutter/view_model/facebook_sign_in_provider.dart';
+import 'package:fit_flow_flutter/view_models/authentication_viewmodel.dart';
+import 'package:fit_flow_flutter/view_models/facebook_sign_in_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
-import '../view_model/google_sign_in_provider.dart';
+import '../view_models/google_sign_in_provider.dart';
 import '../widgets/custom_button.dart';
 import '../widgets/custom_text_field.dart';
 import '../widgets/full_screen_load_widget.dart';

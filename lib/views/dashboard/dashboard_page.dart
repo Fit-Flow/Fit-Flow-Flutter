@@ -1,6 +1,6 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/utils/responsive.dart';
-import 'package:fit_flow_flutter/view_model/drawer_navigation_viewmodel.dart';
+import 'package:fit_flow_flutter/view_models/drawer_navigation_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fit_flow_flutter/view_model/authentication_viewmodel.dart';
+import 'package:fit_flow_flutter/view_models/authentication_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,5 +1,5 @@
 import 'package:fit_flow_flutter/utils/app_colors.dart';
-import 'package:fit_flow_flutter/view_model/goal_viewmodel.dart';
+import 'package:fit_flow_flutter/view_models/goal_viewmodel.dart';
 import 'package:fit_flow_flutter/widgets/goal_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

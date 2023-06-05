@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../view_model/authentication_viewmodel.dart';
+import '../../view_models/authentication_viewmodel.dart';
 import '../../widgets/custom_text_field.dart';
 import '../utils/app_colors.dart';
 import 'custom_button.dart';

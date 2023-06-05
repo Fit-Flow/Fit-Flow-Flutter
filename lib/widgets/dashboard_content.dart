@@ -1,4 +1,4 @@
-import 'package:fit_flow_flutter/view_model/drawer_navigation_viewmodel.dart';
+import 'package:fit_flow_flutter/view_models/drawer_navigation_viewmodel.dart';
 import 'package:fit_flow_flutter/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

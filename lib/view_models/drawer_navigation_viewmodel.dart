@@ -1,7 +1,7 @@
-import 'package:fit_flow_flutter/view/dashboard/goal_page.dart';
-import 'package:fit_flow_flutter/view/dashboard/settings_page.dart';
-import 'package:fit_flow_flutter/view/dashboard/start_page.dart';
-import 'package:fit_flow_flutter/view/dashboard/training_page.dart';
+import 'package:fit_flow_flutter/views/dashboard/goal_page.dart';
+import 'package:fit_flow_flutter/views/dashboard/settings_page.dart';
+import 'package:fit_flow_flutter/views/dashboard/start_page.dart';
+import 'package:fit_flow_flutter/views/dashboard/training_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
