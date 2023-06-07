@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fit_flow_flutter/view/dashboard/dashboard_page.dart';
-import 'package:fit_flow_flutter/view/forgot_password_page.dart';
-import 'package:fit_flow_flutter/view/login_page.dart';
-import 'package:fit_flow_flutter/view/signup_page.dart';
-import 'package:fit_flow_flutter/view_model/facebook_sign_in_provider.dart';
-import 'package:fit_flow_flutter/view_model/google_sign_in_provider.dart';
+import 'package:fit_flow_flutter/view_models/facebook_sign_in_provider.dart';
+import 'package:fit_flow_flutter/view_models/google_sign_in_provider.dart';
+import 'package:fit_flow_flutter/views/dashboard/dashboard_page.dart';
+import 'package:fit_flow_flutter/views/forgot_password_page.dart';
+import 'package:fit_flow_flutter/views/login_page.dart';
+import 'package:fit_flow_flutter/views/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
