@@ -25,7 +25,6 @@ class GoalViewModel extends GetxController implements GetxService {
 
   @override
   void onInit() {
-    getGoals();
     print('INIT Goal viewmodel');
     super.onInit();
   }
