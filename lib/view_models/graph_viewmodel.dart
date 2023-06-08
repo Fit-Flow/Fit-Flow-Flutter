@@ -41,6 +41,10 @@ class GraphViewModel extends GetxController implements GetxService {
   List<GraphData> _trainingsThree = [];
   List<GraphData> get trainingsThree => _trainingsThree;
 
+  RxBool isDataOneLoaded = false.obs;
+  RxBool isDataTwoLoaded = false.obs;
+  RxBool isDataThreeLoaded = false.obs;
+
   @override
   void onInit() async {
     createGraphList();
@@ -81,6 +85,19 @@ class GraphViewModel extends GetxController implements GetxService {
       );
       _trainingsThree.add(graphDataCopy2);
     }
+  }
+
+  void removeData() {
+    _trainingsOne = [];
+    _trainingsTwo = [];
+    _trainingsThree = [];
+    _goalOne = null;
+    _goalTwo = null;
+    _goalThree = null;
+    isDataOneLoaded.value = false;
+    isDataTwoLoaded.value = false;
+    isDataThreeLoaded.value = false;
+    update();
   }
 
   /// Retrieves a specific goal based on its name and goal number.
@@ -126,7 +143,6 @@ class GraphViewModel extends GetxController implements GetxService {
         }
       });
     }
-    print('Done');
   }
 
   /// Retrieves training data for a specific workout and updates the corresponding graph data list.
@@ -185,6 +201,7 @@ class GraphViewModel extends GetxController implements GetxService {
         if (lowestValue < _trainingsOne[month - 1].minWeight) {
           _trainingsOne[month - 1].minWeight = lowestValue;
         }
+        isDataOneLoaded.value = true;
         break;
       case 2:
         if (highestValue > _trainingsTwo[month - 1].maxWeight) {
@@ -193,6 +210,7 @@ class GraphViewModel extends GetxController implements GetxService {
         if (lowestValue < _trainingsTwo[month - 1].minWeight) {
           _trainingsTwo[month - 1].minWeight = lowestValue;
         }
+        isDataTwoLoaded.value = true;
         break;
       case 3:
         if (highestValue > _trainingsThree[month - 1].maxWeight) {
@@ -201,6 +219,7 @@ class GraphViewModel extends GetxController implements GetxService {
         if (lowestValue < _trainingsThree[month - 1].minWeight) {
           _trainingsThree[month - 1].minWeight = lowestValue;
         }
+        isDataThreeLoaded.value = true;
         break;
     }
   }

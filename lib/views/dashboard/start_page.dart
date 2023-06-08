@@ -1,3 +1,4 @@
+import 'package:fit_flow_flutter/utils/app_colors.dart';
 import 'package:fit_flow_flutter/view_models/graph_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -80,33 +81,51 @@ class _OverviewGraphsState extends State<OverviewGraphs> {
       graphViewModel.getGoalFromName('Triceps Extension', 3);
       graphViewModel.getTrainingData('Triceps Extension', 3);
 
-      return Wrap(
-        spacing: 10,
-        runSpacing: 10,
-        children: [
-          graphViewModel.goalOne == null
-              ? Container()
-              : GraphOverview(
-                  title: "Bænkpres",
-                  goalWeight: int.parse(graphViewModel.goalOne!.goalWeight),
-                  graphData: graphViewModel.trainingsOne,
-                ),
-          graphViewModel.goalTwo == null
-              ? Container()
-              : GraphOverview(
-                  title: "Dødløft",
-                  goalWeight: int.parse(graphViewModel.goalTwo!.goalWeight),
-                  graphData: graphViewModel.trainingsTwo,
-                ),
-          graphViewModel.goalThree == null
-              ? Container()
-              : GraphOverview(
-                  title: "Squat",
-                  goalWeight: int.parse(graphViewModel.goalThree!.goalWeight),
-                  graphData: graphViewModel.trainingsThree,
-                ),
-        ],
-      );
+      return Obx(() {
+        if (graphViewModel.isDataOneLoaded.value ||
+            graphViewModel.isDataTwoLoaded.value ||
+            graphViewModel.isDataThreeLoaded.value) {
+          return Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: [
+              graphViewModel.goalOne == null &&
+                      graphViewModel.isDataOneLoaded.value
+                  ? Container()
+                  : GraphOverview(
+                      title: "Bænkpres",
+                      goalWeight: int.parse(graphViewModel.goalOne!.goalWeight),
+                      graphData: graphViewModel.trainingsOne,
+                    ),
+              graphViewModel.goalTwo == null &&
+                      graphViewModel.isDataTwoLoaded.value
+                  ? Container()
+                  : GraphOverview(
+                      title: "Dødløft",
+                      goalWeight: int.parse(graphViewModel.goalTwo!.goalWeight),
+                      graphData: graphViewModel.trainingsTwo,
+                    ),
+              graphViewModel.goalThree == null &&
+                      graphViewModel.isDataThreeLoaded.value
+                  ? Container()
+                  : GraphOverview(
+                      title: "Squat",
+                      goalWeight:
+                          int.parse(graphViewModel.goalThree!.goalWeight),
+                      graphData: graphViewModel.trainingsThree,
+                    ),
+            ],
+          );
+        } else {
+          return Text(
+            'Der er ikke noget data endnu',
+            style: TextStyle(
+                color: AppColors.textColor,
+                fontSize: 20,
+                fontWeight: FontWeight.bold),
+          );
+        }
+      });
     });
   }
 }

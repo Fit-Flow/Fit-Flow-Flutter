@@ -14,21 +14,22 @@ Future<void> init() async {
   // Firebase initialization
   await Firebase.initializeApp();
 
-  // Configure Firebase authentication
-  FirebaseAuth.instance.authStateChanges().listen((User? user) {
-    if (user == null) {
-      print('User is currently signed out!');
-      Get.offNamed('/');
-    } else {
-      print('User is signed in!');
-      //Get.offNamed('/dashboard');
-    }
-  });
-
   // Initialize view models
   Get.lazyPut(() => DrawerNavigationViewModel());
   Get.lazyPut(() => TrainingViewModel());
   Get.lazyPut(() => AuthenticationViewModel());
   Get.lazyPut(() => GoalViewModel());
   Get.lazyPut(() => GraphViewModel());
+
+  // Configure Firebase authentication
+  FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+      Get.offNamed('/');
+      Get.find<GraphViewModel>().removeData();
+    } else {
+      print('User is signed in!');
+      //Get.offNamed('/dashboard');
+    }
+  });
 }
