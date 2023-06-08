@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fit_flow_flutter/view_models/lates_trainings_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -93,138 +94,166 @@ class _LatestWorkoutsWidgetState extends State<LatestWorkoutsWidget> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        SingleChildScrollView(
-          controller: _scrollController,
-          scrollDirection: Axis.horizontal,
-          child: Wrap(
-            spacing: 20,
-            children: [
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                  "Dips",
-                  "Flyers",
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                  "Dips",
-                  "Flyers",
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                  "Dips",
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                ],
-              ),
-              LatestWorkoutCard(
-                title: "Træning 24-06/23",
-                workouts: [
-                  "Bænkpres",
-                  "Incline bænkpres",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                  "Dips",
-                  "Flyers",
-                  "Triceps pulldown",
-                ],
-              ),
-            ],
-          ),
-        ),
+        GetBuilder<LatestTrainingViewModel>(builder: (viewModel) {
+          viewModel.fetchTrainingsFromFirestore();
+          return SingleChildScrollView(
+            controller: _scrollController,
+            scrollDirection: Axis.horizontal,
+            child: Obx(() {
+              if (viewModel.trainingLoaded.value) {
+                print(viewModel.trainings.length);
+                return Wrap(
+                    spacing: 20,
+                    children:
+                        List.generate(viewModel.trainings.length, (index) {
+                      return LatestWorkoutCard(
+                        title: viewModel.trainings[index].name,
+                        workouts: List.generate(
+                            viewModel.trainings[index].workouts.length,
+                            (workoutIndex) {
+                          return viewModel
+                              .trainings[index].workouts[workoutIndex].name;
+                        }),
+                      );
+                    })
+                    /*[
+                    LatestWorkoutCard(
+                      title: "Træning 24-06/23",
+                      workouts: [
+                        "Bænkpres",
+                        "Incline bænkpres",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                      ],
+                    ),
+                    LatestWorkoutCard(
+                      title: "Træning 24-06/23",
+                      workouts: [
+                        "Bænkpres",
+                        "Incline bænkpres",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                        "Dips",
+                        "Flyers",
+                      ],
+                    ),
+                    LatestWorkoutCard(
+                      title: "Træning 24-06/23",
+                      workouts: [
+                        "Bænkpres",
+                        "Incline bænkpres",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                        "Dips",
+                        "Flyers",
+                      ],
+                    ),
+                    LatestWorkoutCard(
+                      title: "Træning 24-06/23",
+                      workouts: [
+                        "Bænkpres",
+                        "Incline bænkpres",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                      ],
+                    ),
+                    LatestWorkoutCard(
+                      title: "Træning 24-06/23",
+                      workouts: [
+                        "Bænkpres",
+                        "Incline bænkpres",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                      ],
+                    ),
+                    LatestWorkoutCard(
+                      title: "Træning 24-06/23",
+                      workouts: [
+                        "Bænkpres",
+                        "Incline bænkpres",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                        "Dips",
+                      ],
+                    ),
+                    LatestWorkoutCard(
+                      title: "Træning 24-06/23",
+                      workouts: [
+                        "Bænkpres",
+                        "Incline bænkpres",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                      ],
+                    ),
+                    LatestWorkoutCard(
+                      title: "Træning 24-06/23",
+                      workouts: [
+                        "Bænkpres",
+                        "Incline bænkpres",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                      ],
+                    ),
+                    LatestWorkoutCard(
+                      title: "Træning 24-06/23",
+                      workouts: [
+                        "Bænkpres",
+                        "Incline bænkpres",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                      ],
+                    ),
+                    LatestWorkoutCard(
+                      title: "Træning 24-06/23",
+                      workouts: [
+                        "Bænkpres",
+                        "Incline bænkpres",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                        "Dips",
+                        "Flyers",
+                        "Triceps pulldown",
+                      ],
+                    ),
+                  ],*/
+                    );
+              } else {
+                return Text(
+                  'Ingen data endnu',
+                  style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                );
+              }
+            }),
+          );
+        }),
         Positioned.fill(
           child: Align(
             alignment: Alignment.center,
