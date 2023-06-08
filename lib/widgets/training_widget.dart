@@ -115,7 +115,6 @@ class TrainingSetWidget extends StatefulWidget {
 
 class _TrainingSetWidgetState extends State<TrainingSetWidget> {
   final TextEditingController weightController = TextEditingController();
-
   final TextEditingController repsController = TextEditingController();
 
   @override
@@ -139,7 +138,7 @@ class _TrainingSetWidgetState extends State<TrainingSetWidget> {
             .workoutSets[widget.setIndex]
             .reps !=
         0) {
-      weightController.text = Get.find<TrainingViewModel>()
+      repsController.text = Get.find<TrainingViewModel>()
           .currentTraining
           .workouts[widget.workoutIndex]
           .workoutSets[widget.setIndex]

@@ -74,10 +74,12 @@ class AuthenticationViewModel extends GetxController implements GetxService {
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(
-            email: emailAddress,
-            password: password,
-          )
-          .then((value) => Get.offNamed('/dashboard'));
+        email: emailAddress,
+        password: password,
+      )
+          .then((value) {
+        Get.offNamed('/dashboard');
+      });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
