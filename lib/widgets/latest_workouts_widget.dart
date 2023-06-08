@@ -243,12 +243,15 @@ class _LatestWorkoutsWidgetState extends State<LatestWorkoutsWidget> {
                   ],*/
                     );
               } else {
-                return Text(
-                  'Ingen data endnu',
-                  style: TextStyle(
-                      color: AppColors.textColor,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
+                return SizedBox(
+                  width: double.maxFinite,
+                  child: Text(
+                    'Ingen data endnu',
+                    style: TextStyle(
+                        color: AppColors.textColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
                 );
               }
             }),

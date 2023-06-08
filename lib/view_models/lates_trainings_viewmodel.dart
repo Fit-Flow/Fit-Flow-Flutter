@@ -6,6 +6,15 @@ import 'package:get/get.dart';
 
 import '../models/training_model.dart';
 
+/// A view model class that handles fetching and managing latest trainings from Firestore.
+///
+/// This class extends [GetxController] and implements [GetxService] to enable reactive programming
+/// and dependency injection using the GetX package.
+///
+/// It provides a method to fetch trainings from Firestore and populates the `_trainings` list.
+/// The fetched trainings are stored in the `_trainings` list and the `trainingLoaded` flag is set to indicate the loading status.
+///
+/// Author: Jackie
 class LatestTrainingViewModel extends GetxController implements GetxService {
   final _dbRef = FirebaseFirestore.instance
       .collection('users')
@@ -16,6 +25,16 @@ class LatestTrainingViewModel extends GetxController implements GetxService {
   List<Training> get trainings => _trainings;
   RxBool trainingLoaded = false.obs;
 
+  /// Fetches trainings from Firestore and populates the `_trainings` list.
+  /// Each training document in Firestore should have a 'name' and 'timestamp' field,
+  /// as well as a subcollection named 'sets' containing documents with a 'name' field
+  /// and a list of workouts.
+  ///
+  /// Throws an error and sets `trainingLoaded` to `false` if an error occurs while fetching trainings.
+  ///
+  /// On successful fetching, sets the fetched trainings to the `_trainings` list and sets `trainingLoaded` to `true`.
+  ///
+  /// Author: Jackie
   Future<void> fetchTrainingsFromFirestore() async {
     List<Training> trainings = [];
 
@@ -26,7 +45,7 @@ class LatestTrainingViewModel extends GetxController implements GetxService {
         String name = doc.data()['name'];
         Timestamp timestamp = doc.data()['timestamp'];
         List<Workout> sets =
-            await fetchSetsFromFirestore(doc.reference.collection('sets'));
+            await _fetchSetsFromFirestore(doc.reference.collection('sets'));
 
         Training training =
             Training(name: name, timestamp: timestamp, workouts: sets);
@@ -42,7 +61,15 @@ class LatestTrainingViewModel extends GetxController implements GetxService {
     }
   }
 
-  Future<List<Workout>> fetchSetsFromFirestore(
+  /// Fetches workout sets from a Firestore collection.
+  ///
+  /// Parameters:
+  /// - [collectionRef]: The reference to the Firestore collection containing workout sets.
+  ///
+  /// Returns a list of [Workout] objects representing the fetched workout sets.
+  ///
+  /// Author: Jackie
+  Future<List<Workout>> _fetchSetsFromFirestore(
       CollectionReference<Map<String, dynamic>> collectionRef) async {
     List<Workout> sets = [];
 
