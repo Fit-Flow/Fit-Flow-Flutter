@@ -103,145 +103,19 @@ class _LatestWorkoutsWidgetState extends State<LatestWorkoutsWidget> {
               if (viewModel.trainingLoaded.value) {
                 print(viewModel.trainings.length);
                 return Wrap(
-                    spacing: 20,
-                    children:
-                        List.generate(viewModel.trainings.length, (index) {
-                      return LatestWorkoutCard(
-                        title: viewModel.trainings[index].name,
-                        workouts: List.generate(
-                            viewModel.trainings[index].workouts.length,
-                            (workoutIndex) {
-                          return viewModel
-                              .trainings[index].workouts[workoutIndex].name;
-                        }),
-                      );
-                    })
-                    /*[
-                    LatestWorkoutCard(
-                      title: "Træning 24-06/23",
-                      workouts: [
-                        "Bænkpres",
-                        "Incline bænkpres",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                      ],
-                    ),
-                    LatestWorkoutCard(
-                      title: "Træning 24-06/23",
-                      workouts: [
-                        "Bænkpres",
-                        "Incline bænkpres",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                        "Dips",
-                        "Flyers",
-                      ],
-                    ),
-                    LatestWorkoutCard(
-                      title: "Træning 24-06/23",
-                      workouts: [
-                        "Bænkpres",
-                        "Incline bænkpres",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                        "Dips",
-                        "Flyers",
-                      ],
-                    ),
-                    LatestWorkoutCard(
-                      title: "Træning 24-06/23",
-                      workouts: [
-                        "Bænkpres",
-                        "Incline bænkpres",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                      ],
-                    ),
-                    LatestWorkoutCard(
-                      title: "Træning 24-06/23",
-                      workouts: [
-                        "Bænkpres",
-                        "Incline bænkpres",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                      ],
-                    ),
-                    LatestWorkoutCard(
-                      title: "Træning 24-06/23",
-                      workouts: [
-                        "Bænkpres",
-                        "Incline bænkpres",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                        "Dips",
-                      ],
-                    ),
-                    LatestWorkoutCard(
-                      title: "Træning 24-06/23",
-                      workouts: [
-                        "Bænkpres",
-                        "Incline bænkpres",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                      ],
-                    ),
-                    LatestWorkoutCard(
-                      title: "Træning 24-06/23",
-                      workouts: [
-                        "Bænkpres",
-                        "Incline bænkpres",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                      ],
-                    ),
-                    LatestWorkoutCard(
-                      title: "Træning 24-06/23",
-                      workouts: [
-                        "Bænkpres",
-                        "Incline bænkpres",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                      ],
-                    ),
-                    LatestWorkoutCard(
-                      title: "Træning 24-06/23",
-                      workouts: [
-                        "Bænkpres",
-                        "Incline bænkpres",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                        "Dips",
-                        "Flyers",
-                        "Triceps pulldown",
-                      ],
-                    ),
-                  ],*/
+                  spacing: 20,
+                  children: List.generate(viewModel.trainings.length, (index) {
+                    return LatestWorkoutCard(
+                      title: viewModel.trainings[index].name,
+                      workouts: List.generate(
+                          viewModel.trainings[index].workouts.length,
+                          (workoutIndex) {
+                        return viewModel
+                            .trainings[index].workouts[workoutIndex].name;
+                      }),
                     );
+                  }),
+                );
               } else {
                 return SizedBox(
                   width: double.maxFinite,
