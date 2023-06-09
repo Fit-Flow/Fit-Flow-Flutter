@@ -87,6 +87,14 @@ class GraphViewModel extends GetxController implements GetxService {
     }
   }
 
+  /// Removes the data from the graph view model.
+  ///
+  /// This method clears the [_trainingsOne], [_trainingsTwo], and [_trainingsThree] lists,
+  /// sets the [_goalOne], [_goalTwo], and [_goalThree] variables to `null`, and updates the
+  /// `isDataOneLoaded`, `isDataTwoLoaded`, and `isDataThreeLoaded` flags to `false`. Finally,
+  /// it triggers an update to notify the listeners of the changes.
+  ///
+  /// Author: Jackie
   void removeData() {
     _trainingsOne = [];
     _trainingsTwo = [];

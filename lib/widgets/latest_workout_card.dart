@@ -18,7 +18,7 @@ class LatestWorkoutCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 210,
+      width: 230,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppColors.darkGreyColor,

@@ -4,6 +4,7 @@ import 'package:fit_flow_flutter/view_models/authentication_viewmodel.dart';
 import 'package:fit_flow_flutter/view_models/drawer_navigation_viewmodel.dart';
 import 'package:fit_flow_flutter/view_models/goal_viewmodel.dart';
 import 'package:fit_flow_flutter/view_models/graph_viewmodel.dart';
+import 'package:fit_flow_flutter/view_models/lates_trainings_viewmodel.dart';
 import 'package:fit_flow_flutter/view_models/training_viewmodel.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,7 @@ Future<void> init() async {
   // Initialize view models
   Get.lazyPut(() => DrawerNavigationViewModel());
   Get.lazyPut(() => TrainingViewModel());
+  Get.lazyPut(() => LatestTrainingViewModel());
   Get.lazyPut(() => AuthenticationViewModel());
   Get.lazyPut(() => GoalViewModel());
   Get.lazyPut(() => GraphViewModel());
