@@ -101,7 +101,7 @@ class _OverviewGraphsState extends State<OverviewGraphs> {
                       graphViewModel.isDataTwoLoaded.value
                   ? Container()
                   : GraphOverview(
-                      title: "Dødløft",
+                      title: "Squat",
                       goalWeight: int.parse(graphViewModel.goalTwo!.goalWeight),
                       graphData: graphViewModel.trainingsTwo,
                     ),
@@ -109,7 +109,7 @@ class _OverviewGraphsState extends State<OverviewGraphs> {
                       graphViewModel.isDataThreeLoaded.value
                   ? Container()
                   : GraphOverview(
-                      title: "Squat",
+                      title: "Triceps Extension",
                       goalWeight:
                           int.parse(graphViewModel.goalThree!.goalWeight),
                       graphData: graphViewModel.trainingsThree,

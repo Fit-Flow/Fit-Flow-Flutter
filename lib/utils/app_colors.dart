@@ -5,7 +5,7 @@ import 'dart:ui';
 ///authors: Jackie, Christoffer & Jakob
 class AppColors {
   static const Color titleColor = Color(0xFFFFFFFF);
-  static const Color textColor = Color(0xFFFFFFFF); //TODO: Den skal vælges??
+  static const Color textColor = Color(0xFFFFFFFF);
   static const Color grayTextColor = Color(0xFF727272);
 
   static const Color backgroundColor = Color(0xFF111111);
